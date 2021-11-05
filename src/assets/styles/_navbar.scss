@@ -1,0 +1,92 @@
+.nav {
+  height: 60px;
+  padding: 10px;
+  position: relative;
+  &-logo {
+    width: 30px;
+    height: 30px;
+    background: var(--logo-url);
+    background-size: 100% 100%;
+    margin: auto 24px auto 0;
+  }
+  &-option {
+    width: 70%;
+    display: flex;
+    justify-content: space-between;
+    &-item {
+      align-items: center;  
+      display: flex;
+      &-icon {
+        width: 24px;
+        height: 24px;
+      }
+      #homePage {
+        background: var(--home-url);
+        background-size: 100% 100%;
+      }
+      #userInfo {
+        background: var(--user-url);
+        background-size: 100% 100%;
+      }
+      #settings {
+        background: var(--settings-url);
+        background-size: 100% 100%;
+      }
+      &-label {
+        display: none;
+      }
+    }
+  }
+  &-logout {
+    position: absolute;
+    right: 1%;
+    top: 18px;
+    display: flex;
+    align-items: center;
+    &-icon {
+      background: var(--logout-url);
+      background-size: 100% 100%;
+      width: 24px;
+      height: 24px;
+    }
+    &-label {
+      display: none;
+    }
+  }
+}
+
+@media screen and (min-width:1082px) {
+  .nav {
+    flex-direction: column;
+    height: 100vh;
+    &-logo {
+      margin: 0;
+    }
+    &-option {
+      width: 100%;
+      margin-top: 20px;
+      flex-direction: column;
+      &-item {
+        height: 56px;
+        &-icon {
+          margin-right: 20px;
+        }
+        &-label {
+          display: block;
+        }
+      }
+    }
+    &-logout {
+      position: absolute;
+      top: 94.2%;
+      left: 10px;
+      height: 60px;
+      &-icon {
+        margin-right: 20px;
+      }
+      &-label {
+        display: block;
+      }
+    }
+  }
+}

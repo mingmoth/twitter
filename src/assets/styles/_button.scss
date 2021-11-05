@@ -8,4 +8,21 @@ button {
     margin-top: 40px;
     border-radius: 50px;
   }
+  &.btn-nav {
+    width: 24px;
+    height: 24px;
+    border-radius: 50%;
+    margin: auto 0 auto 0;
+  }
+}
+
+@media screen and (min-width: 1082px){
+  button {
+    &.btn-nav {
+      width: 90%;
+      height: 38px;
+      border-radius: 100px;
+      margin-top: 10px;
+    }
+  }
 }
