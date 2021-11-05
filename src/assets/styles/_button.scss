@@ -1,0 +1,11 @@
+button {
+  background: var(--orange);
+  color: var(--light);
+  border: none;
+  &.btn-login {
+    width: 540px;
+    height: 46px;
+    margin-top: 40px;
+    border-radius: 50px;
+  }
+}

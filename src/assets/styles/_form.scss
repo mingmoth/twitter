@@ -1,0 +1,26 @@
+.form-label-group {
+  height: 52px;
+  margin-top: 32px;
+  background: var(--input-bg);
+  label {
+    font-size: 15px;
+    font-weight: 500;
+    color: var(--input-label);
+    margin-top: 5px;
+    margin-left: 10px;
+  }
+  input {
+    border: none;
+    outline: none;
+    border-radius: 0;
+    background: var(--input-bg);
+    border-bottom: 2px solid var(--input-label);
+    box-shadow: inset 0 0 0 1000px var(--input-bg);
+    padding: 0 10px 0 10px;
+    &:hover, :focus {
+      border-bottom: 2px solid var(--input-active);
+      outline: none;
+      background: var(--input-bg);
+    }
+  }
+}

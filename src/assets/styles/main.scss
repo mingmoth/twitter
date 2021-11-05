@@ -1,3 +1,10 @@
 @import url('https://fonts.googleapis.com/css2?family=Noto+Sans+TC:wght@400;500;700;900&display=swap');
 
 @import '_colors';
+@import '_login';
+@import '_form';
+@import '_button';
+
+html, body {
+  font-family: Noto Sans TC;
+}
