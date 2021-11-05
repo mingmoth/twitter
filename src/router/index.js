@@ -16,11 +16,11 @@ const routes = [
     name: 'login',
     component: Login
   },
-  // {
-  //   path: '/register',
-  //   name: 'register',
-  //   component: () => import('../views/Register.vue')
-  // },
+  {
+    path: '/register',
+    name: 'register',
+    component: () => import('../views/Register.vue')
+  },
   {
     path: '*',
     name: 'not-found',

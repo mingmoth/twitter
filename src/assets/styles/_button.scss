@@ -2,7 +2,7 @@ button {
   background: var(--orange);
   color: var(--light);
   border: none;
-  &.btn-login {
+  &.btn-login, &.btn-register {
     width: 540px;
     height: 46px;
     margin-top: 40px;
