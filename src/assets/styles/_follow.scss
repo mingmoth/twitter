@@ -1,0 +1,42 @@
+
+@media screen and (min-width:683px) {
+  .follow {
+    width: 100%;
+    margin-top: 15px;
+    background: var(--input-bg);
+    border-radius: 14px;
+    padding-top: 10px;
+    padding-bottom: 10px;
+    &-title {
+      margin-left: 15px;
+      font-size: 18px;
+      font-weight: 700;
+      margin-bottom: 9px;
+    }
+    &-item {
+      padding: 10px 15px 10px 15px;
+      border-top: 1px solid var(--input-border);
+      display: flex;
+      align-items: center;
+      height: 70px;
+      &-icon {
+        width: 50px;
+        height: 50px;
+        background: #C4C4C4;
+        border-radius: 50%;
+        margin-right: 10px;
+      }
+      &-title {
+        flex: 1;
+        font-size: 15px;
+        font-weight: 700;
+        &-name {
+          color: var(--text-content);
+        }
+        &-account {
+          color: var(--input-label)
+        }
+      }
+    }
+  }
+}

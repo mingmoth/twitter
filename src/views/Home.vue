@@ -4,16 +4,20 @@
       <Navbar />
     </div>
     <div class="post">Post</div>
-    <div class="follow">FollowLists</div>
+    <div class="follows">
+      <Follow />
+    </div>
   </div>
 </template>
 
 <script>
 import Navbar from "../components/Navbar.vue";
+import Follow from '../components/Follow.vue'
 export default {
   name: "Home",
   components: {
     Navbar,
+    Follow,
   },
 };
 </script>
@@ -33,7 +37,7 @@ export default {
     grid-gap: 30px;
     .header,
     .post,
-    .follow {
+    .follows {
       border: 1px solid red;
     }
     
