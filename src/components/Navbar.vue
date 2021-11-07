@@ -14,7 +14,8 @@
         <div class="nav-option-item-icon" id="settings"></div>
         <span class="nav-option-item-label">設定</span>
       </div>
-      <button class="btn-nav"></button>
+      <button class="btn-nav" data-bs-toggle="modal"
+          data-bs-target="#main-post-tweet"></button>
     </div>
     <div class="nav-logout">
       <div class="nav-logout-icon"></div>

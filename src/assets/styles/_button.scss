@@ -38,6 +38,9 @@ button {
     font-size: 18px;
     font-weight: 500;
   }
+  &.btn-close {
+    color: var(--orange)
+  }
 }
 
 @media screen and (min-width: 1082px){
