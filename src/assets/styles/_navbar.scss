@@ -53,6 +53,32 @@
       display: none;
     }
   }
+  
+}
+.navTop {
+  height: 55px;
+  padding-left: 15px;
+  display: flex;
+  align-items: center;
+  &-icon {
+    width: 23px;
+    height: 24px;
+    background: var(--back-url);
+    background-size: 100% 100%;
+    margin-right: 41px;
+  }
+  &-title {
+    &-name {
+      font-size: 18px;
+      font-weight: 700;
+      color: var(--text-content);
+    }
+    &-info {
+      font-size: 13px;
+      font-weight: 500;
+      color: var(--input-label);
+    }
+  }
 }
 
 @media screen and (min-width:1082px) {

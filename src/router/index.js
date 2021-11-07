@@ -1,7 +1,7 @@
 import Vue from 'vue'
 import VueRouter from 'vue-router'
 import Login from '../views/Login.vue'
-import Home from '../views/Home.vue'
+import Main from '../views/Main.vue'
 import NotFound from '../views/NotFound.vue'
 
 Vue.use(VueRouter)
@@ -28,9 +28,9 @@ const routes = [
     component: () => import('../views/Register.vue')
   },
   {
-    path: '/home',
-    name: 'home',
-    component: Home
+    path: '/main',
+    name: 'main',
+    component: Main
   },
   {
     path: '*',

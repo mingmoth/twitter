@@ -1,0 +1,68 @@
+.tweet {
+  padding: 10px 15px 10px 15px;
+  display: flex;
+  border-bottom: 1px solid var(--input-border);
+  &-icon {
+    width: 50px;
+    height: 50px;
+    border-radius: 50%;
+    background: var(--input-label);
+    margin-right: 10px;
+  }
+  &-body {
+    flex: 1;
+    height: 100%;
+    &-head {
+      display: flex;
+      &-name {
+        font-size: 15px;
+        font-weight: 700;
+        color: var(--text-content);
+        margin-right: 5px;
+      }
+      &-account, &-time {
+        font-size: 15px;
+        font-weight: 500;
+        color: var(--input-label);
+      }
+    }
+    &-content {
+      margin-top: 4px;
+      font-size: 15px;
+      font-weight: 500;
+      color: var(--text-content);
+    }
+    &-foot {
+      margin-top: 10px;
+      color: var(--input-label);
+      font-size: 13px;
+      font-weight: 500;
+      display: flex;
+      width: 130px;
+      justify-content: space-between;
+      &-comment {
+        
+        display: flex;
+        align-items: center;
+        &-icon {
+          width: 12.34px;
+          height: 12.34px;
+          background: var(--comment-url);
+          background-size: 100% 100%;
+          margin-right: 11.35px;
+        }
+      }
+      &-liked {
+        display: flex;
+        align-items: center;
+        &-icon {
+          width: 12.56px;
+          height: 11.82px;
+          background: var(--liked-url);
+          background-size: 100% 100%;
+          margin-right: 11.35px;
+        }
+      }
+    }
+  }
+}

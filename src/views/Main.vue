@@ -1,9 +1,11 @@
 <template>
-  <div class="home">
+  <div class="app-container">
     <div class="header">
       <Navbar />
     </div>
-    <div class="post">Post</div>
+    <div class="home">
+      <Home />
+    </div>
     <div class="follows">
       <Follow />
     </div>
@@ -12,11 +14,13 @@
 
 <script>
 import Navbar from "../components/Navbar.vue";
+import Home from '../components/Home.vue';
 import Follow from '../components/Follow.vue'
 export default {
-  name: "Home",
+  name: "Main",
   components: {
     Navbar,
+    Home,
     Follow,
   },
 };
@@ -29,17 +33,17 @@ export default {
 //   }
 // }
 @media screen and (min-width: 1082px) {
-  .home {
+  .app-container {
     width: 86.5%;
     margin: 0 auto;
     display: grid;
     grid-template-columns: 1fr 2.8fr 1.49fr;
     grid-gap: 30px;
-    .header,
-    .post,
-    .follows {
-      border: 1px solid red;
-    }
+    // .header,
+    // .home,
+    // .follows {
+    //   border: 1px solid red;
+    // }
     
   }
 }
