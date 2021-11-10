@@ -1,7 +1,7 @@
 <template>
   <div
     class="modal fade"
-    id="main-post-tweet1"
+    id="main-post-tweet"
     aria-hidden="true"
   >
     <div class="modal-dialog" role="document">

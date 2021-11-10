@@ -1,5 +1,5 @@
 <template>
-  <div class="modal fade" id="main-post-tweet" aria-hidden="true">
+  <div class="modal fade" id="main-post-reply" aria-hidden="true">
     <div class="modal-dialog" role="document">
       <div class="modal-content">
         <div class="modal-header">
@@ -37,7 +37,7 @@
                 id="tweet"
                 cols="30"
                 rows="10"
-                placeholder="有什麼新鮮事?"
+                placeholder="推你的回覆"
               ></textarea>
               <button
                 class="btn-tweet"

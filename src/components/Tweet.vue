@@ -11,7 +11,9 @@
       <div class="tweet-body-content">Nulla Lorem mollit cupidatat irure. Laborum magna nulla duis ullamco cillum dolor. Voluptate exercitation incididunt aliquip deserunt reprehenderit elit laborum. </div>
       <div class="tweet-body-foot">
         <div class="tweet-body-foot-comment">
-          <div class="tweet-body-foot-comment-icon"></div>
+          <div 
+            class="tweet-body-foot-comment-icon" data-bs-toggle="modal"
+            data-bs-target="#main-post-reply"></div>
           <span class="tweet-body-foot-comment-count">13</span>
         </div>
         <div class="tweet-body-foot-liked">
