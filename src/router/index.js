@@ -33,6 +33,11 @@ const routes = [
     component: Main
   },
   {
+    path: '/settings',
+    name: 'settings',
+    component: () => import('../views/Settings.vue')
+  },
+  {
     path: '*',
     name: 'not-found',
     component: NotFound

@@ -32,19 +32,5 @@ export default {
 //   .home {
 //   }
 // }
-@media screen and (min-width: 1082px) {
-  .app-container {
-    width: 86.5%;
-    margin: 0 auto;
-    display: grid;
-    grid-template-columns: 1fr 2.8fr 1.49fr;
-    grid-gap: 30px;
-    // .header,
-    // .home,
-    // .follows {
-    //   border: 1px solid red;
-    // }
-    
-  }
-}
+
 </style>

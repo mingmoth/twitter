@@ -41,6 +41,15 @@ button {
   &.btn-close {
     color: var(--orange)
   }
+  &.btn-setting {
+    margin-top: 40px;
+    width: 116px;
+    height: 46px;
+    border-radius: 50px;
+    font-size: 18px;
+    font-weight: 700;
+    float: right;
+  }
 }
 
 @media screen and (min-width: 1082px){
