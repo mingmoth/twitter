@@ -50,6 +50,16 @@ button {
     font-weight: 700;
     float: right;
   }
+  &.btn-edit {
+    width: 120px;
+    height: 35px;
+    background-color: var(--light);
+    border: 1px solid var(--orange);
+    border-radius: 100px;
+    color: var(--orange);
+    font-size: 15px;
+    font-weight: 700;
+  }
 }
 
 @media screen and (min-width: 1082px){

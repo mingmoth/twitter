@@ -10,6 +10,7 @@
 @import '_modal';
 @import '_post';
 @import '_reply';
+@import '_user';
 
 html, body {
   font-family: Noto Sans TC;
@@ -17,7 +18,11 @@ html, body {
 
 .main {
   border: 1px solid var(--input-border);
+  border-top: none;
+  border-bottom: none;
   height: 100%;
+  width: 97%;
+  margin: 0 auto 0 auto;
 }
 .mainPost {
   height: 130px;
