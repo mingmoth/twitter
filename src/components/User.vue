@@ -6,7 +6,8 @@
         <div class="user-header-container-photo"></div>
       </div>
       <div class="user-header-edit">
-        <button class="btn-edit">編輯個人資料</button>
+        <button class="btn-edit" data-bs-toggle="modal"
+          data-bs-target="#user-setting-edit">編輯個人資料</button>
       </div>
     </div>
     <div class="user-title">

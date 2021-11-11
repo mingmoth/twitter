@@ -1,12 +1,102 @@
 .modal {
-  &-close {
-    background: var(--modal-close);
-    background-size: 100% 100%;
-    width: 24px;
-    height: 24px;
-    cursor: pointer;
+  &-header {
+    .modal-close {
+      background: var(--modal-close);
+      background-size: 100% 100%;
+      width: 24px;
+      height: 24px;
+      cursor: pointer;
+    }
+    &-title {
+      flex: 1;
+      margin-left: 40px;
+      font-size: 17px;
+      font-weight: 500;
+      padding-bottom: 3px;
+    }
   }
   &-body {
+    position: relative;
+    &-bg {
+      width: 100%;
+      position: absolute;
+      top:0;
+      left: 0;
+      height: 200px;
+      background: var(--input-active);
+      opacity: 60%;
+      z-index:0;
+      display: flex;
+      justify-content: center;
+      align-items: center;
+      &-option {
+        width: 78px;
+        display: flex;
+        justify-content: space-between;
+        &-edit {
+          width: 24px;
+          height: 24px;
+          background: var(--edit-url);
+          background-size: 100% 100%;
+        }
+        &-delete {
+          width: 24px;
+          height: 24px;
+          background: var(--delete-url);
+          background-size: 100% 100%;
+        }
+      }
+    }
+    &-header {
+      position: relative;
+      margin-top: 124px;
+      width: 120px;
+      height: 120px;
+      border-radius: 50%;
+      background-color: var(--light);
+      //z-index只能在有設定位（position）的元素上才會奏效。
+      z-index: 1;
+      display: flex;
+      justify-content: center;
+      align-items: center;
+      &-photo {
+        width: 113px;
+        height: 113px;
+        border-radius: 50%;
+        background: var(--input-label);
+        opacity: 60%;
+        display: flex;
+        justify-content: center;
+        align-items: center;
+        &-edit {
+          background: var(--edit-url);
+          background-size: 100% 100%;
+          width: 24px;
+          height: 24px;
+        }
+      }
+    }
+    &-form {
+      &-limit {
+        background: var(--light);
+        display: flex;
+        justify-content: end;
+        &-alert {
+          flex: 1;
+          font-size: 15px;
+          font-weight: 500;
+          color: var(--input-alert);
+        }
+        &-count {
+          font-size: 15px;
+          font-weight: 500;
+          color: var(--input-label);
+        }
+      }
+      #modal-intro {
+        height: 150px;
+      }
+    }
     &-post {
       display: flex;
       margin-bottom: 10px;
@@ -15,8 +105,8 @@
         height: 50px;
         border-radius: 50%;
         background: var(--input-label);
-        margin-right: 10px;
       }
+      
       &-body {
         flex: 1;
         height: 100%;

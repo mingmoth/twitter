@@ -43,6 +43,16 @@ const routes = [
     component: () => import('../views/UserTweets.vue')
   },
   {
+    path: '/user/replies',
+    name: 'user-replies',
+    component: () => import('../views/UserReplies.vue')
+  },
+  {
+    path: '/user/likes',
+    name: 'user-likes',
+    component: () => import('../views/UserLikes.vue')
+  },
+  {
     path: '/settings',
     name: 'settings',
     component: () => import('../views/Settings.vue')
