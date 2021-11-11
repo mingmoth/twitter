@@ -1,0 +1,35 @@
+.following {
+  padding: 13px 10px 10px 10px;
+  display: flex;
+  border-bottom: 1px solid var(--input-border);
+  &-icon {
+    width: 50px;
+    height: 50px;
+    border-radius: 50%;
+    background: var(--input-label);
+  }
+  &-content {
+    flex: 1;
+    margin-left: 10px;
+    &-head {
+      display: flex;
+      justify-content: space-between;
+      &-title {
+        &-name {
+          font-size: 15px;
+          font-weight: 700;
+          color: var(--text-content);
+        }
+        &-account {
+          font-size: 14px;
+          font-weight: 500;
+          color: var(--input-label);
+        }
+      }
+    }
+    &-body {
+     font-size: 15px;
+      font-weight: 500;
+    }
+  }
+}
