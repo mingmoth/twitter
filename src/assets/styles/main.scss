@@ -12,6 +12,7 @@
 @import '_reply';
 @import '_user';
 @import '_following';
+@import '_card';
 
 html, body {
   font-family: Noto Sans TC;
@@ -24,7 +25,13 @@ html, body {
   height: 100%;
   width: 97%;
   margin: 0 auto 0 auto;
+  #user-panel {
+    width: 100%;
+    margin: 0 auto 0 auto;
+    padding: 15px 7.5px 15px 7.5px;
+  }
 }
+
 .mainPost {
   height: 130px;
   width: 100%;
