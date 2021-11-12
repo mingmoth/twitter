@@ -67,4 +67,11 @@
       }
     }
   }
+  &-delete {
+    width: 24px;
+    height: 24px;
+    background: var(--admin-delete-url);
+    background-size: 100% 100%;
+    cursor: pointer;
+  }
 }

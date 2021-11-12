@@ -16,6 +16,10 @@
     &-item {
       align-items: center;  
       display: flex;
+      &:hover {
+        cursor: pointer;
+        color: var(--orange);
+      }
       &-icon {
         width: 24px;
         height: 24px;
@@ -34,6 +38,11 @@
       }
       &-label {
         display: none;
+        text-decoration: none;
+        color: var(--text-content);
+        &:hover {
+          color: var(--orange);
+        }
       }
     }
   }
@@ -51,6 +60,11 @@
     }
     &-label {
       display: none;
+      text-decoration: none;
+      color: var(--text-content);
+      &:hover {
+        color: var(--orange);
+      }
     }
   }
   
@@ -60,6 +74,7 @@
   padding-left: 15px;
   display: flex;
   align-items: center;
+  border-bottom: 1px solid var(--input-border);
   &-icon {
     width: 23px;
     height: 24px;
