@@ -13,6 +13,8 @@
 <script>
 import Navbar from '../components/Navbar.vue'
 import Setting from '../components/Setting.vue'
+
+
 export default {
   name: 'Settings',
   components: {
