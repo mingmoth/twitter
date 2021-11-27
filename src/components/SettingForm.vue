@@ -28,12 +28,14 @@
 
 <script>
 const dummyUser = {
+  // api usersAPI.getCurrentUser({userId})--get('/users/:id')
   user: {
     id: "1",
     name: "Apple",
     account: "apple",
     email: "apple@example.com",
     password: "12345678",
+    passwordCheck: '',
   },
 };
 export default {
@@ -46,7 +48,7 @@ export default {
         account: "",
         email: "",
         password: "",
-        passwordCheck: " ",
+        passwordCheck: "",
       },
       isProcessing: false
     };
@@ -56,15 +58,15 @@ export default {
   },
   methods: {
     fetchUser() {
-      const {id, name ,account, email, password} = dummyUser.user
-      this.user = {id, name ,account, email, password}
+      const {id, name ,account, email, password, passwordCheck} = dummyUser.user
+      this.user = {id, name ,account, email, password, passwordCheck}
     },
     handleSubmit(e) {
       if(!this.account || !this.name || !this.email || !this.password || !this.passwordCheck) {
-        return
+        console.log('oh')
       }
       if(this.password !== this.passwordCheck) {
-        return
+        console.log('oh')
       }
       const form = e.target
       const formData = new FormData(form)

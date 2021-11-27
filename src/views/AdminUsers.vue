@@ -14,7 +14,7 @@
 import NavAdmin from '../components/NavAdmin.vue'
 import UserAdmin from '../components/UserAdmin.vue'
 export default {
-  name: 'UserTweets',
+  name: 'AdminUsers',
   components: {
     NavAdmin, UserAdmin
   }
