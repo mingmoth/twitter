@@ -11,21 +11,19 @@
         </div>
         <div class="modal-body">
           <div class="modal-body-post">
-            <div class="modal-body-post-icon"></div>
+            <img :src="modalTweet.User.image" alt="" class="modal-body-post-icon">
             <div class="modal-body-post-body">
               <div class="modal-body-post-body-head">
-                <div class="modal-body-post-body-head-name">Apple</div>
-                <div class="modal-body-post-body-head-account">@apple</div>
+                <div class="modal-body-post-body-head-name">{{modalTweet.User.name}}</div>
+                <div class="modal-body-post-body-head-account">@{{modalTweet.User.account}}</div>
                 <span> · </span>
-                <div class="modal-body-post-body-head-time">3小時</div>
+                <div class="modal-body-post-body-head-time">{{modalTweet.createdAt}}</div>
               </div>
               <div class="modal-body-post-body-content">
-                Nulla Lorem mollit cupidatat irure. Laborum magna nulla duis
-                ullamco cillum dolor. Voluptate exercitation incididunt aliquip
-                deserunt reprehenderit elit laborum.
+                {{modalTweet.text}}
               </div>
               <div class="modal-body-post-body-foot">
-                <div class="modal-body-post-body-foot-reply">回覆給 <span class="modal-body-post-body-foot-account">@apple</span></div>
+                <div class="modal-body-post-body-foot-reply">回覆給 <span class="modal-body-post-body-foot-account">@{{modalTweet.User.account}}</span></div>
               </div>
             </div>
           </div>
@@ -54,3 +52,29 @@
     </div>
   </div>
 </template>
+
+<script>
+export default {
+  name: "TweetReplyModal",
+  props: {
+    tweet: {
+      type: Object,
+      required: true
+    }
+  },
+  data() {
+    return {
+      modalTweet: {}
+    }
+  },
+  created() {
+    this.fetchTweet()
+  },
+  methods: {
+    fetchTweet() {
+      this.modalTweet = this.tweet
+    }
+  }
+
+}
+</script>

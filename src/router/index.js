@@ -50,22 +50,22 @@ export default new VueRouter({
       component: () => import('../views/AdminUsers.vue')
     },
     {
-      path: '/user/tweets',
+      path: '/users/:id/tweets',
       name: 'user-tweets',
       component: () => import('../views/UserTweets.vue')
     },
     {
-      path: '/user/replies',
+      path: '/users/:id/replies',
       name: 'user-replies',
       component: () => import('../views/UserReplies.vue')
     },
     {
-      path: '/user/likes',
+      path: '/users/:id/likes',
       name: 'user-likes',
       component: () => import('../views/UserLikes.vue')
     },
     {
-      path: '/user/followings',
+      path: '/users/followings',
       name: 'user-followings',
       component: () => import('../views/UserFollowings.vue')
     },

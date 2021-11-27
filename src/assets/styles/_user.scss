@@ -4,6 +4,7 @@
     width: 100%;
     height: 200px;
     position: absolute;
+    object-fit: cover;
     top: 0;
     background: var(--input-label);
     z-index: -1;
@@ -18,6 +19,13 @@
       height: 140px;
       border-radius: 50%;
       background: var(--light);
+      &-photo {
+        object-fit: cover;
+        width: 140px;
+        height: 140px;
+        border-radius: 50%;
+        border: 5px solid var(--light);
+      }
     }
     &-edit {
       margin-right: 15px;
