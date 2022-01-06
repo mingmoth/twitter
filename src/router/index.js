@@ -1,7 +1,7 @@
 import Vue from 'vue'
 import VueRouter from 'vue-router'
 import Login from '../views/Login.vue'
-import Main from '../views/Main.vue'
+import Tweets from '../views/Tweets.vue'
 import NotFound from '../views/NotFound.vue'
 
 Vue.use(VueRouter)
@@ -30,9 +30,9 @@ export default new VueRouter({
       component: () => import('../views/Register.vue')
     },
     {
-      path: '/main',
-      name: 'main',
-      component: Main
+      path: '/tweets',
+      name: 'tweets',
+      component: Tweets
     },
     {
       path: '/posts',
