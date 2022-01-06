@@ -1,0 +1,42 @@
+@mixin breakpoint($point) {
+    @if $point == fixedSide {
+        @media (min-width: 1400px) {
+            @content
+        }
+    }
+    @else if $point == zone-nb-small {
+        @media (max-width: 1280px) {
+            @content
+        }
+    }
+    @else if $point == zone-base {
+        @media (max-width: 1179px) {
+            @content
+        }
+    }
+    @else if $point == pad-landscape {
+        @media (max-width: 1024px) {
+            @content
+        }
+    }
+    @else if $point == pad-portrait-980 {
+        @media (max-width: 980px) {
+            @content
+        }
+    }
+    @else if $point == pad-portrait {
+        @media (max-width: 800px) {
+            @content
+        }
+    }
+    @else if $point == mobile-landscape {
+        @media (max-width: 580px) {
+            @content
+        }
+    }
+    @else if $point == mobile {
+        @media (max-width: 430px) {
+            @content
+        }
+    }
+};

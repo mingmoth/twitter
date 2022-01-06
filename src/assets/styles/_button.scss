@@ -1,3 +1,4 @@
+@import '_rwd';
 button {
   background: var(--orange);
   color: var(--light);
@@ -15,6 +16,18 @@ button {
     margin: 10px 0 auto 0;
     font-size: 16px;
     font-weight: 500;
+    @include breakpoint(mobile) {
+      position: absolute;
+      bottom: 70px;
+      right: 10%;
+      width: 40px;
+      height: 40px;
+      box-shadow: 1px 1px 1px 1px rgba(0, 0, 0, 0.1);
+      &::before {
+        content: '+';
+        font-size: 18px;
+      }
+    }
   }
   &.btn-unfollow {
     width: 90px;

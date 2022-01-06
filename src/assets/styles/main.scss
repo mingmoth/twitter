@@ -14,7 +14,7 @@
 @import '_following';
 @import '_card';
 
-@import "./mixins/_rwd.sass";
+@import '_rwd';
 
 html, body {
   font-family: Noto Sans TC;

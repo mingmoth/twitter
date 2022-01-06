@@ -42,12 +42,12 @@
         data-bs-toggle="modal"
         data-bs-target="#main-post-tweet"
       >
-        推文
+        <span>推文</span>
       </button>
     </ul>
     <div class="side-logout">
       <router-link to="/login" class="side-logout-label">
-      <img src="../../public/images/icon_logout.png" alt="" class="img"> 登出</router-link>
+      <img src="../../public/images/icon_logout.png" alt="" class="img"> <span>登出</span></router-link>
     </div>
   </div>
 </template>
