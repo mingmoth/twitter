@@ -8,11 +8,13 @@ button {
     margin-top: 40px;
     border-radius: 50px;
   }
-  &.btn-nav {
-    width: 24px;
-    height: 24px;
-    border-radius: 50%;
-    margin: auto 0 auto 0;
+  &.btn-side {
+    width: 70%;
+    height: 38px;
+    border-radius: 100px;
+    margin: 10px 0 auto 0;
+    font-size: 16px;
+    font-weight: 500;
   }
   &.btn-unfollow {
     width: 90px;

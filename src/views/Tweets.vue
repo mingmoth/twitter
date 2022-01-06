@@ -1,7 +1,7 @@
 <template>
   <div class="app-container">
     <div class="header">
-      <Navbar />
+      <Sidebar />
     </div>
     <div class="home">
       <Home />
@@ -13,13 +13,13 @@
 </template>
 
 <script>
-import Navbar from "../components/Navbar.vue";
+import Sidebar from "../components/Sidebar.vue";
 import Home from '../components/Home.vue';
 import Follow from '../components/Follow.vue'
 export default {
   name: "Main",
   components: {
-    Navbar,
+    Sidebar,
     Home,
     Follow,
   },
@@ -27,10 +27,5 @@ export default {
 </script>
 
 <style lang="scss">
-
-// @media screen and (min-width: 883px) {
-//   .home {
-//   }
-// }
 
 </style>

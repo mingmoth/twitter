@@ -1,7 +1,7 @@
 <template>
   <div class="app-container">
     <div class="header">
-      <Navbar />
+      <Sidebar />
     </div>
     <div class="home">
       <Post />
@@ -13,13 +13,13 @@
 </template>
 
  <script>
- import Navbar from '../components/Navbar.vue'
+ import Sidebar from '../components/Sidebar.vue'
  import Post from '../components/Post.vue'
  import Follow from '../components/Follow.vue'
  export default {
    name: 'Posts',
    components: {
-     Navbar, Post, Follow
+     Sidebar, Post, Follow
    }
  }
  </script>

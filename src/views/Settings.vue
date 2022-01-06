@@ -1,7 +1,7 @@
 <template>
   <div class="app-container">
     <div class="header">
-      <Navbar />
+      <Sidebar />
     </div>
     <div class="home">
       <Setting />
@@ -11,14 +11,14 @@
 </template>
 
 <script>
-import Navbar from '../components/Navbar.vue'
+import Sidebar from '../components/Sidebar.vue'
 import Setting from '../components/Setting.vue'
 
 
 export default {
   name: 'Settings',
   components: {
-    Navbar, Setting
+    Sidebar, Setting
   }
 }
 </script>

@@ -1,7 +1,7 @@
 <template>
   <div class="app-container">
     <div class="header">
-      <Navbar />
+      <Sidebar />
     </div>
     <div class="home">
       <UserLike />
@@ -13,13 +13,13 @@
 </template>
 
 <script>
-import Navbar from '../components/Navbar.vue'
+import Sidebar from '../components/Sidebar.vue'
 import UserLike from '../components/UserLike.vue'
 import Follow from '../components/Follow.vue'
 export default {
   name: 'UserTweets',
   components: {
-    Navbar, UserLike, Follow
+    Sidebar, UserLike, Follow
   }
 }
 </script>

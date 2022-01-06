@@ -1,7 +1,7 @@
 <template>
   <div class="app-container">
     <div class="header">
-      <Navbar />
+      <Sidebar />
     </div>
     <div class="home">
       <UserTweet />
@@ -13,13 +13,13 @@
 </template>
 
 <script>
-import Navbar from '../components/Navbar.vue'
+import Sidebar from '../components/Sidebar.vue'
 import UserTweet from '../components/UserTweet.vue'
 import Follow from '../components/Follow.vue'
 export default {
   name: 'UserTweets',
   components: {
-    Navbar, UserTweet, Follow
+    Sidebar, UserTweet, Follow
   }
 }
 </script>
