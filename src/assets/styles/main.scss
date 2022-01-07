@@ -28,7 +28,27 @@ html, body {
   width: 95%;
   max-width: 1440px;
   margin: 0 auto;
-  
+  .sidebar {
+    width: 20%;
+    margin-right: 2.4%;
+  }
+  .home {
+    flex: 1;
+  }
+  .popular {
+    width: 28%;
+    margin-left: 2.4%;
+  }
+  @include breakpoint(zone-base) {
+    .sidebar {
+      width: 10%;
+    }
+  }
+  @include breakpoint(pad-portrait-980) {
+    .popular {
+      display: none;
+    }
+  }
   @include breakpoint(mobile) {
     display: block;
     height: 100vh;
@@ -40,20 +60,7 @@ html, body {
       width: 100%;
       margin-top: auto;
     }
+    
   }
-  .sidebar {
-    width: 20%;
-    margin-right: 2.4%;
-  }
-  .home {
-    flex: 1;
-    @include breakpoint(mobile) {
-      display: block;
-      width: 100vw;
-    }
-  }
-  .popular {
-    width: 28%;
-    margin-left: 2.4%;
-  }
+  
 }
