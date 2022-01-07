@@ -1,6 +1,6 @@
 <template>
   <div class="app-container">
-    <div class="header">
+    <div class="sidebar">
       <Sidebar />
     </div>
     <div class="home">

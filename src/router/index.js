@@ -35,9 +35,9 @@ export default new VueRouter({
       component: Tweets
     },
     {
-      path: '/posts',
-      name: 'posts',
-      component: () => import('../views/Posts.vue')
+      path: '/tweet',
+      name: 'tweet',
+      component: () => import('../views/Tweet.vue')
     },
     {
       path: '/admin/main',

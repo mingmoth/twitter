@@ -1,12 +1,12 @@
 <template>
   <div class="app-container">
-    <div class="header">
+    <div class="sidebar">
       <Sidebar />
     </div>
     <div class="home">
       <UserLike />
     </div>
-    <div class="follows">
+    <div class="popular">
       <Follow />
     </div>
   </div>

@@ -1,7 +1,5 @@
 @import '_rwd';
 .side {
-  height: 100vh;
-  position: relative;
   &-logo {
     margin: 14px 10px 30px 10px;
     width: 30px;
@@ -14,11 +12,10 @@
     list-style: none;
     margin: 0;
     padding: 0;
-    position: relative;
     @include breakpoint(mobile) {
       display: flex;
       justify-content: space-around;
-      position: absolute;
+      position: relative;
       bottom: 0;
       width: 100vw;
       border-top: 1px solid var(--input-border);
@@ -71,15 +68,10 @@
         }
       }
     }
-    span {
-      @include breakpoint(zone-base) {
-        display: none;
-      }
-    }
   }
   &-logout {
     bottom: 17px;
-    left: 13px;
+    left: 2.5%;
     position: absolute;
     &-label {
       display: flex;
@@ -93,10 +85,19 @@
       width: 24px;
       height: 24px;
       margin-right: 20px;
+      margin-left: 13px;
+      @include breakpoint(zone-base) {
+
+      }
     }
     @include breakpoint(mobile) {
       display: none;
     }
+  }
+  span {
+    @include breakpoint(zone-base) {
+      display: none;
+    }    
   }
 }
 .navTop {
