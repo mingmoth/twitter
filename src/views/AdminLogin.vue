@@ -1,11 +1,11 @@
 <template>
   <div class="login">
     <div class="login-logo"></div>
-    <div class="login-title">登入 Alpitter</div>
+    <div class="login-title">管理 Alpitter</div>
     <form action="">
       <div class="form-label-group">
-        <label for="email">Email</label>
-        <input type="email" name="email" id="email" class="form-control" required autofocus>
+        <label for="account">帳戶</label>
+        <input type="text" name="account" id="account" class="form-control" required autofocus>
         <div class="login-error" style="visibility: none"></div>
       </div>
       <div class="form-label-group">
@@ -20,3 +20,9 @@
     </div>
   </div>
 </template>
+
+<script>
+export default {
+  name: 'AdminLogin',
+}
+</script>
