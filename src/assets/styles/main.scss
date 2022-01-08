@@ -34,6 +34,11 @@ html, body {
   }
   .home {
     flex: 1;
+    border-right: 1px solid var(--input-border);
+    border-left: 1px solid var(--input-border);
+    @include breakpoint(mobile) {
+      border: none;
+    }
   }
   .popular {
     width: 28%;

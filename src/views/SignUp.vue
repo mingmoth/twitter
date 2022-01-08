@@ -58,7 +58,7 @@ import { errorToast, successToast } from "../utils/toast";
 import authorizationAPI from "../apis/authorization";
 
 export default {
-  name: "Register",
+  name: "SignUp",
   data() {
     return {
       name: '',
@@ -101,7 +101,7 @@ export default {
         successToast.fire({
           title: data.message,
         });
-        this.$router.push("/login");
+        this.$router.push("/signin");
       } catch (error) {
         console.log(error);
         errorToast.fire({

@@ -105,10 +105,11 @@
 }
 .navTop {
   height: 55px;
-  padding-left: 15px;
+  padding: 0 15px;
   display: flex;
   align-items: center;
   border-bottom: 1px solid var(--input-border);
+  position: relative;
   &-icon {
     width: 23px;
     height: 24px;
@@ -126,6 +127,17 @@
       font-size: 13px;
       font-weight: 500;
       color: var(--input-label);
+    }
+  }
+  &-logo {
+    width: 30px;
+    height: 30px;
+    object-fit: cover;
+    position: absolute;
+    left: calc(50% - 15px);
+    display: none;
+    @include breakpoint(mobile) {
+      display: block;
     }
   }
 }

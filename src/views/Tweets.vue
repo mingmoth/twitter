@@ -4,7 +4,10 @@
       <Sidebar />
     </div>
     <div class="home">
-      <Home />
+      <UserPost />
+      <Tweet />
+      <TweetModal />
+      <TweetReplyModal />
     </div>
     <div class="popular">
       <Follow />
@@ -14,18 +17,17 @@
 
 <script>
 import Sidebar from "../components/Sidebar.vue";
-import Home from '../components/Home.vue';
+import UserPost from '../components/UserPost.vue'
+import TweetModal from '../components/TweetModal.vue'
+import TweetReplyModal from '../components/TweetReplyModal.vue'
 import Follow from '../components/Follow.vue'
 export default {
   name: "Main",
   components: {
-    Sidebar,
-    Home,
-    Follow,
+    Sidebar, UserPost, TweetModal, TweetReplyModal, Follow
   },
 };
 </script>
 
 <style lang="scss">
-
 </style>

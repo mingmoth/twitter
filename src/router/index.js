@@ -1,6 +1,6 @@
 import Vue from 'vue'
 import VueRouter from 'vue-router'
-import Login from '../views/Login.vue'
+import SignIn from '../views/SignIn.vue'
 import Tweets from '../views/Tweets.vue'
 import NotFound from '../views/NotFound.vue'
 
@@ -15,9 +15,9 @@ export default new VueRouter({
       redirect: '/login'
     },
     {
-      path: '/login',
-      name: 'login',
-      component: Login
+      path: '/signin',
+      name: 'signin',
+      component: SignIn
     },
     {
       path: '/adminlogin',
@@ -25,9 +25,9 @@ export default new VueRouter({
       component: () => import('../views/AdminLogin.vue')
     },
     {
-      path: '/register',
-      name: 'register',
-      component: () => import('../views/Register.vue')
+      path: '/signup',
+      name: 'signup',
+      component: () => import('../views/SignUp.vue')
     },
     {
       path: '/tweets',

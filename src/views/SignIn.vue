@@ -16,7 +16,7 @@
       <button class="btn-login" type="submit">登入</button>
     </form>
     <div class="login-link">
-      <p><router-link class="login-link-target" to="/register">註冊 Alpitter</router-link></p>
+      <p><router-link class="login-link-target" to="/signup">註冊 Alpitter</router-link></p>
       <span> · </span>
       <p><router-link class="login-link-target" to="/adminlogin">後台登入</router-link></p>
     </div>
@@ -30,7 +30,7 @@ import { successToast, errorToast } from '../utils/toast'
 import { mapActions } from 'vuex'
 
 export default {
-  name: 'Login',
+  name: 'SignIn',
   data() {
     return {
       account: '',

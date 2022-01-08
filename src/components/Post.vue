@@ -11,7 +11,7 @@
 
 <script>
 import NavTop from './NavTop.vue'
-import UserPost from './UserPost.vue'
+import UserPost from './UserTweet.vue'
 import Reply from './Reply.vue'
 import TweetModal from './TweetModal.vue'
 import TweetReplyModal from './TweetReplyModal.vue'

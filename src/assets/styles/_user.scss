@@ -99,3 +99,22 @@
     }
   }
 }
+
+.userPost {
+  padding: 10px 15px;
+  border-bottom: 10px solid var(--input-border);
+  display: flex;
+  position: relative;
+  &-icon {
+    width: 50px;
+    height: 50px;
+    object-fit: cover;
+    margin-right: 10px;
+  }
+  .form-main-tweet {
+    width: 100%;
+  }
+  @include breakpoint(mobile) {
+    display: none;
+  }
+}

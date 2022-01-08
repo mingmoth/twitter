@@ -16,7 +16,7 @@
       <button class="btn-login" type="submit">登入</button>
     </form>
     <div class="login-link">
-      <p><router-link class="login-link-target" to="/login">前台登入</router-link></p>
+      <p><router-link class="login-link-target" to="/signin">前台登入</router-link></p>
     </div>
   </div>
 </template>
@@ -67,7 +67,7 @@ export default {
           errorToast.fire({
             title: '此帳號不含登入權限'
           })
-          this.$router.push('/login')
+          this.$router.push('/signin')
           return
         } else if(data.user.role === 'admin') {
           this.setUser(data.user)
