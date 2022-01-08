@@ -3,6 +3,7 @@ moment.locale("zh-tw")
 
 import { successToast, errorToast } from './toast'
 import { mapActions } from 'vuex'
+import userAPI from '../apis/users'
 import tweetAPI from '../apis/tweets'
 
 export const timeFilter = {
@@ -26,14 +27,26 @@ export const imageFilter = {
 
 export const userFeature = {
   methods: {
-    async getUserTweets() {},
-    async getUserReplies() {},
-    async getUserLikes() {},
+    ...mapActions(['setCurrentUser']),
+    async fetchCurrentUser() {
+      try {
+        const { data } = await userAPI.getCurrentUser()
+        this.setCurrentUser(data.user)
+      } catch (error) {
+        console.log(error)
+        errorToast.fire({
+          title: error.message
+        })
+      }
+    },
+    async fetchUserTweets() {},
+    async fetchUserReplies() {},
+    async fetchUserLikes() {},
     async addLike() {},
     async removeLike() {},
     async addFollow() {},
     async removeFollow() {},
-    async getPopular() {},
+    async fetchPopular() {},
     async putUser() {},
     async updateUser() {},
   }
@@ -69,8 +82,8 @@ export const replies = {
 
 export const admin = {
   methods: {
-    async getUsers() {},
-    async getAdminTweets() {},
+    async fetchUsers() {},
+    async fetchAdminTweets() {},
     async deleteTweet() {},
   }
 }

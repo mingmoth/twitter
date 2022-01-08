@@ -11,7 +11,7 @@
         </div>
         <div class="modal-body">
           <div class="modal-body-post">
-            <div class="modal-body-post-icon"></div>
+            <img :src="getCurrentUser.avatar" alt="" class="modal-body-post-icon">
             <form action="" class="modal-body-post-body">
               <textarea
                 name="tweet"
@@ -36,6 +36,17 @@
   </div>
 </template>
 
-// aria-labelledby="exampleModalLongTitle"
-// role="dialog"
-// tabindex="-1"
+<script>
+import { mapGetters } from 'vuex'
+import { userFeature } from '../utils/mixins'
+export default {
+  name: 'TweetModal',
+  mixins: [userFeature],
+  created() {
+    this.fetchCurrentUser()
+  },
+  computed: {
+    ...mapGetters(['getCurrentUser'])
+  }, 
+}
+</script>

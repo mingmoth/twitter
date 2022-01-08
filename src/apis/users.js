@@ -1,6 +1,9 @@
 import { apiHelper } from "../utils/apis";
 
 export default {
+  getCurrentUser() {
+    return apiHelper.get('/currentUser')
+  },
   addLike(tweetId) {
     return apiHelper.post(`/tweets/${tweetId}/like`, null)
   },
