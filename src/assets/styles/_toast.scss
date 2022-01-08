@@ -1,0 +1,20 @@
+.swal2-popup {
+  height: 96px !important;
+  padding: 20px !important;
+  position: relative !important;
+}
+.swal2-title {
+  line-height: 56px;
+  margin: 0 !important;
+}
+.swal2-icon {
+  position: absolute !important;
+  border: none !important;
+  right: 20px !important;
+  bottom: 32px !important;
+  img {
+    width: 56px;
+    height: 56px;
+    object-fit: cover;
+  }
+}

@@ -5,7 +5,6 @@
     </div>
     <div class="home">
       <UserPost />
-      <Tweet />
       <TweetModal />
       <TweetReplyModal />
     </div>
@@ -17,14 +16,29 @@
 
 <script>
 import Sidebar from "../components/Sidebar.vue";
-import UserPost from '../components/UserPost.vue'
-import TweetModal from '../components/TweetModal.vue'
-import TweetReplyModal from '../components/TweetReplyModal.vue'
-import Follow from '../components/Follow.vue'
+import UserPost from "../components/UserPost.vue";
+import TweetModal from "../components/TweetModal.vue";
+import TweetReplyModal from "../components/TweetReplyModal.vue";
+import Follow from "../components/Follow.vue";
+
+import { mapGetters } from "vuex";
+import { tweetFeature } from "../utils/mixins";
+
 export default {
-  name: "Main",
+  name: "Tweets",
   components: {
-    Sidebar, UserPost, TweetModal, TweetReplyModal, Follow
+    Sidebar,
+    UserPost,
+    TweetModal,
+    TweetReplyModal,
+    Follow,
+  },
+  mixins: [tweetFeature],
+  created() {
+    this.fetchTweets();
+  },
+  computed: {
+    ...mapGetters(["getTweets"]),
   },
 };
 </script>

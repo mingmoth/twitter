@@ -1,6 +1,10 @@
 import moment from 'moment/min/moment-with-locales'
 moment.locale("zh-tw")
 
+import { successToast, errorToast } from './toast'
+import { mapActions } from 'vuex'
+import tweetAPI from '../apis/tweets'
+
 export const time = {
   filters: {
     fromNow(time) {
@@ -20,7 +24,7 @@ export const image = {
   }
 }
 
-export const users = {
+export const userFeature = {
   methods: {
     async getUserTweets() {},
     async getUserReplies() {},
@@ -35,10 +39,26 @@ export const users = {
   }
 }
 
-export const tweets = {
+export const tweetFeature = {
   methods: {
-    async getTweets() {},
-    async getTweet() {},
+    ...mapActions(['setTweets', 'newTweet']),
+    async fetchTweets() {
+      try {
+        const response = await tweetAPI.getTweets()
+        console.log(response)
+        const { data, statusText} = response
+        if (statusText !== 'OK') {
+          throw new Error(data.messages)
+        }
+        this.setTweets(data)
+        successToast
+      } catch (error) {
+        errorToast.fire({
+          title: error.message
+        })
+      }
+    },
+    async fetchTweet() {},
   }
 }
 
