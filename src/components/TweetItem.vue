@@ -26,8 +26,18 @@
           }}</span>
         </div>
         <div class="tweet-body-foot-liked">
-          <img v-if="tweet.isLiked" src="../../public/images/icon_like.png" alt="" class="tweet-body-foot-liked-icon">
-          <img v-else src="../../public/images/icon_like_fill.png" alt="" class="tweet-body-foot-liked-icon">
+          <img 
+            v-if="!tweet.isLiked" 
+            src="../../public/images/icon_like.png" 
+            alt="" 
+            class="tweet-body-foot-liked-icon"
+            @click.stop.prevent="addLike(tweet.id)">
+          <img 
+            v-else 
+            src="../../public/images/icon_like_fill.png" 
+            alt="" 
+            class="tweet-body-foot-liked-icon"
+            @click.stop.prevent="removeLike(tweet.id)">
           <span class="tweet-body-foot-liked-count">{{
             tweet.Likes
           }}</span>
@@ -38,6 +48,9 @@
 </template>
 
 <script>
+import { successToast, errorToast } from '../utils/toast'
+import { mapActions } from 'vuex'
+import userAPI from '../apis/users'
 import { imageFilter, timeFilter } from '../utils/mixins'
 export default {
   name: "TweetItem",
@@ -47,6 +60,45 @@ export default {
       type: Object,
       required: true
     }
-  }
+  },
+  methods: {
+    ...mapActions(['likeTweet', 'unlikeTweet']),
+    async addLike(tweetId) {
+      try {
+        const { data } = await userAPI.addLike(tweetId)
+        console.log(data)
+        if(data.status !== 'success') {
+          throw new Error(data.message)
+        }
+        this.likeTweet(tweetId)
+        successToast.fire({
+          title: data.message
+        })
+      } catch (error) {
+        console.log(error)
+        errorToast.fire({
+          title: error.message
+        })
+      }
+    },
+    async removeLike(tweetId) {
+      try {
+        const { data } = await userAPI.removeLike(tweetId)
+        console.log(data)
+        if(data.status !== 'success') {
+          throw new Error(data.message)
+        }
+        this.unlikeTweet(tweetId)
+        successToast.fire({
+          title: data.message
+        })
+      } catch (error) {
+        console.log(error)
+        errorToast.fire({
+          title: error.message
+        })
+      }
+    },
+  },
 };
 </script>

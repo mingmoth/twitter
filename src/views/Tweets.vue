@@ -6,7 +6,7 @@
     <div class="home">
       <UserPost />
       <div>
-        <TweetItem v-for="tweet in getTweets.tweets" :key="tweet.id" :tweet="tweet"/>
+        <TweetItem v-for="tweet in getTweets" :key="tweet.id" :tweet="tweet"/>
       </div>
       <TweetModal />
       <TweetReplyModal />

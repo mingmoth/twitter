@@ -1,5 +1,7 @@
 @import '_rwd';
 .side {
+  height: 100%;
+  position: relative;
   &-logo {
     margin: 14px 10px 30px 10px;
     width: 30px;

@@ -45,12 +45,11 @@ export const tweetFeature = {
     async fetchTweets() {
       try {
         const response = await tweetAPI.getTweets()
-        console.log(response)
         const { data, statusText} = response
         if (statusText !== 'OK') {
           throw new Error(data.messages)
         }
-        this.setTweets(data)
+        this.setTweets(data.tweets)
         successToast
       } catch (error) {
         errorToast.fire({
