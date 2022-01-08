@@ -5,6 +5,9 @@
     </div>
     <div class="home">
       <UserPost />
+      <div>
+        <TweetItem v-for="tweet in getTweets.tweets" :key="tweet.id" :tweet="tweet"/>
+      </div>
       <TweetModal />
       <TweetReplyModal />
     </div>
@@ -17,6 +20,7 @@
 <script>
 import Sidebar from "../components/Sidebar.vue";
 import UserPost from "../components/UserPost.vue";
+import TweetItem from '../components/TweetItem.vue'
 import TweetModal from "../components/TweetModal.vue";
 import TweetReplyModal from "../components/TweetReplyModal.vue";
 import Follow from "../components/Follow.vue";
@@ -28,7 +32,7 @@ export default {
   name: "Tweets",
   components: {
     Sidebar,
-    UserPost,
+    UserPost, TweetItem,
     TweetModal,
     TweetReplyModal,
     Follow,

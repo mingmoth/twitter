@@ -15,7 +15,6 @@
   }
   &-body {
     flex: 1;
-    height: 100%;
     &-head {
       display: flex;
       &-name {
@@ -45,12 +44,11 @@
       width: 130px;
       justify-content: space-between;
       &-comment {
-        
         display: flex;
         align-items: center;
         &-icon {
-          width: 12.34px;
-          height: 12.34px;
+          width: 15px;
+          height: 15px;
           background: var(--comment-url);
           background-size: 100% 100%;
           margin-right: 11.35px;
@@ -61,8 +59,8 @@
         display: flex;
         align-items: center;
         &-icon {
-          width: 12.56px;
-          height: 11.82px;
+          width: 15px;
+          height: 15px;
           background: var(--liked-url);
           background-size: 100% 100%;
           margin-right: 11.35px;

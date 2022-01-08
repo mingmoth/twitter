@@ -5,7 +5,7 @@ import { successToast, errorToast } from './toast'
 import { mapActions } from 'vuex'
 import tweetAPI from '../apis/tweets'
 
-export const time = {
+export const timeFilter = {
   filters: {
     fromNow(time) {
       return time ? moment(time).fromNow(): '--'
@@ -13,13 +13,13 @@ export const time = {
   }
 }
 
-export const image = {
+export const imageFilter = {
   filters: {
     emptyAvatar(src) {
-      return src || '../../public/images/default_avatar.png'
+      return src || 'https://i.pinimg.com/474x/3c/81/4a/3c814a534b0cf42c80fd5cba6e2ac07f.jpg'
     },
     emptyCover(src) {
-      return src || '../../public/images/default_cover.png'
+      return src || 'https://htmlcolorcodes.com/assets/images/colors/light-orange-color-solid-background-1920x1080.png'
     }
   }
 }
