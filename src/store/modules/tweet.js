@@ -28,6 +28,9 @@ const actions = {
   unlikeTweet({ commit }, tweetId) {
     commit('removeLike', tweetId)
   },
+  newReply({ commit }, tweetId) {
+    commit('addReply', tweetId)
+  }
 }
 
 const mutations = {
@@ -54,6 +57,16 @@ const mutations = {
         tweet.isLiked = false,
         tweet.Likes -= 1
       }
+    })
+  },
+  addReply: (state, tweetId) => {
+    state.tweets = state.tweets.map(tweet => {
+      if(tweet.id === tweetId) {
+        return tweet = {
+          ...tweet,
+          Replies: tweet.Replies += 1
+        }
+      } else { return tweet }
     })
   },
 }
