@@ -153,6 +153,7 @@
         height: 50px;
         border-radius: 50%;
         background: var(--input-border);
+        object-fit: cover;
       }
       &-tweet {
         margin-left: 10px;

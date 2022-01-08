@@ -20,7 +20,8 @@
             alt=""
             class="tweet-body-foot-comment-icon"
             data-bs-toggle="modal"
-            data-bs-target="#main-post-reply">
+            data-bs-target="#main-post-reply"
+            @click.stop.prevent="getReplyTweet(tweet.id)">
           <span class="tweet-body-foot-comment-count">{{
             tweet.Replies
           }}</span>
@@ -62,11 +63,10 @@ export default {
     }
   },
   methods: {
-    ...mapActions(['likeTweet', 'unlikeTweet']),
+    ...mapActions(['setTweet', 'likeTweet', 'unlikeTweet']),
     async addLike(tweetId) {
       try {
         const { data } = await userAPI.addLike(tweetId)
-        console.log(data)
         if(data.status !== 'success') {
           throw new Error(data.message)
         }
@@ -84,7 +84,6 @@ export default {
     async removeLike(tweetId) {
       try {
         const { data } = await userAPI.removeLike(tweetId)
-        console.log(data)
         if(data.status !== 'success') {
           throw new Error(data.message)
         }
@@ -99,6 +98,10 @@ export default {
         })
       }
     },
+    getReplyTweet(tweetId) {
+      console.log(tweetId)
+      this.setTweet(tweetId)
+    }
   },
 };
 </script>

@@ -76,7 +76,7 @@ export const tweetFeature = {
 
 export const replies = {
   methods: {
-    async reply() {}
+    async createReply() {}
   }
 }
 

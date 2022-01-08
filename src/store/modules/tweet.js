@@ -1,14 +1,23 @@
 const state = {
-  tweets: []
+  tweets: [],
+  tweet: {
+    User: {
+      avatar: ''
+    }
+  }
 }
 
 const getters = {
-  getTweets: state => state.tweets
+  getTweets: state => state.tweets,
+  getTweet: state => state.tweet
 }
 
 const actions = {
   setTweets({commit}, tweets) {
     commit('updateTweets', tweets)
+  },
+  setTweet({commit}, tweetId) {
+    commit('updateTweet', tweetId)
   },
   newTweet({commit}, tweets) {
     commit('addTweet', tweets)
@@ -24,6 +33,9 @@ const actions = {
 const mutations = {
   updateTweets: (state, tweets) => {
     state.tweets = tweets
+  },
+  updateTweet: (state, tweetId) => {
+    state.tweet = state.tweets.find(tweet => tweet.id === tweetId)
   },
   addTweet: (state, tweet) => {
     state.tweets.unshift(tweet)
