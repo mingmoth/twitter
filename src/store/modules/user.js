@@ -18,6 +18,12 @@ const actions = {
   // },
   setPopular({ commit }, popular) {
     commit('getPopular', popular)
+  },
+  setFollow({ commit }, userId) {
+    commit('addFollow', userId)
+  },
+  setUnfollow({ commit }, followingId) {
+    commit('removeFollow', followingId)
   }
 }
 
@@ -27,6 +33,26 @@ const mutations = {
   },
   getPopular(state, popular) {
     state.popular = popular
+  },
+  addFollow(state, userId) {
+    state.popular = state.popular.map(user => {
+      if(user.id === userId) {
+        return user = {
+          ...user,
+          isFollowed: true
+        }
+      } else { return user }
+    })
+  },
+  removeFollow(state, followingId) {
+    state.popular = state.popular.map(user => {
+      if (user.id === followingId) {
+        return user = {
+          ...user,
+          isFollowed: false
+        }
+      } else { return user }
+    })
   }
 }
 

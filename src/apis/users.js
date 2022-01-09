@@ -10,6 +10,12 @@ export default {
   removeLike(tweetId) {
     return apiHelper.post(`/tweets/${tweetId}/unlike`, null)
   },
+  addFollow(UserId) {
+    return apiHelper.post('/followships', UserId)
+  },
+  removeFollow(followingId) {
+    return apiHelper.delete(`/followships/${followingId}`)
+  },
   getTopUser() {
     return apiHelper.get('/users/top')
   }

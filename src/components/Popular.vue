@@ -10,8 +10,8 @@
         <div class="follow-item-title-name">{{user.name}}</div>
         <div class="follow-item-title-account">{{user.account}}</div>
       </div>
-      <button v-if="user.isFollowed" class="btn-unfollow">正在跟隨</button>
-      <button v-else class="btn-follow">跟隨</button>
+      <button v-if="user.isFollowed" class="btn-unfollow" @click.stop.prevent="removeFollow(user.id)">正在跟隨</button>
+      <button v-else class="btn-follow" @click.stop.prevent="addFollow(user.id)">跟隨</button>
     </div>
   </div>
 </template>
@@ -34,7 +34,12 @@ export default {
     ...mapGetters(['getPopular']),
   },
   methods: {
-
+    addFollow(userId) {
+      this.followUser(userId)
+    },
+    removeFollow(userId) {
+      this.unfollowUser(userId)
+    },
   }
 }
 </script>
