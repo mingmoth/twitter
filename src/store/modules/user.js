@@ -1,10 +1,12 @@
 const state = {
   currentUser: {},
   user: {},
+  popular: [],
 }
 
 const getters = {
-  getCurrentUser: state => state.currentUser
+  getCurrentUser: state => state.currentUser,
+  getPopular: state => state.popular
 }
 
 const actions = {
@@ -14,12 +16,18 @@ const actions = {
   // setTweets({ commit }, tweets) {
   //   commit('updateTweets', tweets)
   // },
+  setPopular({ commit }, popular) {
+    commit('getPopular', popular)
+  }
 }
 
 const mutations = {
   getCurrentUser(state, currentUser) {
     state.currentUser = currentUser
   },
+  getPopular(state, popular) {
+    state.popular = popular
+  }
 }
 
 export default {

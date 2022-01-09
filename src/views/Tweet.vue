@@ -7,7 +7,7 @@
       <Post />
     </div>
     <div class="popular">
-      <Follow />
+      <Popular />
     </div>
   </div>
 </template>
@@ -15,11 +15,11 @@
  <script>
  import Sidebar from '../components/Sidebar.vue'
  import Post from '../components/Post.vue'
- import Follow from '../components/Follow.vue'
+ import Popular from '../components/Popular.vue'
  export default {
    name: 'Posts',
    components: {
-     Sidebar, Post, Follow
+     Sidebar, Post, Popular
    }
  }
  </script>

@@ -7,7 +7,7 @@
       <UserLike />
     </div>
     <div class="popular">
-      <Follow />
+      <Popular />
     </div>
   </div>
 </template>
@@ -15,11 +15,11 @@
 <script>
 import Sidebar from '../components/Sidebar.vue'
 import UserLike from '../components/UserLike.vue'
-import Follow from '../components/Follow.vue'
+import Popular from '../components/Popular.vue'
 export default {
   name: 'UserTweets',
   components: {
-    Sidebar, UserLike, Follow
+    Sidebar, UserLike, Popular
   }
 }
 </script>

@@ -27,7 +27,7 @@ export const imageFilter = {
 
 export const userFeature = {
   methods: {
-    ...mapActions(['setCurrentUser']),
+    ...mapActions(['setCurrentUser', 'setPopular']),
     async fetchCurrentUser() {
       try {
         const { data } = await userAPI.getCurrentUser()
@@ -46,7 +46,21 @@ export const userFeature = {
     async removeLike() {},
     async addFollow() {},
     async removeFollow() {},
-    async fetchPopular() {},
+    async fetchPopular() {
+      try {
+        const response = await userAPI.getTopUser()
+        const { data, statusText } = response
+        if(statusText !== 'OK') {
+          throw new Error(data.message)
+        }
+        const popular = data.users
+        this.setPopular(popular)
+      } catch (error) {
+        errorToast.fire({
+          title: error.message
+        })
+      }
+    },
     async putUser() {},
     async updateUser() {},
   }

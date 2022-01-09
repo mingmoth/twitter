@@ -9,5 +9,8 @@ export default {
   },
   removeLike(tweetId) {
     return apiHelper.post(`/tweets/${tweetId}/unlike`, null)
+  },
+  getTopUser() {
+    return apiHelper.get('/users/top')
   }
 }
