@@ -71,6 +71,33 @@ export const tweetFeature = {
       }
     },
     async fetchTweet() {},
+    async createTweet(description) {
+      try {
+        const { data } = await tweetAPI.createTweet({
+          description: description
+        })
+        console.log(data)
+        if (data.status !== 'success') {
+          throw new Error(data.message)
+        }
+        successToast.fire({
+          title: data.message
+        })
+        const newTweet = {
+          ...data.tweet,
+          User: this.getCurrentUser,
+          Replies: 0,
+          Likes: 0,
+          isLiked: false
+        }
+        this.newTweet(newTweet)
+      } catch (error) {
+        console.log(error)
+        errorToast.fire({
+          title: error.message
+        })
+      }
+    },
   }
 }
 

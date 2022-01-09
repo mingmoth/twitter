@@ -7,20 +7,21 @@
       <img src="../../public/images/ac logo.png" alt="" class="navTop-logo">
     </div>
     <div class="userPost">
-      <img :src="getCurrentUser.avatar" alt="" class="userPost-icon">
-      <form action="" class="form-main-tweet">
+      <img :src="getCurrentUser.avatar | emptyAvatar" alt="" class="userPost-icon">
+      <form action="" class="form-main-tweet" @submit.stop.prevent="submitTweet">
         <textarea
-          name="tweet"
-          id="tweet"
+          name="description"
+          id="description"
           cols="40"
           rows="5"
           placeholder="有什麼新鮮事?"
-          v-model="post"
+          v-model="description"
         ></textarea>
         <button
           class="btn-tweet"
           id="btn-tweet"
-          :disabled="checkPost"
+          :disabled="checkText"
+          type="submit"
         >
           推文
         </button>
@@ -31,13 +32,14 @@
 
 <script>
 import { mapGetters } from "vuex";
-import { userFeature } from '../utils/mixins'
+import { userFeature, tweetFeature, imageFilter } from '../utils/mixins'
+import { errorToast } from '../utils/toast'
 export default {
   name: 'UserPost',
-  mixins: [userFeature],
+  mixins: [userFeature, tweetFeature, imageFilter],
   data() {
     return {
-      post: ''
+      description: ''
     }
   },
   created() {
@@ -45,14 +47,25 @@ export default {
   },
   computed: {
     ...mapGetters(['getCurrentUser']),
-    checkPost() {
-      if(!this.post.length || this.post.length > 140) {
+    checkText() {
+      if(!this.description.length || this.description.length > 140) {
         return true
       } else {
         return false
       }
     },
   },
-  methods: {},
+  methods: {
+    async submitTweet() {
+      if(!this.description) {
+        errorToast.fire({
+          title: '請完成推文內容後送出'
+        })
+        return
+      }
+      await this.createTweet(this.description)
+      this.description = ''
+    }
+  },
 }
 </script>

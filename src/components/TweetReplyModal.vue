@@ -28,7 +28,7 @@
             </div>
           </div>
           <div class="modal-body-reply">
-            <img :src="getCurrentUser.avatar" alt="" class="modal-body-reply-icon">
+            <img :src="getCurrentUser.avatar | emptyAvatar" alt="" class="modal-body-reply-icon">
             <form 
               action=""
               class="modal-body-reply-tweet"
@@ -46,7 +46,7 @@
                 id="btn-tweet"
                 type="submit"
                 data-bs-dismiss="modal"
-                :disabled="checkPost"
+                :disabled="checkText"
               >
                 推文
               </button>
@@ -76,7 +76,7 @@ export default {
   },
   computed: {
     ...mapGetters(['getCurrentUser', 'getTweet']),
-    checkPost() {
+    checkText() {
       if(!this.comment.length || this.comment.length > 140) {
         return true
       } else {
@@ -115,6 +115,5 @@ export default {
       }
     },
   }
-
 }
 </script>

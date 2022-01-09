@@ -19,8 +19,8 @@ const actions = {
   setTweet({commit}, tweetId) {
     commit('updateTweet', tweetId)
   },
-  newTweet({commit}, tweets) {
-    commit('addTweet', tweets)
+  newTweet({commit}, tweet) {
+    commit('addTweet', tweet)
   },
   likeTweet({commit}, tweetId) {
     commit('addLike', tweetId)
