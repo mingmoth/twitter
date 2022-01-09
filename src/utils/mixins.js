@@ -10,6 +10,9 @@ export const timeFilter = {
   filters: {
     fromNow(time) {
       return time ? moment(time).fromNow(): '--'
+    },
+    dateTime(time) {
+      return time ? moment(time).format('a h:mm · ll'): '--'
     }
   }
 }
@@ -96,7 +99,7 @@ export const userFeature = {
 
 export const tweetFeature = {
   methods: {
-    ...mapActions(['setTweets', 'newTweet']),
+    ...mapActions(['setTweets', 'setTweet', 'newTweet']),
     async fetchTweets() {
       try {
         const response = await tweetAPI.getTweets()
@@ -112,7 +115,20 @@ export const tweetFeature = {
         })
       }
     },
-    async fetchTweet() {},
+    async fetchTweet(tweetId) {
+      try {
+        const { data, statusText } = await tweetAPI.getTweet(tweetId)
+        if (statusText !== 'OK') {
+          throw new Error(data.message)
+        }
+        this.setTweet(data.tweet)
+      } catch (error) {
+        console.log(error)
+        errorToast.fire({
+          title: error.message
+        })
+      }
+    },
     async createTweet(description) {
       try {
         const { data } = await tweetAPI.createTweet({

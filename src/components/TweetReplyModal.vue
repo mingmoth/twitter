@@ -11,19 +11,19 @@
         </div>
         <div class="modal-body">
           <div class="modal-body-post">
-            <img :src="getTweet.User.avatar | emptyAvatar" alt="" class="modal-body-post-icon">
+            <img :src="getTweetModal.User.avatar | emptyAvatar" alt="" class="modal-body-post-icon">
             <div class="modal-body-post-body">
               <div class="modal-body-post-body-head">
-                <div class="modal-body-post-body-head-name">{{getTweet.User.name}}</div>
-                <div class="modal-body-post-body-head-account">@{{getTweet.User.account}}</div>
+                <div class="modal-body-post-body-head-name">{{getTweetModal.User.name}}</div>
+                <div class="modal-body-post-body-head-account">@{{getTweetModal.User.account}}</div>
                 <span> · </span>
-                <div class="modal-body-post-body-head-time">{{getTweet.createdAt | fromNow}}</div>
+                <div class="modal-body-post-body-head-time">{{getTweetModal.createdAt | fromNow}}</div>
               </div>
               <div class="modal-body-post-body-content">
-                {{getTweet.description}}
+                {{getTweetModal.description}}
               </div>
               <div class="modal-body-post-body-foot">
-                <div class="modal-body-post-body-foot-reply">回覆給 <span class="modal-body-post-body-foot-account">@{{getTweet.User.account}}</span></div>
+                <div class="modal-body-post-body-foot-reply">回覆給 <span class="modal-body-post-body-foot-account">@{{getTweetModal.User.account}}</span></div>
               </div>
             </div>
           </div>
@@ -32,7 +32,7 @@
             <form 
               action=""
               class="modal-body-reply-tweet"
-              @submit.stop.prevent="createReply(getTweet.id)">
+              @submit.stop.prevent="createReply(getTweetModal.id)">
               <textarea
                 name="comment"
                 id="comment"
@@ -75,7 +75,7 @@ export default {
     this.fetchCurrentUser()
   },
   computed: {
-    ...mapGetters(['getCurrentUser', 'getTweet']),
+    ...mapGetters(['getCurrentUser', 'getTweetModal']),
     checkText() {
       if(!this.comment.length || this.comment.length > 140) {
         return true

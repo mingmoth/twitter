@@ -35,7 +35,7 @@ export default new VueRouter({
       component: Tweets
     },
     {
-      path: '/tweet',
+      path: '/tweets/:id',
       name: 'tweet',
       component: () => import('../views/Tweet.vue')
     },

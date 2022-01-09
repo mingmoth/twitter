@@ -10,9 +10,7 @@
         <span> · </span>
         <div class="tweet-body-head-time">{{ tweet.createdAt | fromNow}}</div>
       </div>
-      <div class="tweet-body-content">
-        {{ tweet.description }}
-      </div>
+      <router-link :to="{ name: 'tweet', params: { id: tweet.id } }" class="tweet-body-content">{{ tweet.description }}</router-link>
       <div class="tweet-body-foot">
         <div class="tweet-body-foot-comment">
           <img 
@@ -63,7 +61,7 @@ export default {
     }
   },
   methods: {
-    ...mapActions(['setTweet', 'likeTweet', 'unlikeTweet']),
+    ...mapActions(['setTweetModal', 'likeTweet', 'unlikeTweet']),
     async addLike(tweetId) {
       try {
         const { data } = await userAPI.addLike(tweetId)
@@ -100,7 +98,7 @@ export default {
     },
     getReplyTweet(tweetId) {
       console.log(tweetId)
-      this.setTweet(tweetId)
+      this.setTweetModal(tweetId)
     }
   },
 };

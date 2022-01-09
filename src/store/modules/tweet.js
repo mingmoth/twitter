@@ -1,6 +1,7 @@
 const state = {
   tweets: [],
-  tweet: {
+  tweet: {},
+  tweetModal: {
     User: {
       avatar: ''
     }
@@ -9,20 +10,24 @@ const state = {
 
 const getters = {
   getTweets: state => state.tweets,
-  getTweet: state => state.tweet
+  getTweet: state => state.tweet,
+  getTweetModal: state => state.tweetModal
 }
 
 const actions = {
-  setTweets({commit}, tweets) {
+  setTweets({ commit }, tweets) {
     commit('updateTweets', tweets)
   },
-  setTweet({commit}, tweetId) {
-    commit('updateTweet', tweetId)
+  setTweet({ commit }, tweet) {
+    commit('updateTweet', tweet)
   },
-  newTweet({commit}, tweet) {
+  setTweetModal({ commit }, tweetId) {
+    commit('updateTweetModal', tweetId)
+  },
+  newTweet({ commit }, tweet) {
     commit('addTweet', tweet)
   },
-  likeTweet({commit}, tweetId) {
+  likeTweet({ commit }, tweetId) {
     commit('addLike', tweetId)
   },
   unlikeTweet({ commit }, tweetId) {
@@ -37,8 +42,11 @@ const mutations = {
   updateTweets: (state, tweets) => {
     state.tweets = tweets
   },
-  updateTweet: (state, tweetId) => {
-    state.tweet = state.tweets.find(tweet => tweet.id === tweetId)
+  updateTweet: (state, tweet) => {
+    state.tweet = tweet
+  },
+  updateTweetModal: (state, tweetId) => {
+    state.tweetModal = state.tweets.find(tweet => tweet.id === tweetId)
   },
   addTweet: (state, tweet) => {
     state.tweets.unshift(tweet)

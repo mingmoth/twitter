@@ -120,6 +120,17 @@
     margin-right: 41px;
   }
   &-title {
+    display: flex;
+    &-back {
+      width: 23px;
+      height: 24px;
+      object-fit: cover;
+      margin-right: 41px;
+      cursor: pointer;
+      @include breakpoint(mobile) {
+        margin-right: 21px;
+      }
+    }
     &-name {
       font-size: 18px;
       font-weight: 700;
@@ -129,10 +140,7 @@
       font-size: 13px;
       font-weight: 500;
       color: var(--input-label);
-    }
-    @include breakpoint(mobile) {
-      display: none;
-    }
+    } 
   }
   &-logo {
     width: 30px;
