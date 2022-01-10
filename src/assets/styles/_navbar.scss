@@ -121,6 +121,7 @@
   }
   &-title {
     display: flex;
+    align-items: center;
     &-back {
       width: 23px;
       height: 24px;
@@ -135,6 +136,10 @@
       font-size: 18px;
       font-weight: 700;
       color: var(--text-content);
+      &-tweets {
+        font-size: 13px;
+        color: var(--input-label)
+      }
     }
     &-info {
       font-size: 13px;

@@ -2,6 +2,7 @@ const state = {
   currentUser: {},
   userProfile: {},
   userTweets: {},
+  userReplies: {},
   popular: [],
 }
 
@@ -9,6 +10,7 @@ const getters = {
   getCurrentUser: state => state.currentUser,
   getUserProfile: state => state.userProfile,
   getUserTweets: state => state.userTweets,
+  getUserReplies: state => state.userReplies,
   getPopular: state => state.popular
 }
 
@@ -21,6 +23,9 @@ const actions = {
   },
   setUserTweets({ commit }, userTweets) {
     commit('getUserTweets', userTweets)
+  },
+  setUserReplies({ commit }, userReplies) {
+    commit('getUserReplies', userReplies)
   },
   // setTweets({ commit }, tweets) {
   //   commit('updateTweets', tweets)
@@ -45,6 +50,9 @@ const mutations = {
   },
   getUserTweets: (state, userTweets) => {
     state.userTweets = userTweets
+  },
+  getUserReplies: (state, userReplies) => {
+    state.userReplies = userReplies
   },
   getPopular(state, popular) {
     state.popular = popular

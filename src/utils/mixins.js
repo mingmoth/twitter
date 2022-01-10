@@ -30,7 +30,7 @@ export const imageFilter = {
 
 export const userFeature = {
   methods: {
-    ...mapActions(['setCurrentUser', 'setUser', 'setUserTweets', 'setPopular', 'setFollow', 'setUnfollow', 'likeTweet', 'unlikeTweet']),
+    ...mapActions(['setCurrentUser', 'setUser', 'setUserTweets', 'setUserReplies', 'setPopular', 'setFollow', 'setUnfollow', 'likeTweet', 'unlikeTweet']),
     async fetchCurrentUser() {
       try {
         const { data } = await userAPI.getCurrentUser()
@@ -62,7 +62,21 @@ export const userFeature = {
         })
       }
     },
-    async fetchUserReplies() {},
+    async fetchUserReplies(userId) {
+      try {
+        const response = await userAPI.getUserReplies(userId)
+        const { data, statusText } = response
+        if (statusText !== 'OK') {
+          throw new Error(data.message)
+        }
+        console.log(response)
+        this.setUserReplies(data.tweets)
+      } catch (error) {
+        errorToast.fire({
+          title: error.message
+        })
+      }
+    },
     async fetchUserLikes() {},
     async addTweetLike(tweetId) {
       try {

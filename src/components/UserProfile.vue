@@ -5,7 +5,7 @@
         <img src="../../public/images/icon_back.png" alt="" class="navTop-title-back" @click="$router.push('/tweets')">
         <div class="navTop-title-name">
           {{getUserProfile.name}}
-          <div class="navTop-title-name-tweets">{{getUserProfile.Tweets}}<span>貼文</span></div>
+          <div class="navTop-title-name-tweets">{{getUserProfile.Tweets}}<span> 貼文</span></div>
         </div>
       </div>
     </div>

@@ -4,7 +4,8 @@
       <Sidebar />
     </div>
     <div class="home">
-      <UserReply />
+      <UserProfile />
+      <TweetReply v-for="tweet in getUserReplies" :key="tweet.id" :tweet="tweet"/>
     </div>
     <div class="popular">
       <Popular />
@@ -13,13 +14,25 @@
 </template>
 
 <script>
+import { mapGetters } from 'vuex'
+import { userFeature } from '../utils/mixins'
+
 import Sidebar from '../components/Sidebar.vue'
-import UserReply from '../components/UserReply.vue'
+import UserProfile from '../components/UserProfile.vue'
+import TweetReply from '../components/TweetReply.vue'
 import Popular from '../components/Popular.vue'
 export default {
-  name: 'UserTweets',
+  name: 'UserReplies',
+  mixins: [ userFeature ],
   components: {
-    Sidebar, UserReply, Popular
-  }
+    Sidebar, UserProfile, TweetReply, Popular
+  },
+  created() {
+    const { id: userId } = this.$route.params
+    this.fetchUserReplies(userId)
+  },
+  computed: {
+    ...mapGetters(['getUserReplies'])
+  },
 }
 </script>

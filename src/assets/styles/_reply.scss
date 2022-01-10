@@ -20,10 +20,20 @@
         font-weight: 700;
         color: var(--text-content);
         margin-right: 5px;
+        text-decoration: none;
+        &:hover {
+          text-decoration: underline;
+          color: var(--text-content);
+        }
       }
       &-account, &-time {
         font-weight: 500;
         color: var(--input-label);
+        text-decoration: none;
+        &:hover {
+          text-decoration: underline;
+          color: var(--input-label);
+        }
       }
     }
     &-target {
