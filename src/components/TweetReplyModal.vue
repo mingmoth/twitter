@@ -85,7 +85,7 @@ export default {
     },
   },
   methods: {
-    ...mapActions(['newReply']),
+    ...mapActions(['newReply', 'pushNewReply']),
     async createReply(tweetId) {
       if(!this.comment) {
         errorToast.fire({
@@ -97,15 +97,19 @@ export default {
         const { data } = await tweetAPI.createReply(
           { tweetId, comment: this.comment}
         )
-        console.log(data)
         if(data.status !== 'success') {
           throw new Error(data.message)
         }
         successToast.fire({
           title: data.message
         })
+        const newReply = {
+          ...data.reply,
+          User: this.getCurrentUser
+        }
         this.comment = ''
         this.newReply(tweetId)
+        this.pushNewReply(newReply)
       } catch (error) {
         console.log(error)
         errorToast.fire({

@@ -61,14 +61,14 @@ export default {
     }
   },
   methods: {
-    ...mapActions(['setTweetModal', 'likeTweet', 'unlikeTweet']),
+    ...mapActions(['setTweetModal', 'likeTweets', 'unlikeTweets']),
     async addLike(tweetId) {
       try {
         const { data } = await userAPI.addLike(tweetId)
         if(data.status !== 'success') {
           throw new Error(data.message)
         }
-        this.likeTweet(tweetId)
+        this.likeTweets(tweetId)
         successToast.fire({
           title: data.message
         })
@@ -85,7 +85,7 @@ export default {
         if(data.status !== 'success') {
           throw new Error(data.message)
         }
-        this.unlikeTweet(tweetId)
+        this.unlikeTweets(tweetId)
         successToast.fire({
           title: data.message
         })

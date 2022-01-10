@@ -30,7 +30,7 @@ export const imageFilter = {
 
 export const userFeature = {
   methods: {
-    ...mapActions(['setCurrentUser', 'setPopular', 'setFollow', 'setUnfollow']),
+    ...mapActions(['setCurrentUser', 'setPopular', 'setFollow', 'setUnfollow', 'likeTweet', 'unlikeTweet']),
     async fetchCurrentUser() {
       try {
         const { data } = await userAPI.getCurrentUser()
@@ -45,8 +45,38 @@ export const userFeature = {
     async fetchUserTweets() {},
     async fetchUserReplies() {},
     async fetchUserLikes() {},
-    async addLike() {},
-    async removeLike() {},
+    async addTweetLike(tweetId) {
+      try {
+        const { data } = await userAPI.addLike(tweetId)
+        if(data.status !== 'success') {
+          throw new Error(data.message)
+        }
+        successToast.fire({
+          title: data.message
+        })
+        this.likeTweet(data.like)
+      } catch (error) {
+        errorToast.fire({
+          title: error.message
+        })
+      }
+    },
+    async removeTweetLike(tweetId, userId) {
+      try {
+        const { data } = await userAPI.removeLike(tweetId)
+        if (data.status !== 'success') {
+          throw new Error(data.message)
+        }
+        successToast.fire({
+          title: data.message
+        })
+        this.unlikeTweet(userId)
+      } catch (error) {
+        errorToast.fire({
+          title: error.message
+        })
+      }
+    },
     async followUser(userId) {
       try {
         const { data } = await userAPI.addFollow({ UserId: userId })

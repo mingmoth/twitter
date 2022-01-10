@@ -5,7 +5,7 @@
     </div>
     <div class="home">
       <UserTweet :tweet="getTweet" />
-      <Reply />
+      <Reply v-for="reply in getTweet.Replies" :key="reply.id" :reply="reply" :tweetOwner="getTweet.User.account"/>
       <TweetModal />
       <TweetReplyModal />
     </div>
@@ -26,7 +26,7 @@ import Popular from "../components/Popular.vue";
 import { tweetFeature } from '../utils/mixins'
 import { mapGetters } from 'vuex'
 export default {
-  name: "Posts",
+  name: "Tweet",
   mixins: [tweetFeature],
   components: {
     Sidebar,
@@ -37,11 +37,12 @@ export default {
     Popular,
   },
   created() {
+    this.fetchTweets()
     const { id: tweetId } = this.$route.params
     this.fetchTweet(tweetId)
   },
   computed: {
-    ...mapGetters(['getTweet']),
+    ...mapGetters(['getTweets','getTweet']),
   },
   methods: {},
 };

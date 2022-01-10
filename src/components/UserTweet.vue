@@ -8,22 +8,22 @@
     </div>
     <div class="post">
       <div class="post-header">
-        <img :src="tweet.User.avatar | emptyAvatar" alt="" class="post-header-icon">
+        <img :src="tweet.User ? tweet.User.avatar: '' | emptyAvatar" alt="" class="post-header-icon">
         <div class="post-header-title">
-          <div class="post-header-title-name">{{tweet.User.name}}</div>
-          <div class="post-header-title-account"><span>@</span>{{tweet.User.account}}</div>
+          <div class="post-header-title-name">{{tweet.User ? tweet.User.name : ''}}</div>
+          <div class="post-header-title-account"><span>@</span>{{tweet.User ? tweet.User.account : ''}}</div>
         </div>
       </div>
       <div class="post-content">{{tweet.description}}</div>
       <div class="post-time">{{tweet.createdAt | dateTime}}</div>
       <div class="post-info">
         <div class="post-info-reply">
-          <div class="post-info-reply-count">{{tweet.Replies.length}}
+          <div class="post-info-reply-count">{{tweet.Replies ? tweet.Replies.length : ''}}
             <span class="post-info-reply-unit"> 回覆</span>
           </div>
         </div>
         <div class="post-info-liked">
-          <div class="post-info-liked-count">{{tweet.Likes.length}}
+          <div class="post-info-liked-count">{{tweet.Likes ? tweet.Likes.length : ''}}
             <span class="post-info-liked-unit"> 喜歡次數</span>
           </div>
         </div>
@@ -34,23 +34,52 @@
           alt=""
           class="post-action-reply"
           data-bs-toggle="modal"
-          data-bs-target="#main-post-reply">
-          <img v-if="!tweet.isLiked" src="../../public/images/icon_like.png" alt="" class="post-action-liked">
-          <img v-else src="../../public/images/icon_like_fill.png" alt="" class="post-action-liked">
+          data-bs-target="#main-post-reply"
+          @click.stop.prevent="getReplyTweet(tweet.id)">
+          <img 
+            v-if="!tweet.isLiked" 
+            src="../../public/images/icon_like.png" 
+            alt="" 
+            class="post-action-liked"
+            @click.stop.prevent="addLike(tweet.id)">
+          <img 
+            v-else 
+            src="../../public/images/icon_like_fill.png" 
+            alt="" 
+            class="post-action-liked"
+            @click.stop.prevent="removeLike(tweet.id)">
       </div>
     </div>
   </div>
 </template>
 
 <script>
-import { imageFilter, timeFilter } from '../utils/mixins'
+import { mapGetters, mapActions } from 'vuex'
+import { userFeature, imageFilter, timeFilter } from '../utils/mixins'
 export default {
   name: 'UserTweet',
-  mixins: [imageFilter, timeFilter],
+  mixins: [userFeature, imageFilter, timeFilter],
   props: {
     tweet: {
       type: Object
     }
-  }
+  },
+  methods: {
+    ...mapActions(['setTweetModal']),
+    addLike(tweetId) {
+      this.addTweetLike(tweetId)
+    },
+    removeLike(tweetId) {
+      const userId = this.getCurrentUser.id
+      this.removeTweetLike(tweetId, userId)
+    },
+    getReplyTweet(tweetId) {
+      console.log(tweetId)
+      this.setTweetModal(tweetId)
+    },
+  },
+  computed: {
+    ...mapGetters(['getCurrentUser']),
+  },
 }
 </script>

@@ -1,16 +1,32 @@
 <template>
   <div class="reply">
-    <div class="reply-icon"></div>
+    <img :src="reply.User.avatar | emptyAvatar" alt="" class="reply-icon">
     <div class="reply-content">
       <div class="reply-content-title">
-        <div class="reply-content-title-name">Mary Jane</div>
-        <div class="reply-content-title-account">@mjjane<span>・</span></div>
-        <div class="reply-content-title-time">13小時</div>
+        <div class="reply-content-title-name">{{reply.User.name}}</div>
+        <div class="reply-content-title-account">@{{reply.User.account}}<span>・</span></div>
+        <div class="reply-content-title-time">{{reply.createdAt | fromNow}}</div>
       </div>
       <div class="reply-content-target">回覆 
-        <span class="reply-content-target-account">@apple</span>
+        <span class="reply-content-target-account">@{{tweetOwner}}</span>
       </div>
-      <div class="reply-content-comment">Amet minim mollit non deserunt ullamco est sit aliqua dolor do amet sint. Velit officia consequat duis enim velit mollit. Exercitation veniam consequat sunt nostrud amet.</div>
+      <div class="reply-content-comment">{{reply.comment}}</div>
     </div>
   </div>
 </template>
+
+<script>
+import { imageFilter, timeFilter } from '../utils/mixins'
+export default {
+  name: 'Reply',
+  mixins: [imageFilter, timeFilter],
+  props: {
+    reply: {
+      type: Object,
+    },
+    tweetOwner: {
+      type: String,
+    }
+  }
+}
+</script>

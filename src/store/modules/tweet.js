@@ -27,14 +27,23 @@ const actions = {
   newTweet({ commit }, tweet) {
     commit('addTweet', tweet)
   },
-  likeTweet({ commit }, tweetId) {
-    commit('addLike', tweetId)
+  likeTweets({ commit }, tweetId) {
+    commit('addLikeTweets', tweetId)
   },
-  unlikeTweet({ commit }, tweetId) {
-    commit('removeLike', tweetId)
+  unlikeTweets({ commit }, tweetId) {
+    commit('removeLikeTweets', tweetId)
+  },
+  likeTweet({ commit }, like) {
+    commit('addLikeTweet', like)
+  },
+  unlikeTweet({ commit }, userId) {
+    commit('removeLikeTweet', userId)
   },
   newReply({ commit }, tweetId) {
     commit('addReply', tweetId)
+  },
+  pushNewReply({ commit }, reply) {
+    commit('pushReply', reply)
   }
 }
 
@@ -51,7 +60,7 @@ const mutations = {
   addTweet: (state, tweet) => {
     state.tweets.unshift(tweet)
   },
-  addLike: (state, tweetId) => {
+  addLikeTweets: (state, tweetId) => {
     state.tweets.map(tweet => {
       if(tweet.id === tweetId && !tweet.isLiked) {
         tweet.isLiked = true,
@@ -59,13 +68,21 @@ const mutations = {
       }
     })
   },
-  removeLike: (state, tweetId) => {
+  removeLikeTweets: (state, tweetId) => {
     state.tweets.map(tweet => {
       if (tweet.id === tweetId && tweet.isLiked) {
         tweet.isLiked = false,
         tweet.Likes -= 1
       }
     })
+  },
+  addLikeTweet: (state, like) => {
+    state.tweet.isLiked = true
+    state.tweet.Likes.push(like)
+  },
+  removeLikeTweet: (state, userId) => {
+    state.tweet.isLiked = false
+    state.tweet.Likes = state.tweet.Likes.filter(like => like.UserId !== userId)
   },
   addReply: (state, tweetId) => {
     state.tweets = state.tweets.map(tweet => {
@@ -77,6 +94,9 @@ const mutations = {
       } else { return tweet }
     })
   },
+  pushReply: (state, reply) => {
+    state.tweet.Replies.push(reply)
+  }
 }
 
 export default {
