@@ -112,14 +112,12 @@
   padding: 0 15px;
   display: flex;
   align-items: center;
-  border-bottom: 1px solid var(--input-border);
   position: fixed;
+  width: 100%;
   top: 0;
   background-color: var(--light);
   opacity:0.9;
   z-index: 1;
-  width: inherit;
-  max-width: 100%;
   &-icon {
     width: 23px;
     height: 24px;
@@ -128,6 +126,7 @@
     margin-right: 41px;
   }
   &-title {
+    width: 100%;
     display: flex;
     align-items: center;
     &-back {
