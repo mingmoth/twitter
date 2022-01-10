@@ -33,11 +33,17 @@ html, body {
     margin-right: 2.4%;
   }
   .home {
+    max-height: 100vh;
+    overflow-y: auto;
     flex: 1;
     border-right: 1px solid var(--input-border);
     border-left: 1px solid var(--input-border);
+    position: relative;
     @include breakpoint(mobile) {
       border: none;
+    }
+    &::-webkit-scrollbar {
+      display: none;
     }
   }
   .popular {

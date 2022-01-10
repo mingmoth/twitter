@@ -120,12 +120,6 @@ export default {
     &-photo {
       margin-bottom: 4px;
     }
-    // &-connect {
-    //   height: calc(100% - 30px);
-    //   width: 2px;
-    //   background-color: #ccd6dd;
-    //   margin-left: 24px;
-    // }
   }
 }
 .reply {

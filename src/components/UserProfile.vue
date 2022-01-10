@@ -1,5 +1,5 @@
 <template>
-  <div>
+  <div class="profile">
     <div class="navTop">
       <div class="navTop-title">
         <img src="../../public/images/icon_back.png" alt="" class="navTop-title-back" @click="$router.push('/tweets')">
@@ -80,3 +80,10 @@ export default {
   },
 };
 </script>
+
+<style lang="scss" scoped>
+.profile {
+  position: relative;
+  width: inherit;
+}
+</style>

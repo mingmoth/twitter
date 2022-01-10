@@ -13,6 +13,9 @@ export default {
   getUserReplies(userId) {
     return apiHelper.get(`/users/${userId}/replied_tweets`)
   },
+  getUserLikes(userId) {
+    return apiHelper.get(`/users/${userId}/likes`)
+  },
   addLike(tweetId) {
     return apiHelper.post(`/tweets/${tweetId}/like`, null)
   },

@@ -2,6 +2,8 @@
 .side {
   height: 100%;
   position: relative;
+  background: var(--light);
+  z-index: 1;
   &-logo {
     margin: 14px 10px 30px 10px;
     width: 30px;
@@ -111,7 +113,13 @@
   display: flex;
   align-items: center;
   border-bottom: 1px solid var(--input-border);
-  position: relative;
+  position: fixed;
+  top: 0;
+  background-color: var(--light);
+  opacity:0.9;
+  z-index: 1;
+  width: inherit;
+  max-width: 100%;
   &-icon {
     width: 23px;
     height: 24px;
