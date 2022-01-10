@@ -16,7 +16,7 @@
         </router-link>
       </li>
       <li>
-        <router-link to="tweets" class="side-option">
+        <router-link :to="{ name: 'user-tweets', params: { id: getCurrentUser.id } }" class="side-option">
           <img src="../../public/images/user logo.png" alt="" class="icon" />
           <img
             src="../../public/images/user logo active.png"
@@ -51,3 +51,13 @@
     </div>
   </div>
 </template>
+
+<script>
+import { mapGetters } from 'vuex'
+export default {
+  name: 'Sidebar',
+  computed: {
+    ...mapGetters(['getCurrentUser'])
+  },
+}
+</script>

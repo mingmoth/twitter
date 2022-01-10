@@ -4,6 +4,12 @@ export default {
   getCurrentUser() {
     return apiHelper.get('/currentUser')
   },
+  getUser(userId) {
+    return apiHelper.get(`/users/${userId}`)
+  },
+  getUserTweets(userId) {
+    return apiHelper.get(`/users/${userId}/tweets`)
+  },
   addLike(tweetId) {
     return apiHelper.post(`/tweets/${tweetId}/like`, null)
   },

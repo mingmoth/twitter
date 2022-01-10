@@ -8,7 +8,7 @@
 
 <script>
 import NavTop from './NavTop.vue'
-import User from './User.vue'
+import User from './UserProfile.vue'
 
 import UserSettingModal from './UserSettingModal.vue'
 export default {

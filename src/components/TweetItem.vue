@@ -5,8 +5,8 @@
     </div>
     <div class="tweet-body">
       <div class="tweet-body-head">
-        <div class="tweet-body-head-name">{{ tweet.User.name }}</div>
-        <div class="tweet-body-head-account">@{{ tweet.User.account }}</div>
+        <router-link :to="{ name: 'user-tweets', params: { id: tweet.UserId }}" class="tweet-body-head-name">{{ tweet.User.name }}</router-link>
+        <router-link :to="{ name: 'user-tweets', params: { id: tweet.UserId }}" class="tweet-body-head-account">@{{ tweet.User.account }}</router-link>
         <span> · </span>
         <div class="tweet-body-head-time">{{ tweet.createdAt | fromNow}}</div>
       </div>
