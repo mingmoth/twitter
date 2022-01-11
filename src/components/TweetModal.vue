@@ -51,7 +51,7 @@ export default {
     }
   },
   created() {
-    this.fetchCurrentUser()
+    
   },
   computed: {
     ...mapGetters(['getCurrentUser']),

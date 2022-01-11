@@ -77,6 +77,7 @@ export default {
         } else if(data.user.role === 'user') {
           this.setUser(data.user)
           this.setToken(data.token)
+          this.$store.commit('getCurrentUser', data.user)
           successToast.fire({
             title: '登入成功'
           })

@@ -39,7 +39,6 @@ html, body {
     flex: 1;
     border-left: 1px solid var(--input-border);
     position: relative;
-    z-index: 0;
     @include breakpoint(pad-portrait-980) {
       border-right: 1px solid var(--input-border);
     }

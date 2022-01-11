@@ -3,10 +3,11 @@ import VueRouter from 'vue-router'
 import SignIn from '../views/SignIn.vue'
 import Tweets from '../views/Tweets.vue'
 import NotFound from '../views/NotFound.vue'
+import store from './../store'
 
 Vue.use(VueRouter)
 
-export default new VueRouter({
+const router = new VueRouter({
   linkExactActiveClass: 'active',
   routes : [
     {
@@ -65,13 +66,13 @@ export default new VueRouter({
       component: () => import('../views/UserLikes.vue')
     },
     {
-      path: '/users/followings',
+      path: '/users/:id/followings',
       name: 'user-followings',
       component: () => import('../views/UserFollowings.vue')
     },
     {
-      path: '/settings',
-      name: 'settings',
+      path: '/users/:id/settings',
+      name: 'user-settings',
       component: () => import('../views/Settings.vue')
     },
     {
@@ -81,3 +82,10 @@ export default new VueRouter({
     },
   ]
 })
+
+router.beforeEach(async (to, from, next) => {
+  store.dispatch('setCurrentUser')
+  next()
+})
+
+export default router

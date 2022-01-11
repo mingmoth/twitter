@@ -6,7 +6,7 @@
     <div class="home">
       <Setting />
     </div>
-    
+    <div class="popular"></div>
   </div>
 </template>
 

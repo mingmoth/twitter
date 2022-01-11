@@ -1,3 +1,5 @@
+import userAPI from '../../apis/users'
+
 const state = {
   currentUser: {},
   userProfile: {},
@@ -5,6 +7,8 @@ const state = {
   userReplies: {},
   userLikes: {},
   popular: [],
+  isAuthenticated: false,
+  token: ''
 }
 
 const getters = {
@@ -17,8 +21,16 @@ const getters = {
 }
 
 const actions = {
-  setCurrentUser({ commit }, currentUser) {
-    commit('getCurrentUser', currentUser)
+  async setCurrentUser({ commit }) {
+    try {
+      const { data } = await userAPI.getCurrentUser()
+      commit('getCurrentUser', data.user)
+      return true
+    } catch (error) {
+      console.log(error)
+      return false
+    }
+    
   },
   setUser({ commit }, userProfile) {
     commit('getUser', userProfile)
@@ -45,7 +57,18 @@ const actions = {
 
 const mutations = {
   getCurrentUser(state, currentUser) {
-    state.currentUser = currentUser
+    state.currentUser = {
+      ...state.currentUser,
+      ...currentUser
+    }
+    state.token = localStorage.getItem('getToken')
+    state.isAuthenticated = true
+  },
+  revokeAuthentication(state) {
+    state.currentUser = {}
+    state.token = ''
+    state.isAuthenticated = false
+    localStorage.removeItem('getToken')
   },
   getUser: (state, userProfile) => {
     state.userProfile = userProfile

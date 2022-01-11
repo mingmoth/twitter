@@ -27,7 +27,7 @@
         </router-link>
       </li>
       <li>
-        <router-link to="/settings" class="side-option">
+        <router-link :to="{name: 'user-settings', params: { id: getCurrentUser.id }}" class="side-option">
           <img src="../../public/images/setting logo.png" alt="" class="icon" />
           <img
             src="../../public/images/setting logo active.png"
@@ -46,8 +46,8 @@
       </button>
     </ul>
     <div class="side-logout">
-      <router-link to="/login" class="side-logout-label">
-      <img src="../../public/images/icon_logout.png" alt="" class="img"> <span>登出</span></router-link>
+      <a class="side-logout-label">
+      <img src="../../public/images/icon_logout.png" alt="" class="img" @click="logout"> <span>登出</span></a>
     </div>
   </div>
 </template>
@@ -58,6 +58,12 @@ export default {
   name: 'Sidebar',
   computed: {
     ...mapGetters(['getCurrentUser'])
+  },
+  methods: {
+    logout() {
+      this.$store.commit('revokeAuthentication')
+      this.$router.push('/signin')
+    },
   },
 }
 </script>

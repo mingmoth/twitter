@@ -31,17 +31,6 @@ export const imageFilter = {
 export const userFeature = {
   methods: {
     ...mapActions(['setCurrentUser', 'setUser', 'setUserTweets', 'setUserReplies', 'setUserLikes', 'setPopular', 'setFollow', 'setUnfollow', 'likeTweet', 'unlikeTweet']),
-    async fetchCurrentUser() {
-      try {
-        const { data } = await userAPI.getCurrentUser()
-        this.setCurrentUser(data.user)
-      } catch (error) {
-        console.log(error)
-        errorToast.fire({
-          title: error.message
-        })
-      }
-    },
     async fetchUser(userId) {
       try {
         const { data } = await userAPI.getUser(userId)
