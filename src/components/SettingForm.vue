@@ -1,5 +1,11 @@
 <template>
   <div>
+    <div class="navTop">
+      <div class="navTop-title">
+        <div class="navTop-title-name">帳戶設定</div>
+      </div>
+      <img src="../../public/images/ac logo.png" alt="" class="navTop-logo">
+    </div>
     <div class="setting">
       <form action="" @submit="handleSubmit">
         <div class="form-label-group">
@@ -29,12 +35,12 @@
           />
         </div>
         <div class="form-label-group">
-          <label for="passwordCheck">密碼確認</label>
+          <label for="checkPassword">密碼確認</label>
           <input
-            v-model="passwordCheck"
+            v-model="user.checkPassword"
             type="password"
-            name="passwordCheck"
-            id="passwordCheck"
+            name="checkPassword"
+            id="checkPassword"
           />
         </div>
         <button type="submit" class="btn-setting" :disabled="isProcessing">
@@ -46,11 +52,12 @@
 </template>
 
 <script>
-import { mapGetters } from 'vuex'
-import { userFeature } from '../utils/mixins'
+import { mapGetters } from "vuex";
+import { userFeature } from "../utils/mixins";
+import { errorToast } from "../utils/toast";
 export default {
   name: "SettingForm",
-  mixins: [ userFeature ],
+  mixins: [userFeature],
   data() {
     return {
       user: {
@@ -59,25 +66,42 @@ export default {
         account: "",
         email: "",
         password: "",
-        passwordCheck: "",
+        checkPassword: "",
       },
       isProcessing: false,
     };
   },
   created() {
-    
+    if (this.getCurrentUser.id === -1) return;
+    const { id } = this.$route.params;
+    this.setUser(id)
+  },
+  beforeRouteUpdate(to, from, next) {
+    if (this.currentUser.id === -1) return;
+    const { id } = to.params;
+    this.setUser(id);
+    next();
   },
   computed: {
-    ...mapGetters(['getCurrentUser']),
+    ...mapGetters(["getCurrentUser"]),
   },
   methods: {
+    setUser(userId) {
+      if (Number(this.getCurrentUser.id) !== Number(userId)) {
+        errorToast.fire({
+          title: "無法查看非本人資訊",
+        });
+        this.$router.push({ name: "tweets" });
+      }
+      this.user = {...this.getCurrentUser}
+    },
     handleSubmit(e) {
       if (
         !this.account ||
         !this.name ||
         !this.email ||
         !this.password ||
-        !this.passwordCheck
+        !this.checkPassword
       ) {
         console.log("oh");
       }

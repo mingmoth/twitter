@@ -4,7 +4,7 @@
       <Sidebar />
     </div>
     <div class="home">
-      <Setting />
+      <SettingForm />
     </div>
     <div class="popular"></div>
   </div>
@@ -12,13 +12,13 @@
 
 <script>
 import Sidebar from '../components/Sidebar.vue'
-import Setting from '../components/Setting.vue'
+import SettingForm from '../components/SettingForm.vue'
 
 
 export default {
   name: 'Settings',
   components: {
-    Sidebar, Setting
+    Sidebar, SettingForm
   }
 }
 </script>
