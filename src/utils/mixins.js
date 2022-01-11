@@ -157,7 +157,25 @@ export const userFeature = {
         })
       }
     },
-    async putUser() {},
+    async putUser(userId, form) {
+      try {
+        const { data } = await userAPI.putUser(
+          userId, form
+        )
+        if (data.status !== 'success') {
+          throw new Error(data.message)
+        }
+        successToast.fire({
+          title: data.message
+        })
+        this.$router.push({ name: 'user-tweets', params: userId})
+      } catch (error) {
+        console.log(error)
+        errorToast.fire({
+          title: error.message
+        })
+      }
+    },
     async updateUser() {},
   }
 }

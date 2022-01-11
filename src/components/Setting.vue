@@ -7,7 +7,7 @@
       <img src="../../public/images/ac logo.png" alt="" class="navTop-logo">
     </div>
     <div class="setting">
-      <form action="" @submit="handleSubmit">
+      <form action="" @submit.stop.prevent="handleSubmit">
         <div class="form-label-group">
           <label for="account">帳號</label>
           <input
@@ -82,35 +82,55 @@ export default {
     this.setUser(id);
     next();
   },
+  watch: {
+    getCurrentUser(user) {
+      if (user.id === -1) return;
+      const { id } = this.$route.params;
+      this.setUser(id);
+    },
+  },
   computed: {
     ...mapGetters(["getCurrentUser"]),
   },
   methods: {
     setUser(userId) {
       if (Number(this.getCurrentUser.id) !== Number(userId)) {
+        this.$router.push({ name: "tweets" });
         errorToast.fire({
           title: "無法查看非本人資訊",
         });
-        this.$router.push({ name: "tweets" });
+        
       }
       this.user = {...this.getCurrentUser}
     },
-    handleSubmit(e) {
+    handleSubmit() {
       if (
-        !this.account ||
-        !this.name ||
-        !this.email ||
-        !this.password ||
-        !this.checkPassword
+        !this.user.account ||
+        !this.user.name ||
+        !this.user.email ||
+        !this.user.password ||
+        !this.user.checkPassword
       ) {
-        console.log("oh");
+        errorToast.fire({
+          title: '請確認所有欄位皆已填寫'
+        })
       }
-      if (this.password !== this.passwordCheck) {
-        console.log("oh");
+      if (this.user.password !== this.user.checkPassword) {
+        errorToast.fire({
+          title: '兩次密碼輸入不一致'
+        })
       }
-      const form = e.target;
-      const formData = new FormData(form);
-      console.log(formData);
+      // const form = e.target;
+      // const formData = new FormData(form);
+      // console.log(formData)
+      const form = {
+        account: this.user.account,
+        name: this.user.name,
+        email: this.user.email,
+        password: this.user.password,
+        checkPassword: this.user.checkPassword
+      }
+      this.putUser(Number(this.getCurrentUser.id), form)
     },
   },
 };
