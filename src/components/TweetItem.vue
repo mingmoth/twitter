@@ -47,55 +47,37 @@
 </template>
 
 <script>
-import { successToast, errorToast } from '../utils/toast'
-import { mapActions } from 'vuex'
-import userAPI from '../apis/users'
-import { imageFilter, timeFilter } from '../utils/mixins'
+import { mapActions, mapGetters } from 'vuex'
+import { userFeature, imageFilter, timeFilter } from '../utils/mixins'
+
 export default {
   name: "TweetItem",
-  mixins: [imageFilter, timeFilter],
+  mixins: [userFeature, imageFilter, timeFilter],
   props: {
     tweet: {
       type: Object,
       required: true
     }
   },
+  watch: {
+    tweet(newValue) {
+      this.tweet = {
+        ...this.tweet,
+        ...newValue,
+      }
+    }
+  },
+  computed: {
+    ...mapGetters(['getCurrentUser']),
+  },
   methods: {
     ...mapActions(['setTweetModal', 'likeTweets', 'unlikeTweets']),
-    async addLike(tweetId) {
-      try {
-        const { data } = await userAPI.addLike(tweetId)
-        if(data.status !== 'success') {
-          throw new Error(data.message)
-        }
-        this.likeTweets(tweetId)
-        successToast.fire({
-          title: data.message
-        })
-      } catch (error) {
-        console.log(error)
-        errorToast.fire({
-          title: error.message
-        })
-      }
+    addLike(tweetId) {
+      this.addTweetLike(tweetId)
     },
-    async removeLike(tweetId) {
-      try {
-        const { data } = await userAPI.removeLike(tweetId)
-        if(data.status !== 'success') {
-          throw new Error(data.message)
-        }
-        this.unlikeTweets(tweetId)
-        this.
-        successToast.fire({
-          title: data.message
-        })
-      } catch (error) {
-        console.log(error)
-        errorToast.fire({
-          title: error.message
-        })
-      }
+    removeLike(tweetId) {
+      const userId = this.getCurrentUser.id
+      this.removeTweetLike(tweetId, userId)
     },
     getReplyTweet(tweetId) {
       console.log(tweetId)

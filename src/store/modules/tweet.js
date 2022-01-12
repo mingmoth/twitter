@@ -78,11 +78,15 @@ const mutations = {
   },
   addLikeTweet: (state, like) => {
     state.tweet.isLiked = true
-    state.tweet.Likes.push(like)
+    if(state.tweet.Likes) {
+      state.tweet.Likes.push(like)
+    }
   },
   removeLikeTweet: (state, userId) => {
     state.tweet.isLiked = false
-    state.tweet.Likes = state.tweet.Likes.filter(like => like.UserId !== userId)
+    if(state.tweet.Likes) {
+      state.tweet.Likes.filter(like => like.UserId !== userId)
+    } 
   },
   addReply: (state, tweetId) => {
     state.tweets = state.tweets.map(tweet => {

@@ -30,7 +30,7 @@ export const imageFilter = {
 
 export const userFeature = {
   methods: {
-    ...mapActions(['setCurrentUser', 'setUser', 'setUserTweets', 'setUserReplies', 'setUserLikes', 'setPopular', 'setFollow', 'setUnfollow', 'likeTweet', 'unlikeTweet', 'unlikeUserLikes']),
+    ...mapActions(['setCurrentUser', 'setUser', 'setUserTweets', 'setUserReplies', 'setUserLikes', 'setPopular', 'setFollow', 'setUnfollow', 'likeTweet', 'unlikeTweet', 'unlikeUserLikes', 'likeUserTweet', 'unlikeUserTweets']),
     async fetchUser(userId) {
       try {
         const { data } = await userAPI.getUser(userId)
@@ -89,8 +89,11 @@ export const userFeature = {
         successToast.fire({
           title: data.message
         })
+        this.likeTweets(tweetId)
         this.likeTweet(data.like)
+        this.likeUserTweet(tweetId)
       } catch (error) {
+        console.log(error)
         errorToast.fire({
           title: error.message
         })
@@ -105,9 +108,12 @@ export const userFeature = {
         successToast.fire({
           title: data.message
         })
+        this.unlikeTweets(tweetId)
         this.unlikeTweet(userId)
         this.unlikeUserLikes(tweetId)
+        this.unlikeUserTweets(tweetId)
       } catch (error) {
+        console.log(error)
         errorToast.fire({
           title: error.message
         })

@@ -56,6 +56,12 @@ const actions = {
   unlikeUserLikes({ commit }, tweetId) {
     commit('removeUserLikes', tweetId)
   },
+  likeUserTweet({ commit }, tweetId) {
+    commit('addUserTweetsLike', tweetId)
+  },
+  unlikeUserTweets({ commit }, tweetId) {
+    commit('removeUserTweetsLike', tweetId)
+  }
 }
 
 const mutations = {
@@ -108,12 +114,50 @@ const mutations = {
       } else { return user }
     })
   },
-  removeUserLikes(state, tweetId) {
-    console.log(tweetId)
-    if (state.userLikes) {
-      state.userLikes.filter(like => like.id !== tweetId)
+  // removeUserLikes(state, tweetId) {
+    
+  //   // if (state.userLikes) {
+  //   //   console.log(tweetId)
+  //   //   return state.userLikes = state.userLikes.filter(like => like.id !== tweetId)
+  //   // } else return
+  // },
+  addUserTweetsLike(state, tweetId) {
+    if (!state.userTweets.length) {
+      return 
+    } else {
+      state.userTweets.map(tweet => {
+        if (tweet.id === tweetId) {
+          console.log(tweet.isLiked)
+          return tweet = {
+            ...tweet,
+            Likes: tweet.Likes + 1,
+            isLiked: !tweet.isLiked
+          }
+        } else {
+          return tweet
+        }
+      })
     }
-  }
+  },
+  removeUserTweetsLike(state, tweetId) {
+    if (!state.userTweets.length) {
+      return
+    } else {
+      state.userTweets.map(tweet => {
+        if (tweet.id === tweetId) {
+          console.log(tweet.isLiked)
+          return tweet = {
+            ...tweet,
+            Likes: tweet.Likes - 1,
+            isLiked: !tweet.isLiked,
+            Oh: 'Oh'
+          }
+        } else {
+          return tweet
+        }
+      })
+    }
+  },
 }
 
 export default {
