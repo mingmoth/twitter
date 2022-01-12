@@ -176,7 +176,25 @@ export const userFeature = {
         })
       }
     },
-    async updateUser() {},
+    async updateUser(userId, form) {
+      try {
+        const { data } = await userAPI.updateUser(
+          userId, form
+        )
+        console.log(data)
+        if (data.status !== 'success') {
+          throw new Error(data.message)
+        }
+        successToast.fire({
+          title: data.message
+        })
+      } catch (error) {
+        console.log(error)
+        errorToast.fire({
+          title: error.message
+        })
+      }
+    },
   }
 }
 

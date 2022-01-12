@@ -2,7 +2,7 @@
   <div class="modal fade" id="user-setting-edit" aria-hidden="true">
     <div class="modal-dialog" role="document">
       <div class="modal-content">
-        <form action="">
+        <form action="" @submit.stop.prevent="handleSubmit">
           <div class="modal-header">
             <div
               class="modal-close"
@@ -10,7 +10,7 @@
               aria-label="Close"
             ></div>
             <div class="modal-header-title">編輯個人資料</div>
-            <button class="btn-save" :disabled="savable">儲存</button>
+            <button class="btn-save" type="submit">儲存</button>
           </div>
           <div class="modal-body">
             <div class="modal-body-bg">
@@ -36,6 +36,7 @@
                 name="cover"
                 id="cover"
                 accept="image/*"
+                @change="handleImage($event, 'cover')"
               />
             </div>
             <div class="modal-body-header">
@@ -56,6 +57,7 @@
                 name="avatar"
                 id="avatar"
                 accept="image/*"
+                @change="handleImage($event, 'avatar')"
               />
             </div>
             <div class="modal-body-form">
@@ -66,18 +68,18 @@
                   type="text"
                   name="name"
                   id="name"
-                  :invalid="userNameLength > 50"
+                  :invalid="name.length > 50"
                   required
                 />
                 <div class="modal-body-form-limit">
                   <div
-                    v-show="userNameLength > 50"
+                    v-show="this.name.length > 50"
                     class="modal-body-form-limit-alert"
                   >
                     字數超出上限!
                   </div>
                   <div class="modal-body-form-limit-count">
-                    {{ userNameLength }}<span>/50</span>
+                    {{ name ? name.length : 0}}<span>/50</span>
                   </div>
                 </div>
               </div>
@@ -92,13 +94,13 @@
                 ></textarea>
                 <div class="modal-body-form-limit">
                   <div
-                    v-show="userIntroLength > 160"
+                    v-show="this.introduction ? ( this.introduction.length > 160 ? true: false) : false"
                     class="modal-body-form-limit-alert"
                   >
                     字數超出上限!
                   </div>
                   <div class="modal-body-form-limit-count">
-                    {{ userIntroLength }}<span>/160</span>
+                    {{ introduction ? introduction.length : 0 }}<span>/160</span>
                   </div>
                 </div>
               </div>
@@ -112,52 +114,22 @@
 
 <script>
 import { mapGetters } from "vuex";
-import { imageFilter } from "../utils/mixins";
+import { userFeature, imageFilter } from "../utils/mixins";
+import { errorToast } from '../utils/toast'
 export default {
   name: "UserSettingModal",
-  mixins: [imageFilter],
+  mixins: [userFeature, imageFilter],
   data() {
     return {
       name: "",
       introduction: "",
       avatar: "",
       cover: "",
-      savable: false,
     };
   },
   computed: {
     ...mapGetters(["getCurrentUser"]),
-    userNameLength() {
-      return this.name.length;
-    },
-    userIntroLength() {
-      return this.introduction ? this.introduction.length : 0;
-    },
-  },
-  watch: {
-    userNameLength() {
-      if (
-        this.userNameLength === 0 ||
-        this.userNameLength > 50 ||
-        this.userIntroLength > 160
-      ) {
-        0;
-        return (this.savable = true);
-      } else {
-        return (this.savable = false);
-      }
-    },
-    userIntroLength() {
-      if (
-        this.userNameLength === 0 ||
-        this.userNameLength > 50 ||
-        this.userIntroLength > 160
-      ) {
-        return (this.savable = true);
-      } else {
-        return (this.savable = false);
-      }
-    },
+    
   },
   created() {
     this.setUser();
@@ -175,6 +147,39 @@ export default {
     updateCover() {
       this.$refs.cover.click();
     },
+    handleImage(event, target) {
+      const { files } = event.target
+      if(files.length === 0) {
+        switch(target) {
+          case "avatar":
+            this.avatar = ''
+            break
+          case "cover":
+            this.cover = ''
+            break
+        }
+      } else {
+        const imageURL = window.URL.createObjectURL(files[0])
+        switch(target) {
+          case "avatar":
+            this.avatar = imageURL
+            break
+          case "cover":
+            this.cover = imageURL
+            break
+        }
+      }
+    },
+    handleSubmit(e) {
+      if(!this.name) {
+        errorToast.fire({
+          title: '使用者名稱不得為空'
+        })
+      }
+      const files = e.target
+      const form = new FormData(files)
+      this.updateUser(Number(this.getCurrentUser.id), form)
+    }
   },
 };
 </script>

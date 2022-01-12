@@ -10,6 +10,9 @@ export default {
   putUser(userId, form) {
     return apiHelper.put(`/users/${userId}`, form)
   },
+  updateUser(userId, form) {
+    return apiHelper.put(`/users/${userId}/profile`, form)
+  },
   getUserTweets(userId) {
     return apiHelper.get(`/users/${userId}/tweets`)
   },
