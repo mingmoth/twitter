@@ -59,14 +59,14 @@ export default {
       required: true
     }
   },
-  watch: {
-    tweet(newValue) {
-      this.tweet = {
-        ...this.tweet,
-        ...newValue,
-      }
-    }
-  },
+  // watch: {
+  //   tweet(newValue) {
+  //     this.tweet = {
+  //       ...this.tweet,
+  //       ...newValue,
+  //     }
+  //   }
+  // },
   computed: {
     ...mapGetters(['getCurrentUser']),
   },

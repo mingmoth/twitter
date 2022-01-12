@@ -114,20 +114,18 @@ const mutations = {
       } else { return user }
     })
   },
-  // removeUserLikes(state, tweetId) {
-    
-  //   // if (state.userLikes) {
-  //   //   console.log(tweetId)
-  //   //   return state.userLikes = state.userLikes.filter(like => like.id !== tweetId)
-  //   // } else return
-  // },
+  removeUserLikes(state, tweetId) {
+    if (state.userLikes.length) {
+      console.log(tweetId)
+      return state.userLikes = state.userLikes.filter(like => like.id !== tweetId)
+    } else return
+  },
   addUserTweetsLike(state, tweetId) {
     if (!state.userTweets.length) {
       return 
     } else {
-      state.userTweets.map(tweet => {
+      state.userTweets = state.userTweets.map(tweet => {
         if (tweet.id === tweetId) {
-          console.log(tweet.isLiked)
           return tweet = {
             ...tweet,
             Likes: tweet.Likes + 1,
@@ -143,14 +141,12 @@ const mutations = {
     if (!state.userTweets.length) {
       return
     } else {
-      state.userTweets.map(tweet => {
+      state.userTweets = state.userTweets.map(tweet => {
         if (tweet.id === tweetId) {
-          console.log(tweet.isLiked)
           return tweet = {
             ...tweet,
             Likes: tweet.Likes - 1,
             isLiked: !tweet.isLiked,
-            Oh: 'Oh'
           }
         } else {
           return tweet
