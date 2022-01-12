@@ -96,6 +96,18 @@ button {
     width: 90px;
     height: 25px;
     border-radius: 100px;
+    color: var(--orange);
+    background: transparent;
+    border: 1px solid var(--orange);
+    line-height: 15px;
+    font-size: 15px;
+  }
+  &.btn-unfollowing {
+    width: 90px;
+    height: 25px;
+    border-radius: 100px;
+    line-height: 15px;
+    font-size: 15px;
   }
 }
 

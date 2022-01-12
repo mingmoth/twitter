@@ -1,19 +1,36 @@
 <template>
-  <div class="main">
-    <NavTop />
-    <NavFollow />
-    <Following />
+  <div class="following">
+    <img :src="follow.avatar | emptyAvatar" alt="" class="following-icon">
+    
+    <div class="following-content">
+      <div class="following-content-head">
+        <div class="following-content-head-title">
+          <div class="following-content-head-title-name">{{follow.name}}</div>
+          <div class="following-content-head-title-account">@{{follow.account}}</div>
+        </div>
+        <button v-if="!follow.isFollowed" class="btn-following" v-show="getCurrentUser.id !== follow.id">跟隨</button>
+        <button v-else class="btn-unfollowing" v-show="getCurrentUser.id !== follow.id">取消跟隨</button>
+      </div>
+      <div class="following-content-body">
+        {{follow.introduction}}
+      </div>
+    </div>
   </div>
 </template>
 
 <script>
-import NavTop from './NavTop.vue'
-import NavFollow from './NavFollow.vue'
-import Following from './Following.vue'
+import { mapGetters } from 'vuex'
+import { imageFilter } from '../utils/mixins'
 export default {
-  name: 'UserTweet',
-  components: {
-    NavTop, NavFollow, Following
-  }
-}
+  name: "UserFollowing",
+  mixins: [ imageFilter ],
+  props: {
+    follow: {
+      type: Object,
+    }
+  },
+  computed: {
+    ...mapGetters(['getCurrentUser'])
+  },
+};
 </script>

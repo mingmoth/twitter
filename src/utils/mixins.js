@@ -30,7 +30,7 @@ export const imageFilter = {
 
 export const userFeature = {
   methods: {
-    ...mapActions(['setCurrentUser', 'setUser', 'setUserTweets', 'setUserReplies', 'setUserLikes', 'setPopular', 'setFollow', 'setUnfollow', 'likeTweets', 'unlikeTweets', 'likeTweet', 'unlikeTweet', 'unlikeUserLikes', 'likeUserTweet', 'unlikeUserTweet', 'likeUserReply', 'unlikeUserReply']),
+    ...mapActions(['setCurrentUser', 'setUser', 'setUserTweets', 'setUserReplies', 'setUserLikes', 'setPopular', 'setFollow', 'setUnfollow', 'likeTweets', 'unlikeTweets', 'likeTweet', 'unlikeTweet', 'unlikeUserLikes', 'likeUserTweet', 'unlikeUserTweet', 'likeUserReply', 'unlikeUserReply', 'setUserFollowings', 'setUserFollowers']),
     async fetchUser(userId) {
       try {
         const { data } = await userAPI.getUser(userId)
@@ -75,6 +75,37 @@ export const userFeature = {
         console.log(response)
         this.setUserLikes(data.likes)
       } catch (error) {
+        errorToast.fire({
+          title: error.message
+        })
+      }
+    },
+    async fetchUserFollowings(userId) {
+      try {
+        const response = await userAPI.getUserFollowings(userId)
+        const { data, statusText } = response
+        if (statusText !== 'OK') {
+          throw new Error(data.message)
+        }
+        console.log(data)
+        this.setUserFollowings(data.users)
+      } catch (error) {
+        console.log(error)
+        errorToast.fire({
+          title: error.message
+        })
+      }
+    },
+    async fetchUserFollowers(userId) {
+      try {
+        const response = await userAPI.getUserFollowers(userId)
+        const { data, statusText } = response
+        if (statusText !== 'OK') {
+          throw new Error(data.message)
+        }
+        this.setUserFollowers(data.users)
+      } catch (error) {
+        console.log(error)
         errorToast.fire({
           title: error.message
         })

@@ -72,26 +72,28 @@ const router = new VueRouter({
         }
       ]
     },
-    // {
-    //   path: '/users/:id/tweets',
-    //   name: 'user-tweets',
-    //   component: () => import('../views/UserTweets.vue')
-    // },
-    // {
-    //   path: '/users/:id/replies',
-    //   name: 'user-replies',
-    //   component: () => import('../views/UserReplies.vue')
-    // },
-    // {
-    //   path: '/users/:id/likes',
-    //   name: 'user-likes',
-    //   component: () => import('../views/UserLikes.vue')
-    // },
     {
-      path: '/users/:id/followings',
-      name: 'user-followings',
-      component: () => import('../views/UserFollowings.vue')
+      path: '/users/:id/',
+      name: 'user',
+      component: () => import('../views/UserFollows.vue'),
+      children: [
+        {
+          path: 'followings',
+          name: 'user-followings',
+          component: () => import('../views/UserFollowings.vue')
+        },
+        {
+          path: 'followers',
+          name: 'user-followers',
+          component: () => import('../views/UserFollowers.vue')
+        },
+      ]
     },
+    // {
+    //   path: '/users/:id/followings',
+    //   name: 'user-followings',
+    //   component: () => import('../views/UserFollowings.vue')
+    // },
     {
       path: '/users/:id/settings',
       name: 'user-settings',

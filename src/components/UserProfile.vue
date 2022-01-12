@@ -32,16 +32,16 @@
       <div class="user-info">
         <div class="user-info-content">{{ getUserProfile.introduction }}</div>
         <div class="user-info-feat">
-          <div class="user-info-feat-following">
+          <router-link :to="{name: 'user-followings', params: { id: getUserProfile.id }}" class="user-info-feat-following">
             {{ getUserProfile.Followings ? getUserProfile.Followings.length : '' }} 個<span class="user-info-feat-unit"
               >跟隨中</span
             >
-          </div>
-          <div class="user-info-feat-follower">
+          </router-link>
+          <router-link :to="{name: 'user-followers', params: { id: getUserProfile.id }}" class="user-info-feat-follower">
             {{ getUserProfile.Followings ? getUserProfile.Followers.length: '' }} 位<span class="user-info-feat-unit"
               >跟隨者</span
             >
-          </div>
+          </router-link>
         </div>
       </div>
       <div class="user-navPill">

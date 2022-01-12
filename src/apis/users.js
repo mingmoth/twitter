@@ -22,6 +22,12 @@ export default {
   getUserLikes(userId) {
     return apiHelper.get(`/users/${userId}/likes`)
   },
+  getUserFollowings(userId) {
+    return apiHelper.get(`/users/${userId}/followings`)
+  },
+  getUserFollowers(userId) {
+    return apiHelper.get(`/users/${userId}/followers`)
+  },
   addLike(tweetId) {
     return apiHelper.post(`/tweets/${tweetId}/like`, null)
   },
