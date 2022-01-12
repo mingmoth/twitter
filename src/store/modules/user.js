@@ -53,15 +53,22 @@ const actions = {
   setUnfollow({ commit }, followingId) {
     commit('removeFollow', followingId)
   },
-  unlikeUserLikes({ commit }, tweetId) {
-    commit('removeUserLikes', tweetId)
-  },
   likeUserTweet({ commit }, tweetId) {
     commit('addUserTweetsLike', tweetId)
   },
-  unlikeUserTweets({ commit }, tweetId) {
+  unlikeUserTweet({ commit }, tweetId) {
     commit('removeUserTweetsLike', tweetId)
-  }
+  },
+  likeUserReply({ commit }, replyload) {
+    commit('addUserReplyLike', replyload)
+  },
+  unlikeUserReply({ commit }, replyload) {
+    commit('removeUserReplyLike', replyload)
+  },
+  unlikeUserLikes({ commit }, tweetId) {
+    commit('removeUserLikes', tweetId)
+  },
+  
 }
 
 const mutations = {
@@ -154,6 +161,37 @@ const mutations = {
       })
     }
   },
+  addUserReplyLike(state, replyload) {
+    if (state.userReplies.length) {
+      console.log(replyload.like)
+      state.userReplies = state.userReplies.map(reply => {
+        if (reply.id === replyload.tweetId) {
+          return reply = {
+            ...reply,
+            Likes: reply.Likes.concat(replyload.like),
+            isLiked: true
+          }
+        } else {
+          return reply
+        }
+      })
+    }
+  },
+  removeUserReplyLike(state, replyload) {
+    if(state.userReplies.length) {
+      state.userReplies = state.userReplies.map(reply => {
+        if (reply.id === replyload.tweetId) {
+          return reply = {
+            ...reply,
+            Likes: reply.Likes.filter(like => like.UserId !== replyload.userId),
+            isLiked: false
+          }
+        } else {
+          return reply
+        }
+      })
+    }
+  }
 }
 
 export default {

@@ -98,15 +98,28 @@
 </template>
 
 <script>
-import { timeFilter, imageFilter } from "../utils/mixins";
+import { mapGetters } from 'vuex'
+import { userFeature, timeFilter, imageFilter } from "../utils/mixins";
 export default {
   name: "TweetReply",
-  mixins: [timeFilter, imageFilter],
+  mixins: [userFeature, timeFilter, imageFilter],
   props: {
     tweet: {
       type: Object,
     },
   },
+  computed: {
+    ...mapGetters(['getCurrentUser'])
+  },
+  methods: {
+    addLike(tweetId) {
+      this.addTweetLike(tweetId)
+    },
+    removeLike(tweetId) {
+      const userId = this.getCurrentUser.id
+      this.removeTweetLike(tweetId, userId)
+    },
+  }
 };
 </script>
 

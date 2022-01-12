@@ -59,19 +59,11 @@ export default {
       required: true
     }
   },
-  // watch: {
-  //   tweet(newValue) {
-  //     this.tweet = {
-  //       ...this.tweet,
-  //       ...newValue,
-  //     }
-  //   }
-  // },
   computed: {
     ...mapGetters(['getCurrentUser']),
   },
   methods: {
-    ...mapActions(['setTweetModal', 'likeTweets', 'unlikeTweets']),
+    ...mapActions(['setTweetModal']),
     addLike(tweetId) {
       this.addTweetLike(tweetId)
     },

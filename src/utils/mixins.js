@@ -30,7 +30,7 @@ export const imageFilter = {
 
 export const userFeature = {
   methods: {
-    ...mapActions(['setCurrentUser', 'setUser', 'setUserTweets', 'setUserReplies', 'setUserLikes', 'setPopular', 'setFollow', 'setUnfollow', 'likeTweet', 'unlikeTweet', 'unlikeUserLikes', 'likeUserTweet', 'unlikeUserTweets']),
+    ...mapActions(['setCurrentUser', 'setUser', 'setUserTweets', 'setUserReplies', 'setUserLikes', 'setPopular', 'setFollow', 'setUnfollow', 'likeTweets', 'unlikeTweets', 'likeTweet', 'unlikeTweet', 'unlikeUserLikes', 'likeUserTweet', 'unlikeUserTweet', 'likeUserReply', 'unlikeUserReply']),
     async fetchUser(userId) {
       try {
         const { data } = await userAPI.getUser(userId)
@@ -92,6 +92,8 @@ export const userFeature = {
         this.likeTweets(tweetId)
         this.likeTweet(data.like)
         this.likeUserTweet(tweetId)
+        const replyload = {tweetId: tweetId, like: data.like}
+        this.likeUserReply(replyload)
       } catch (error) {
         console.log(error)
         errorToast.fire({
@@ -111,7 +113,9 @@ export const userFeature = {
         this.unlikeTweets(tweetId)
         this.unlikeTweet(userId)
         this.unlikeUserLikes(tweetId)
-        this.unlikeUserTweets(tweetId)
+        this.unlikeUserTweet(tweetId)
+        const replyload = { tweetId: tweetId, userId: userId }
+        this.unlikeUserReply(replyload)
       } catch (error) {
         console.log(error)
         errorToast.fire({
