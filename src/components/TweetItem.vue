@@ -86,6 +86,7 @@ export default {
           throw new Error(data.message)
         }
         this.unlikeTweets(tweetId)
+        this.
         successToast.fire({
           title: data.message
         })

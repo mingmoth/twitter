@@ -4,11 +4,13 @@
       <div class="modal-content">
         <form action="" @submit.stop.prevent="handleSubmit">
           <div class="modal-header">
-            <div
+            <img 
+              src="../../public/images/icon_close.png" 
+              alt=""
               class="modal-close"
               data-bs-dismiss="modal"
-              aria-label="Close"
-            ></div>
+              aria-label="Close">
+            
             <div class="modal-header-title">編輯個人資料</div>
             <button class="btn-save" type="submit">儲存</button>
           </div>

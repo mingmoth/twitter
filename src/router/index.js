@@ -51,20 +51,42 @@ const router = new VueRouter({
       component: () => import('../views/AdminUsers.vue')
     },
     {
-      path: '/users/:id/tweets',
-      name: 'user-tweets',
-      component: () => import('../views/UserTweets.vue')
+      path: '/users/:id',
+      name: 'user',
+      component: () => import('../views/User.vue'),
+      children: [
+        {
+          path: 'tweets',
+          name: 'user-tweets',
+          component: () => import('../views/UserTweets.vue')
+        },
+        {
+          path: 'replies',
+          name: 'user-replies',
+          component: () => import('../views/UserReplies.vue')
+        },
+        {
+          path: 'likes',
+          name: 'user-likes',
+          component: () => import('../views/UserLikes.vue')
+        }
+      ]
     },
-    {
-      path: '/users/:id/replies',
-      name: 'user-replies',
-      component: () => import('../views/UserReplies.vue')
-    },
-    {
-      path: '/users/:id/likes',
-      name: 'user-likes',
-      component: () => import('../views/UserLikes.vue')
-    },
+    // {
+    //   path: '/users/:id/tweets',
+    //   name: 'user-tweets',
+    //   component: () => import('../views/UserTweets.vue')
+    // },
+    // {
+    //   path: '/users/:id/replies',
+    //   name: 'user-replies',
+    //   component: () => import('../views/UserReplies.vue')
+    // },
+    // {
+    //   path: '/users/:id/likes',
+    //   name: 'user-likes',
+    //   component: () => import('../views/UserLikes.vue')
+    // },
     {
       path: '/users/:id/followings',
       name: 'user-followings',

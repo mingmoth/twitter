@@ -30,7 +30,7 @@ export const imageFilter = {
 
 export const userFeature = {
   methods: {
-    ...mapActions(['setCurrentUser', 'setUser', 'setUserTweets', 'setUserReplies', 'setUserLikes', 'setPopular', 'setFollow', 'setUnfollow', 'likeTweet', 'unlikeTweet']),
+    ...mapActions(['setCurrentUser', 'setUser', 'setUserTweets', 'setUserReplies', 'setUserLikes', 'setPopular', 'setFollow', 'setUnfollow', 'likeTweet', 'unlikeTweet', 'unlikeUserLikes']),
     async fetchUser(userId) {
       try {
         const { data } = await userAPI.getUser(userId)
@@ -106,6 +106,7 @@ export const userFeature = {
           title: data.message
         })
         this.unlikeTweet(userId)
+        this.unlikeUserLikes(tweetId)
       } catch (error) {
         errorToast.fire({
           title: error.message

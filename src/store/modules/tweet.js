@@ -95,7 +95,9 @@ const mutations = {
     })
   },
   pushReply: (state, reply) => {
-    state.tweet.Replies.push(reply)
+    if(state.tweet) {
+      state.tweet.Replies.push(reply)
+    }
   }
 }
 

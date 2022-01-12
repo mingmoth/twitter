@@ -52,7 +52,10 @@ const actions = {
   },
   setUnfollow({ commit }, followingId) {
     commit('removeFollow', followingId)
-  }
+  },
+  unlikeUserLikes({ commit }, tweetId) {
+    commit('removeUserLikes', tweetId)
+  },
 }
 
 const mutations = {
@@ -104,6 +107,12 @@ const mutations = {
         }
       } else { return user }
     })
+  },
+  removeUserLikes(state, tweetId) {
+    console.log(tweetId)
+    if (state.userLikes) {
+      state.userLikes.filter(like => like.id !== tweetId)
+    }
   }
 }
 
