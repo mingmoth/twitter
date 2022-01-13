@@ -87,7 +87,7 @@ export default {
     },
   },
   methods: {
-    ...mapActions(['newReply', 'pushNewReply']),
+    ...mapActions(['newReply', 'pushNewReply', 'pushUserReply', 'pushUserReplies']),
     async createReply(tweetId) {
       if(!this.comment) {
         errorToast.fire({
@@ -110,8 +110,32 @@ export default {
           User: this.getCurrentUser
         }
         this.comment = ''
-        this.newReply(tweetId)
-        this.pushNewReply(newReply)
+        if(this.$route.name === 'tweets') {
+          this.newReply(tweetId)
+        } else if(this.$route.name === 'tweet') {
+          this.pushNewReply(newReply)
+        } else if(this.$route.name === 'user-tweets') {
+          const replyload = {
+            tweets: 'userTweets',
+            tweetId,
+            newReply
+          }
+          this.pushUserReply(replyload)
+        } else if(this.$route.name === 'user-replies') {
+          const replyload = {
+            tweets: 'userReplies',
+            tweetId,
+            newReply
+          }
+          this.pushUserReplies(replyload)
+        } else if(this.$route.name === 'user-likes') {
+          const replyload = {
+            tweets: 'userLikes',
+            tweetId,
+            newReply
+          }
+          this.pushUserReply(replyload)
+        }
       } catch (error) {
         console.log(error)
         errorToast.fire({

@@ -8,7 +8,7 @@
       <router-view />
       <UserSettingModal />
       <TweetModal />
-      <TweetReplyModal />
+      <TweetReplyModal :tweet="getUserTweetModal"/>
     </div>
     <div class="popular">
       <Popular />
@@ -33,7 +33,7 @@ export default {
     Sidebar, UserProfile, Popular, UserSettingModal, TweetModal, TweetReplyModal
   },
   computed: {
-    ...mapGetters(['getUserProfile']),
+    ...mapGetters(['getUserProfile', 'getUserTweetModal']),
   },
   created() {
     const { id: userId } = this.$route.params

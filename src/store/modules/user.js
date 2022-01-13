@@ -83,6 +83,12 @@ const actions = {
   unlikeUserLikes({ commit }, tweetId) {
     commit('removeUserLikes', tweetId)
   },
+  pushUserReply({ commit }, replyload) {
+    commit('addUserReply', replyload)
+  },
+  pushUserReplies({ commit }, replyload) {
+    commit('addUserReplies', replyload)
+  }
   
 }
 
@@ -187,7 +193,6 @@ const mutations = {
   },
   addUserReplyLike(state, replyload) {
     if (state.userReplies.length) {
-      console.log(replyload.like)
       state.userReplies = state.userReplies.map(reply => {
         if (reply.id === replyload.tweetId) {
           return reply = {
@@ -215,6 +220,30 @@ const mutations = {
         }
       })
     }
+  },
+  addUserReply(state, replyload) {
+    state[replyload.tweets] = state[replyload.tweets].map(tweet => {
+      if(tweet.id === replyload.tweetId) {
+        return tweet = {
+          ...tweet,
+          Replies: tweet.Replies + 1
+        }
+      } else { 
+        return tweet
+      }
+    })
+  },
+  addUserReplies(state, replyload) {
+    state[replyload.tweets] = state[replyload.tweets].map(tweet => {
+      if (tweet.id === replyload.tweetId) {
+        return tweet = {
+          ...tweet,
+          Replies: tweet.Replies.concat(replyload.newReply)
+        }
+      } else {
+        return tweet
+      }
+    })
   }
 }
 

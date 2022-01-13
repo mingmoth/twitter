@@ -98,7 +98,7 @@
 </template>
 
 <script>
-import { mapGetters } from 'vuex'
+import { mapGetters, mapActions } from "vuex";
 import { userFeature, timeFilter, imageFilter } from "../utils/mixins";
 export default {
   name: "TweetReply",
@@ -109,17 +109,25 @@ export default {
     },
   },
   computed: {
-    ...mapGetters(['getCurrentUser'])
+    ...mapGetters(["getCurrentUser",'getUserReplies']),
   },
   methods: {
+    ...mapActions(["setTweetModal", "setUserTweetModal"]),
     addLike(tweetId) {
-      this.addTweetLike(tweetId)
+      this.addTweetLike(tweetId);
     },
     removeLike(tweetId) {
-      const userId = this.getCurrentUser.id
-      this.removeTweetLike(tweetId, userId)
+      const userId = this.getCurrentUser.id;
+      this.removeTweetLike(tweetId, userId);
     },
-  }
+    getReplyTweet(tweetId) {
+      const tweetload = {
+        tweets: this.getUserReplies,
+        tweetId,
+      };
+      this.setUserTweetModal(tweetload);
+    },
+  },
 };
 </script>
 
@@ -141,7 +149,7 @@ export default {
   position: relative;
   &::before {
     position: absolute;
-    content: '';
+    content: "";
     top: -35px;
     left: 40px;
     width: 2px;
