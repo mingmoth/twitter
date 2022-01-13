@@ -30,7 +30,7 @@ export const imageFilter = {
 
 export const userFeature = {
   methods: {
-    ...mapActions(['setCurrentUser', 'setUser', 'setUserTweets', 'setUserReplies', 'setUserLikes', 'setPopular', 'setFollow', 'setUnfollow', 'likeTweets', 'unlikeTweets', 'likeTweet', 'unlikeTweet', 'unlikeUserLikes', 'likeUserTweet', 'unlikeUserTweet', 'likeUserReply', 'unlikeUserReply', 'setUserFollowings', 'setUserFollowers', 'followFollowers', 'unfollowFollowers', 'followFollowings', 'unfollowFollowings']),
+    ...mapActions(['setCurrentUser', 'setUser', 'setUserTweets', 'setUserReplies', 'setUserLikes', 'setPopular', 'setFollow', 'setUnfollow', 'likeTweets', 'unlikeTweets', 'likeTweet', 'unlikeTweet', 'unlikeUserLikes', 'likeUserTweet', 'unlikeUserTweet', 'likeUserReply', 'unlikeUserReply', 'setUserFollowings', 'setUserFollowers', 'followFollowers', 'unfollowFollowers', 'followFollowings', 'unfollowFollowings', ]),
     async fetchUser(userId) {
       try {
         const { data } = await userAPI.getUser(userId)

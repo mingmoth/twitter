@@ -40,9 +40,15 @@ export default {
         isFollowed: true
       }
       this.followUser(userId, user)
+      if(Number(userId) === Number(this.$route.params.id)) {
+        this.$store.dispatch('toggleUserProfile')
+      }
     },
     removeFollow(userId) {
       this.unfollowUser(userId)
+      if(Number(userId) === Number(this.$route.params.id)) {
+        this.$store.dispatch('toggleUserProfile')
+      }
     },
   }
 }

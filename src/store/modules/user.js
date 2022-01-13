@@ -80,6 +80,10 @@ const actions = {
   // unfollowFollowings({ commit }, followId) {
   //   commit('removeFollowings', followId)
   // },
+  toggleUserProfile({ commit }) {
+    console.log('toggle')
+    commit('toggleUserFollow')
+  },
   likeUserTweet({ commit }, tweetId) {
     commit('addUserTweetsLike', tweetId)
   },
@@ -196,6 +200,12 @@ const mutations = {
   // removeFollowings(state, followId) {
   //   state.userFollowings = state.userFollowings.filter(follow => follow.id !== followId)
   // },
+  toggleUserFollow(state) {
+    state.userProfile = {
+      ...state.userProfile,
+      isFollowed: !state.userProfile.isFollowed
+    }
+  },
   removeUserLikes(state, tweetId) {
     if (state.userLikes.length) {
       console.log(tweetId)

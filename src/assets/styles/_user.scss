@@ -29,8 +29,19 @@
       }
     }
     &-edit {
+      width: 50%;
       margin-right: 15px;
       margin-top: 86px;
+      div {
+        display: flex;
+        justify-content: end;
+      }
+      img {
+        width: 35px;
+        height: 35px;
+        object-fit: cover;
+        margin-right: 3%;
+      }
     }
   }
   &-title {
@@ -55,8 +66,13 @@
       margin-top: 10px;
       display: flex;
       &-following, &-follower {
+        text-decoration: none;
         color: var(--text-content);
         font-weight: 500;
+        &:hover {
+          text-decoration: underline;
+          color: var(--text-content);
+        }
       }
       &-following {
         margin-right: 20px;
@@ -78,17 +94,21 @@
       height: 100%;
       padding: 0;
       display: flex;
-      flex-direction: row;
+      
       justify-content: space-between;
       align-items: center;
       li {
+        width: 33.3%;
         .nav-link {
+          
           text-align: center;
-          height: 100%;
-          padding-top: 15px;
-          padding-bottom: 15px;
+          height: 52px;
+          padding: 15px;
           color: var(--input-label);
           border-radius: 0;
+          @include breakpoint(mobile) {
+            font-size: 10px;
+          }
           &.active, &:hover {
             background: none;
             color: var(--orange);
