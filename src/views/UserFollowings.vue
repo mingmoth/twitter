@@ -1,6 +1,9 @@
 <template>
   <div >
-    <UserFollowing v-for="follow in getUserFollowings" :key="follow.id" :follow="follow"/>
+    <UserFollowing 
+      v-for="follow in getUserFollowings" 
+      :key="follow.id" 
+      :follow="follow"/>
   </div>
 </template>
 
@@ -19,5 +22,11 @@ export default {
   computed: {
     ...mapGetters(['getUserFollowings'])
   },
+  methods: {
+    updateFollowing() {
+      const { id: userId } = this.$route.params
+    this.fetchUserFollowings(userId)
+    }
+  }
 }
 </script>

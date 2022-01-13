@@ -45,6 +45,7 @@ export default {
       }
       if(Number(this.getCurrentUser.id) === Number(this.$route.params.id)) {
         this.$store.dispatch('followFollowings', user)
+        this.$store.dispatch('toggleFollowings', user.id)
       }
     },
     removeFollow(userId) {

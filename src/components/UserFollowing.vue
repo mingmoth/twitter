@@ -35,7 +35,7 @@ export default {
   props: {
     follow: {
       type: Object,
-      
+
     }
   },
   computed: {

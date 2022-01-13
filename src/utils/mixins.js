@@ -87,7 +87,6 @@ export const userFeature = {
         if (statusText !== 'OK') {
           throw new Error(data.message)
         }
-        console.log(data)
         this.setUserFollowings(data.users)
       } catch (error) {
         console.log(error)
@@ -157,15 +156,12 @@ export const userFeature = {
     async followUser(userId) {
       try {
         const { data } = await userAPI.addFollow({ UserId: userId })
-        console.log(data)
         successToast.fire({
           title: data.message
         })
         this.setFollow(userId)
         this.toggleFollowers(userId)
         this.toggleFollowings(userId)
-        
-        // this.followFollowings(follow)
       } catch (error) {
         errorToast.fire({
           title: error.message
