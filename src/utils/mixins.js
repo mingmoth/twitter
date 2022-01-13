@@ -30,7 +30,7 @@ export const imageFilter = {
 
 export const userFeature = {
   methods: {
-    ...mapActions(['setCurrentUser', 'setUser', 'setUserTweets', 'setUserReplies', 'setUserLikes', 'setPopular', 'setFollow', 'setUnfollow', 'likeTweets', 'unlikeTweets', 'likeTweet', 'unlikeTweet', 'unlikeUserLikes', 'likeUserTweet', 'unlikeUserTweet', 'likeUserReply', 'unlikeUserReply', 'setUserFollowings', 'setUserFollowers']),
+    ...mapActions(['setCurrentUser', 'setUser', 'setUserTweets', 'setUserReplies', 'setUserLikes', 'setPopular', 'setFollow', 'setUnfollow', 'likeTweets', 'unlikeTweets', 'likeTweet', 'unlikeTweet', 'unlikeUserLikes', 'likeUserTweet', 'unlikeUserTweet', 'likeUserReply', 'unlikeUserReply', 'setUserFollowings', 'setUserFollowers', 'followFollowers', 'unfollowFollowers', 'followFollowings', 'unfollowFollowings']),
     async fetchUser(userId) {
       try {
         const { data } = await userAPI.getUser(userId)
@@ -74,6 +74,7 @@ export const userFeature = {
         }
         this.setUserLikes(data.likes)
       } catch (error) {
+        console.log(error)
         errorToast.fire({
           title: error.message
         })
@@ -153,14 +154,18 @@ export const userFeature = {
         })
       }
     },
-    async followUser(userId) {
+    async followUser(userId, follow) {
       try {
         const { data } = await userAPI.addFollow({ UserId: userId })
         console.log(data)
         successToast.fire({
           title: data.message
         })
+  
+        console.log(follow)
         this.setFollow(userId)
+        this.followFollowers(userId)
+        // this.followFollowings(follow)
       } catch (error) {
         errorToast.fire({
           title: error.message
@@ -177,6 +182,8 @@ export const userFeature = {
           title: data.message
         })
         this.setUnfollow(followingId)
+        this.unfollowFollowers(followingId)
+        // this.unfollowFollowings(followingId)
       } catch (error) {
         errorToast.fire({
           title: error.message
@@ -241,7 +248,7 @@ export const userFeature = {
 
 export const tweetFeature = {
   methods: {
-    ...mapActions(['setTweets', 'setTweet', 'newTweet']),
+    ...mapActions(['setTweets', 'setTweet', 'newTweet', 'pushUserTweet']),
     async fetchTweets() {
       try {
         const response = await tweetAPI.getTweets()
@@ -290,7 +297,11 @@ export const tweetFeature = {
           Likes: 0,
           isLiked: false
         }
-        this.newTweet(newTweet)
+        if(this.$route.name === 'tweets') {
+          this.newTweet(newTweet)
+        } else if(this.$route.name === 'user-tweets') {
+          this.pushUserTweet(newTweet)
+        }
       } catch (error) {
         console.log(error)
         errorToast.fire({

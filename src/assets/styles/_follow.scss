@@ -35,6 +35,11 @@
         font-weight: 700;
         &-name {
           color: var(--text-content);
+          text-decoration: none;
+          &:hover {
+            text-decoration: underline;
+            color: var(--text-content);
+          }
         }
         &-account {
           color: var(--input-label)

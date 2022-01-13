@@ -8,8 +8,16 @@
           <router-link :to="{name: 'user-tweets', params: { id: follow.id}}" class="following-content-head-title-name">{{follow.name}}</router-link>
           <div class="following-content-head-title-account">@{{follow.account}}</div>
         </div>
-        <button v-if="!follow.isFollowed" class="btn-following" v-show="getCurrentUser.id !== follow.id">跟隨</button>
-        <button v-else class="btn-unfollowing" v-show="getCurrentUser.id !== follow.id">取消跟隨</button>
+        <button 
+          v-if="!follow.isFollowed" 
+          class="btn-following" 
+          v-show="getCurrentUser.id !== follow.id"
+          @click.stop.prevent="addFollow(follow.id)">跟隨</button>
+        <button 
+          v-else 
+          class="btn-unfollowing" 
+          v-show="getCurrentUser.id !== follow.id"
+          @click.stop.prevent="removeFollow(follow.id)">正在跟隨</button>
       </div>
       <div class="following-content-body">
         {{follow.introduction}}
@@ -20,10 +28,10 @@
 
 <script>
 import { mapGetters } from 'vuex'
-import { imageFilter } from '../utils/mixins'
+import { userFeature, imageFilter } from '../utils/mixins'
 export default {
   name: "UserFollowing",
-  mixins: [ imageFilter ],
+  mixins: [ userFeature, imageFilter ],
   props: {
     follow: {
       type: Object,
@@ -31,6 +39,14 @@ export default {
   },
   computed: {
     ...mapGetters(['getCurrentUser'])
+  },
+  methods: {
+    addFollow(userId) {
+      this.followUser(userId)
+    },
+    removeFollow(userId) {
+      this.unfollowUser(userId)
+    }
   },
 };
 </script>

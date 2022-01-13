@@ -68,6 +68,18 @@ const actions = {
   setUnfollow({ commit }, followingId) {
     commit('removeFollow', followingId)
   },
+  followFollowers({ commit }, followId) {
+    commit('addFollowers', followId)
+  },
+  unfollowFollowers({ commit }, followId) {
+    commit('removeFollowers', followId)
+  },
+  // followFollowings({ commit }, follow) {
+  //   commit('addFollowings', follow)
+  // },
+  // unfollowFollowings({ commit }, followId) {
+  //   commit('removeFollowings', followId)
+  // },
   likeUserTweet({ commit }, tweetId) {
     commit('addUserTweetsLike', tweetId)
   },
@@ -88,6 +100,9 @@ const actions = {
   },
   pushUserReplies({ commit }, replyload) {
     commit('addUserReplies', replyload)
+  },
+  pushUserTweet({ commit }, tweet) {
+    commit('addUserTweet', tweet)
   }
   
 }
@@ -151,6 +166,36 @@ const mutations = {
       } else { return user }
     })
   },
+  addFollowers(state, followId) {
+    state.userFollowers = state.userFollowers.map(follow => {
+      if(follow.id === followId) {
+        return follow = {
+          ...follow,
+          isFollowed: true
+        }
+      } else {
+         return follow
+      }
+    })
+  },
+  removeFollowers(state, followId) {
+    state.userFollowers = state.userFollowers.map(follow => {
+      if (follow.id === followId) {
+        return follow = {
+          ...follow,
+          isFollowed: false
+        }
+      } else {
+        return follow
+      }
+    })
+  },
+  // addFollowings(state, follow) {
+  //   state.userFollowings = state.userFollowings.concat(follow)
+  // },
+  // removeFollowings(state, followId) {
+  //   state.userFollowings = state.userFollowings.filter(follow => follow.id !== followId)
+  // },
   removeUserLikes(state, tweetId) {
     if (state.userLikes.length) {
       console.log(tweetId)
@@ -244,6 +289,9 @@ const mutations = {
         return tweet
       }
     })
+  },
+  addUserTweet(state, tweet) {
+    state.userTweets.unshift(tweet)
   }
 }
 

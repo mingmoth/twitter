@@ -7,11 +7,11 @@
       :key="user.id">
       <img :src="user.avatar | emptyAvatar" alt="" class="follow-item-icon">
       <div class="follow-item-title">
-        <div class="follow-item-title-name">{{user.name}}</div>
-        <div class="follow-item-title-account">{{user.account}}</div>
+        <router-link :to="{ name: 'user-tweets', params: { id: user.id }}" class="follow-item-title-name">{{user.name}}</router-link>
+        <div class="follow-item-title-account">@{{user.account}}</div>
       </div>
       <button v-if="user.isFollowed" class="btn-unfollow" @click.stop.prevent="removeFollow(user.id)">正在跟隨</button>
-      <button v-else class="btn-follow" @click.stop.prevent="addFollow(user.id)">跟隨</button>
+      <button v-else class="btn-follow" @click.stop.prevent="addFollow(user.id, user)">跟隨</button>
     </div>
   </div>
 </template>
@@ -34,8 +34,12 @@ export default {
     ...mapGetters(['getPopular']),
   },
   methods: {
-    addFollow(userId) {
-      this.followUser(userId)
+    addFollow(userId, user) {
+      user = {
+        ...user,
+        isFollowed: true
+      }
+      this.followUser(userId, user)
     },
     removeFollow(userId) {
       this.unfollowUser(userId)
