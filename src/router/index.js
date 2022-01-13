@@ -54,6 +54,7 @@ const router = new VueRouter({
       path: '/users/:id',
       name: 'user',
       component: () => import('../views/User.vue'),
+      redirect: '/users/:id/tweets',
       children: [
         {
           path: 'tweets',

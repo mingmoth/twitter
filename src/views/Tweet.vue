@@ -7,7 +7,7 @@
       <UserTweet :tweet="getTweet" />
       <Reply v-for="reply in getTweet.Replies" :key="reply.id" :reply="reply" :tweetOwner="getTweet.User.account"/>
       <TweetModal />
-      <TweetReplyModal />
+      <TweetReplyModal :tweet="getTweet"/>
     </div>
     <div class="popular">
       <Popular />
@@ -42,7 +42,7 @@ export default {
     this.fetchTweet(tweetId)
   },
   computed: {
-    ...mapGetters(['getTweets','getTweet']),
+    ...mapGetters(['getTweet']),
   },
   methods: {},
 };

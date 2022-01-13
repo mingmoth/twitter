@@ -72,7 +72,6 @@ export const userFeature = {
         if (statusText !== 'OK') {
           throw new Error(data.message)
         }
-        console.log(response)
         this.setUserLikes(data.likes)
       } catch (error) {
         errorToast.fire({

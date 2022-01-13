@@ -21,5 +21,10 @@ export default {
     const { id: userId } = this.$route.params
     this.fetchUserTweets(userId)
   },
+  beforeRouteUpdate(to, from, next) {
+    const { id: userId } = to.params;
+    this.fetchUserTweets(userId)
+    next();
+  },
 }
 </script>

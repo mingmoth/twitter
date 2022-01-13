@@ -5,7 +5,7 @@
     <div class="following-content">
       <div class="following-content-head">
         <div class="following-content-head-title">
-          <div class="following-content-head-title-name">{{follow.name}}</div>
+          <router-link :to="{name: 'user-tweets', params: { id: follow.id}}" class="following-content-head-title-name">{{follow.name}}</router-link>
           <div class="following-content-head-title-account">@{{follow.account}}</div>
         </div>
         <button v-if="!follow.isFollowed" class="btn-following" v-show="getCurrentUser.id !== follow.id">跟隨</button>

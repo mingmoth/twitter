@@ -5,11 +5,11 @@
     </div>
     <div class="home">
       <UserPost />
-      <div>
+      <div class="container">
         <TweetItem v-for="tweet in getTweets" :key="tweet.id" :tweet="tweet"/>
       </div>
       <TweetModal />
-      <TweetReplyModal />
+      <TweetReplyModal :tweet="getTweetModal"/>
     </div>
     <div class="popular">
       <Popular />
@@ -42,10 +42,17 @@ export default {
     this.fetchTweets();
   },
   computed: {
-    ...mapGetters(["getTweets"]),
+    ...mapGetters(["getTweets", 'getTweetModal']),
   },
 };
 </script>
 
 <style lang="scss">
+@import '../assets/styles/_rwd.scss';
+
+.container {
+  @include breakpoint(mobile) {
+    margin-top: 55px;
+  }
+}
 </style>

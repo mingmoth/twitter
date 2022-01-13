@@ -60,7 +60,7 @@ export default {
     }
   },
   computed: {
-    ...mapGetters(['getCurrentUser']),
+    ...mapGetters(['getCurrentUser', 'getTweets', 'getUserTweets', 'getUserReplies', 'getUserLikes']),
   },
   methods: {
     ...mapActions(['setTweetModal']),
@@ -73,7 +73,15 @@ export default {
     },
     getReplyTweet(tweetId) {
       console.log(tweetId)
-      this.setTweetModal(tweetId)
+      if(this.getTweets.length) {
+        this.setTweetModal(tweetId)
+      } 
+      // else if(this.getUserTweets.length) {
+
+      // } else if() {
+
+      // } else if() {}
+      
     }
   },
 };

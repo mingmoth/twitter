@@ -2,7 +2,7 @@
   <div class="profile">
     <div class="navTop">
       <div class="navTop-title">
-        <img src="../../public/images/icon_back.png" alt="" class="navTop-title-back" @click="$router.push('/tweets')">
+        <img src="../../public/images/icon_back.png" alt="" class="navTop-title-back" @click="$router.back()">
         <div class="navTop-title-name">
           {{getUserProfile.name}}
           <div class="navTop-title-name-tweets">{{getUserProfile.Tweets}}<span> 貼文</span></div>
@@ -66,18 +66,33 @@
 </template>
 
 <script>
-import { mapGetters } from 'vuex'
-import { userFeature, imageFilter } from '../utils/mixins'
+// import { mapGetters } from 'vuex'
+import { imageFilter } from '../utils/mixins'
 export default {
   name: "getUserProfile",
-  mixins: [ userFeature, imageFilter ],
-  created() {
-    const { id: userId } = this.$route.params
-    this.fetchUser(userId)
+  props: {
+    getUserProfile: {
+      type: Object,
+    }
   },
-  computed: {
-    ...mapGetters(['getUserProfile']),
-  },
+  mixins: [ imageFilter ],
+  // computed: {
+  //   ...mapGetters(['getUserProfile']),
+  // },
+  // created() {
+  //   console.log('created')
+  //   const { id: userId } = this.$route.params
+  //   this.fetchUser(userId)
+  // },
+  // beforeRouteUpdate(to, from, next) {
+  //   const { id: userId } = to.params;
+  //   this.fetchUser(userId)
+  //   console.log(userId)
+  //   next();
+  // },
+  // mounted() {
+  //   console.log('mounted')
+  // },
 };
 </script>
 

@@ -86,11 +86,11 @@
                 </div>
               </div>
               <div class="form-label-group" id="modal-intro">
-                <label for="intro">自我介紹</label>
+                <label for="introduction">自我介紹</label>
                 <textarea
                   v-model="introduction"
-                  name="intro"
-                  id="intro"
+                  name="introduction"
+                  id="introduction"
                   cols="30"
                   rows="10"
                 ></textarea>

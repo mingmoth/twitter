@@ -3,9 +3,10 @@ import userAPI from '../../apis/users'
 const state = {
   currentUser: {},
   userProfile: {},
-  userTweets: {},
-  userReplies: {},
-  userLikes: {},
+  userTweets: [],
+  userReplies: [],
+  userLikes: [],
+  userTweetModal: {},
   userFollowings: [],
   userFollowers: [],
   popular: [],
@@ -19,6 +20,7 @@ const getters = {
   getUserTweets: state => state.userTweets,
   getUserReplies: state => state.userReplies,
   getUserLikes: state => state.userLikes,
+  getUserTweetModal: state => state.userTweetModal,
   getUserFollowings: state => state.userFollowings,
   getUserFollowers: state => state.userFollowers,
   getPopular: state => state.popular
@@ -47,6 +49,9 @@ const actions = {
   },
   setUserLikes({ commit }, userLikes) {
     commit('getUserLikes', userLikes)
+  },
+  setUserTweetModal({ commit }, tweetload) {
+    commit('getUserTweetModal', tweetload)
   },
   setUserFollowings({ commit }, userFollowings) {
     commit('getUserFollowings', userFollowings)
@@ -107,6 +112,9 @@ const mutations = {
   },
   getUserLikes: (state, userLikes) => {
     state.userLikes = userLikes
+  }, 
+  getUserTweetModal: (state, tweetload) => {
+    state.userTweetModal = tweetload.tweets.find(tweet => tweet.id === tweetload.tweetId)
   },
   getUserFollowings: (state, userFollowings) => {
     state.userFollowings = userFollowings

@@ -11,19 +11,19 @@
         </div>
         <div class="modal-body">
           <div class="modal-body-post">
-            <img :src="getTweetModal.User.avatar | emptyAvatar" alt="" class="modal-body-post-icon">
+            <img :src="tweet.User ? tweet.User.avatar: '' | emptyAvatar" alt="" class="modal-body-post-icon">
             <div class="modal-body-post-body">
               <div class="modal-body-post-body-head">
-                <div class="modal-body-post-body-head-name">{{getTweetModal.User.name}}</div>
-                <div class="modal-body-post-body-head-account">@{{getTweetModal.User.account}}</div>
+                <div class="modal-body-post-body-head-name">{{tweet.User ? tweet.User.name: ''}}</div>
+                <div class="modal-body-post-body-head-account">@{{tweet.User ? tweet.User.account: ''}}</div>
                 <span> · </span>
-                <div class="modal-body-post-body-head-time">{{getTweetModal.createdAt | fromNow}}</div>
+                <div class="modal-body-post-body-head-time">{{tweet.createdAt | fromNow}}</div>
               </div>
               <div class="modal-body-post-body-content">
-                {{getTweetModal.description}}
+                {{tweet.description}}
               </div>
               <div class="modal-body-post-body-foot">
-                <div class="modal-body-post-body-foot-reply">回覆給 <span class="modal-body-post-body-foot-account">@{{getTweetModal.User.account}}</span></div>
+                <div class="modal-body-post-body-foot-reply">回覆給 <span class="modal-body-post-body-foot-account">@{{tweet.User ? tweet.User.account: ''}}</span></div>
               </div>
             </div>
           </div>
@@ -32,7 +32,7 @@
             <form 
               action=""
               class="modal-body-reply-tweet"
-              @submit.stop.prevent="createReply(getTweetModal.id)">
+              @submit.stop.prevent="createReply(tweet.id)">
               <textarea
                 name="comment"
                 id="comment"
@@ -66,16 +66,18 @@ import tweetAPI from '../apis/tweets'
 export default {
   name: "TweetReplyModal",
   mixins: [userFeature, imageFilter, timeFilter],
+  props: {
+    tweet: {
+      type: Object
+    },
+  },
   data() {
     return {
       comment: '',
     }
   },
-  created() {
-    
-  },
   computed: {
-    ...mapGetters(['getCurrentUser', 'getTweetModal']),
+    ...mapGetters(['getCurrentUser',]),
     checkText() {
       if(!this.comment.length || this.comment.length > 140) {
         return true
