@@ -19,7 +19,7 @@ import Sidebar from '../components/Sidebar.vue'
 import NavFollow from '../components/NavFollow.vue'
 import Popular from '../components/Popular.vue'
 export default {
-  name: 'UserFollowings',
+  name: 'UserFollows',
   components: {
     Sidebar, NavFollow, Popular
   },

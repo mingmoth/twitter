@@ -68,18 +68,18 @@ const actions = {
   setUnfollow({ commit }, followingId) {
     commit('removeFollow', followingId)
   },
-  followFollowers({ commit }, followId) {
-    commit('addFollowers', followId)
+  toggleFollowers({ commit }, followId) {
+    commit('toggleFollowers', followId)
   },
-  unfollowFollowers({ commit }, followId) {
-    commit('removeFollowers', followId)
+  toggleFollowings({ commit }, followId) {
+    commit('toggleFollowings', followId)
   },
-  // followFollowings({ commit }, follow) {
-  //   commit('addFollowings', follow)
-  // },
-  // unfollowFollowings({ commit }, followId) {
-  //   commit('removeFollowings', followId)
-  // },
+  followFollowings({ commit }, follow) {
+    commit('addFollowings', follow)
+  },
+  unfollowFollowings({ commit }, followId) {
+    commit('removeFollowings', followId)
+  },
   toggleUserProfile({ commit }) {
     console.log('toggle')
     commit('toggleUserFollow')
@@ -170,36 +170,37 @@ const mutations = {
       } else { return user }
     })
   },
-  addFollowers(state, followId) {
+  toggleFollowers(state, followId) {
     state.userFollowers = state.userFollowers.map(follow => {
       if(follow.id === followId) {
         return follow = {
           ...follow,
-          isFollowed: true
+          isFollowed: !follow.isFollowed
         }
       } else {
          return follow
       }
     })
   },
-  removeFollowers(state, followId) {
-    state.userFollowers = state.userFollowers.map(follow => {
+  toggleFollowings(state, followId) {
+    state.userFollowings = state.userFollowings.map(follow => {
       if (follow.id === followId) {
         return follow = {
           ...follow,
-          isFollowed: false
+          isFollowed: !follow.isFollowed
         }
       } else {
         return follow
       }
     })
   },
-  // addFollowings(state, follow) {
-  //   state.userFollowings = state.userFollowings.concat(follow)
-  // },
-  // removeFollowings(state, followId) {
-  //   state.userFollowings = state.userFollowings.filter(follow => follow.id !== followId)
-  // },
+  addFollowings(state, follow) {
+    console.log(follow.isFollowed)
+    state.userFollowings = state.userFollowings.concat(follow)
+  },
+  removeFollowings(state, followId) {
+    state.userFollowings = state.userFollowings.filter(follow => follow.id !== followId)
+  },
   toggleUserFollow(state) {
     state.userProfile = {
       ...state.userProfile,

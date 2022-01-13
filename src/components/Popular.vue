@@ -31,7 +31,7 @@ export default {
     this.fetchPopular()
   },
   computed: {
-    ...mapGetters(['getPopular']),
+    ...mapGetters(['getPopular', 'getCurrentUser']),
   },
   methods: {
     addFollow(userId, user) {
@@ -43,11 +43,17 @@ export default {
       if(Number(userId) === Number(this.$route.params.id)) {
         this.$store.dispatch('toggleUserProfile')
       }
+      if(Number(this.getCurrentUser.id) === Number(this.$route.params.id)) {
+        this.$store.dispatch('followFollowings', user)
+      }
     },
     removeFollow(userId) {
       this.unfollowUser(userId)
       if(Number(userId) === Number(this.$route.params.id)) {
         this.$store.dispatch('toggleUserProfile')
+      }
+      if(Number(this.getCurrentUser.id) === Number(this.$route.params.id)) {
+        this.$store.dispatch('unfollowFollowings', userId)
       }
     },
   }

@@ -30,7 +30,7 @@ export const imageFilter = {
 
 export const userFeature = {
   methods: {
-    ...mapActions(['setCurrentUser', 'setUser', 'setUserTweets', 'setUserReplies', 'setUserLikes', 'setPopular', 'setFollow', 'setUnfollow', 'likeTweets', 'unlikeTweets', 'likeTweet', 'unlikeTweet', 'unlikeUserLikes', 'likeUserTweet', 'unlikeUserTweet', 'likeUserReply', 'unlikeUserReply', 'setUserFollowings', 'setUserFollowers', 'followFollowers', 'unfollowFollowers', 'followFollowings', 'unfollowFollowings', ]),
+    ...mapActions(['setCurrentUser', 'setUser', 'setUserTweets', 'setUserReplies', 'setUserLikes', 'setPopular', 'setFollow', 'setUnfollow', 'likeTweets', 'unlikeTweets', 'likeTweet', 'unlikeTweet', 'unlikeUserLikes', 'likeUserTweet', 'unlikeUserTweet', 'likeUserReply', 'unlikeUserReply', 'setUserFollowings', 'setUserFollowers', 'toggleFollowers', 'toggleFollowings',  ]),
     async fetchUser(userId) {
       try {
         const { data } = await userAPI.getUser(userId)
@@ -154,17 +154,17 @@ export const userFeature = {
         })
       }
     },
-    async followUser(userId, follow) {
+    async followUser(userId) {
       try {
         const { data } = await userAPI.addFollow({ UserId: userId })
         console.log(data)
         successToast.fire({
           title: data.message
         })
-  
-        console.log(follow)
         this.setFollow(userId)
-        this.followFollowers(userId)
+        this.toggleFollowers(userId)
+        this.toggleFollowings(userId)
+        
         // this.followFollowings(follow)
       } catch (error) {
         errorToast.fire({
@@ -182,8 +182,8 @@ export const userFeature = {
           title: data.message
         })
         this.setUnfollow(followingId)
-        this.unfollowFollowers(followingId)
-        // this.unfollowFollowings(followingId)
+        this.toggleFollowers(followingId)
+        this.toggleFollowings(followingId)
       } catch (error) {
         errorToast.fire({
           title: error.message
