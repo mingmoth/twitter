@@ -18,6 +18,11 @@
         font-size: 15px;
         font-weight: 700;
         color: var(--text-content);
+        text-decoration: none;
+        &:hover {
+          text-decoration: underline;
+          color: var(--text-content);
+        }
       }
       &-account {
         font-size: 15px;

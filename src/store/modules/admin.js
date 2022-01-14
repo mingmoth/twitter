@@ -15,6 +15,9 @@ const actions = {
   setAdminUsers({ commit }, adminUsers) {
     commit('getAdminUsers', adminUsers)
   },
+  removeAdminTweet({ commit }, tweetId) {
+    commit('deleteAdminTweet', tweetId)
+  }
 }
 
 const mutations = {
@@ -23,6 +26,9 @@ const mutations = {
   },
   getAdminUsers(state, adminUsers) {
     state.adminUsers = adminUsers
+  },
+  deleteAdminTweet(state, tweetId) {
+    state.adminTweets = state.adminTweets.filter(tweet => tweet.id !== tweetId)
   }
 }
 

@@ -75,7 +75,7 @@ export default {
           successToast.fire({
             title: '登入成功'
           })
-          this.$router.push('/admin/main')
+          this.$router.push('/admin/tweets')
         }
       } catch (error) {
         console.log(error)

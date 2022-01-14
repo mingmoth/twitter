@@ -10,7 +10,7 @@
       <div class="post-header">
         <img :src="tweet.User ? tweet.User.avatar: '' | emptyAvatar" alt="" class="post-header-icon">
         <div class="post-header-title">
-          <div class="post-header-title-name">{{tweet.User ? tweet.User.name : ''}}</div>
+          <router-link :to="{name: 'user-tweets', params: { id: tweet.User ? tweet.User.id: '' }}" class="post-header-title-name">{{tweet.User ? tweet.User.name : ''}}</router-link>
           <div class="post-header-title-account"><span>@</span>{{tweet.User ? tweet.User.account : ''}}</div>
         </div>
       </div>

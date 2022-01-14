@@ -73,6 +73,7 @@ export const userFeature = {
         if (statusText !== 'OK') {
           throw new Error(data.message)
         }
+        console.log(data)
         this.setUserLikes(data.likes)
       } catch (error) {
         console.log(error)
@@ -318,7 +319,7 @@ export const replies = {
 
 export const adminFeature = {
   methods: {
-    ...mapActions(['setAdminTweets', 'setAdminUsers']),
+    ...mapActions(['setAdminTweets', 'setAdminUsers', 'removeAdminTweet']),
     async fetchAdminUsers() {
       try {
         const response = await adminAPI.getAdminUsers()
@@ -343,6 +344,17 @@ export const adminFeature = {
         })
       }
     },
-    async deleteTweet() {},
+    async deleteAdminTweet(tweetId) {
+      try {
+        const response = await adminAPI.deleteTweet(tweetId)
+        console.log(response)
+        this.removeAdminTweet(tweetId)
+      } catch (error) {
+        console.log(error)
+        errorToast.fire({
+          title: error.message
+        })
+      }
+    },
   }
 }

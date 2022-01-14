@@ -99,7 +99,7 @@ export default {
           throw new Error(data.messages);
         }
         successToast.fire({
-          title: data.message,
+          title: data.messages,
         });
         this.$router.push("/signin");
       } catch (error) {

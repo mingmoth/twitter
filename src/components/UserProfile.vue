@@ -27,7 +27,7 @@
           />
         </div>
         <div class="user-header-edit">
-          <div v-if="getCurrentUser.id === this.$route.params.id">
+          <div v-if="getCurrentUser.id === getUserProfile.id">
             <button
               class="btn-edit"
               data-bs-toggle="modal"
@@ -111,11 +111,6 @@ import { mapGetters } from 'vuex'
 import { userFeature, imageFilter } from "../utils/mixins";
 export default {
   name: "getUserProfile",
-  props: {
-    getUserProfile: {
-      type: Object,
-    },
-  },
   mixins: [userFeature, imageFilter],
   computed: {
     ...mapGetters(['getCurrentUser', 'getUserProfile']),

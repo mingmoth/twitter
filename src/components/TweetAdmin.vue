@@ -12,15 +12,15 @@
       </div>
       <div class="tweet-body-content">{{tweet.description}}</div>
     </div>
-    <img src="../../public/images/icon_close_admin.png" alt="" class="tweet-delete">
+    <img src="../../public/images/icon_close_admin.png" alt="" class="tweet-delete" @click.stop.prevent="deleteTweet(tweet.id)">
   </div>
 </template>
 
 <script>
-import { timeFilter, imageFilter } from '../utils/mixins'
+import { adminFeature, timeFilter, imageFilter } from '../utils/mixins'
 export default {
   name: 'TweetAdmin',
-  mixins: [timeFilter, imageFilter],
+  mixins: [adminFeature, timeFilter, imageFilter],
   props: {
     tweet: {
       type: Object,
@@ -32,7 +32,9 @@ export default {
     }
   },
   methods: {
-    
+    deleteTweet(tweetId) {
+      this.deleteAdminTweet(tweetId)
+    }
   }
 }
 </script>

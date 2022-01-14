@@ -7,7 +7,7 @@ export default {
   getAdminUsers() {
     return apiHelper.get('/admin/users')
   },
-  deleteTweet(userId) {
-    return apiHelper.delete(`/users/${userId}`)
+  deleteTweet(tweetId) {
+    return apiHelper.delete(`/admin/tweets/${tweetId}`)
   }
 }
