@@ -5,6 +5,7 @@ import { successToast, errorToast } from './toast'
 import { mapActions } from 'vuex'
 import userAPI from '../apis/users'
 import tweetAPI from '../apis/tweets'
+import adminAPI from '../apis/admin'
 
 export const timeFilter = {
   filters: {
@@ -30,7 +31,7 @@ export const imageFilter = {
 
 export const userFeature = {
   methods: {
-    ...mapActions(['setCurrentUser', 'setUser', 'setUserTweets', 'setUserReplies', 'setUserLikes', 'setPopular', 'setFollow', 'setUnfollow', 'likeTweets', 'unlikeTweets', 'likeTweet', 'unlikeTweet', 'unlikeUserLikes', 'likeUserTweet', 'unlikeUserTweet', 'likeUserReply', 'unlikeUserReply', 'setUserFollowings', 'setUserFollowers', 'toggleFollowers', 'toggleFollowings',  ]),
+    ...mapActions(['setCurrentUser', 'setUser', 'setUserTweets', 'setUserReplies', 'setUserLikes', 'setPopular', 'setFollow', 'setUnfollow', 'likeTweets', 'unlikeTweets', 'likeTweet', 'unlikeTweet', 'likeUserLikes', 'unlikeUserLikes', 'likeUserTweet', 'unlikeUserTweet', 'likeUserReply', 'unlikeUserReply', 'setUserFollowings', 'setUserFollowers', 'toggleFollowers', 'toggleFollowings',  ]),
     async fetchUser(userId) {
       try {
         const { data } = await userAPI.getUser(userId)
@@ -121,6 +122,7 @@ export const userFeature = {
         })
         this.likeTweets(tweetId)
         this.likeTweet(data.like)
+        this.likeUserLikes(tweetId)
         this.likeUserTweet(tweetId)
         const replyload = {tweetId: tweetId, like: data.like}
         this.likeUserReply(replyload)
@@ -314,10 +316,37 @@ export const replies = {
   }
 }
 
-export const admin = {
+export const adminFeature = {
   methods: {
-    async fetchUsers() {},
-    async fetchAdminTweets() {},
+    ...mapActions(['setAdminTweets', 'setAdminUsers']),
+    async fetchUsers() {
+      try {
+        const response = await adminAPI.getAdminUsers()
+        const { data } = response
+        console.log(response)
+        console.log(data)
+        this.setAdminUsers(data.users)
+      } catch (error) {
+        console.log(error)
+        errorToast.fire({
+          title: error.message
+        })
+      }
+    },
+    async fetchAdminTweets() {
+      try {
+        const response = await adminAPI.getAdminTweets()
+        const { data } = response
+        console.log(response)
+        console.log(data)
+        this.setAdminTweets(data.tweets)
+      } catch (error) {
+        console.log(error)
+        errorToast.fire({
+          title: error.message
+        })
+      }
+    },
     async deleteTweet() {},
   }
 }

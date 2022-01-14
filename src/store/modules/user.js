@@ -96,6 +96,9 @@ const actions = {
   unlikeUserReply({ commit }, replyload) {
     commit('removeUserReplyLike', replyload)
   },
+  likeUserLikes({ commit }, tweetId) {
+    commit('addUserLikes', tweetId)
+  },
   unlikeUserLikes({ commit }, tweetId) {
     commit('removeUserLikes', tweetId)
   },
@@ -207,11 +210,39 @@ const mutations = {
       isFollowed: !state.userProfile.isFollowed
     }
   },
+  addUserLikes(state, tweetId) {
+    if (!state.userLikes.length) {
+      return
+    } else {
+      state.userLikes = state.userLikes.map(tweet => {
+        if (tweet.id === tweetId) {
+          return tweet = {
+            ...tweet,
+            Likes: tweet.Likes + 1,
+            isLiked: !tweet.isLiked,
+          }
+        } else {
+          return tweet
+        }
+      })
+    }
+  },
   removeUserLikes(state, tweetId) {
-    if (state.userLikes.length) {
-      console.log(tweetId)
-      return state.userLikes = state.userLikes.filter(like => like.id !== tweetId)
-    } else return
+    if (!state.userLikes.length) {
+      return
+    } else {
+      state.userLikes = state.userLikes.map(tweet => {
+        if (tweet.id === tweetId) {
+          return tweet = {
+            ...tweet,
+            Likes: tweet.Likes - 1,
+            isLiked: !tweet.isLiked,
+          }
+        } else {
+          return tweet
+        }
+      })
+    }
   },
   addUserTweetsLike(state, tweetId) {
     if (!state.userTweets.length) {

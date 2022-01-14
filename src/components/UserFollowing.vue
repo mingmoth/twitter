@@ -47,6 +47,9 @@ export default {
     },
     removeFollow(userId) {
       this.unfollowUser(userId)
+      if(Number(this.getCurrentUser.id) === Number(this.$route.params.id)) {
+        this.$store.dispatch('unfollowFollowings', userId)
+      }
     }
   },
 };

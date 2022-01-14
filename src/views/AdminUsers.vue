@@ -1,9 +1,9 @@
 <template>
   <div class="app-container">
     <div class="header">
-      <NavAdmin />
+      <AdminSidebar />
     </div>
-    <div class="home-admin">
+    <div class="home">
       <UserAdmin />
     </div>
     
@@ -11,12 +11,12 @@
 </template>
 
 <script>
-import NavAdmin from '../components/NavAdmin.vue'
+import AdminSidebar from '../components/AdminSidebar.vue'
 import UserAdmin from '../components/UserAdmin.vue'
 export default {
   name: 'AdminUsers',
   components: {
-    NavAdmin, UserAdmin
+    AdminSidebar, UserAdmin
   }
 }
 </script>
