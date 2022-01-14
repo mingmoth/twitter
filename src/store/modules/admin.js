@@ -5,7 +5,7 @@ const state = {
 
 const getters = {
   getAdminTweets: state => state.adminTweets,
-  getAdminUser: state => state.adminUsers,
+  getAdminUsers: state => state.adminUsers,
 }
 
 const actions = {

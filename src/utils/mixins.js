@@ -319,12 +319,10 @@ export const replies = {
 export const adminFeature = {
   methods: {
     ...mapActions(['setAdminTweets', 'setAdminUsers']),
-    async fetchUsers() {
+    async fetchAdminUsers() {
       try {
         const response = await adminAPI.getAdminUsers()
         const { data } = response
-        console.log(response)
-        console.log(data)
         this.setAdminUsers(data.users)
       } catch (error) {
         console.log(error)
@@ -337,8 +335,6 @@ export const adminFeature = {
       try {
         const response = await adminAPI.getAdminTweets()
         const { data } = response
-        console.log(response)
-        console.log(data)
         this.setAdminTweets(data.tweets)
       } catch (error) {
         console.log(error)
