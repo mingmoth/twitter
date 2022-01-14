@@ -1,8 +1,9 @@
 import { apiHelper } from "../utils/apis";
 
 export default {
-  getAdminTweets() {
-    return apiHelper.get('/admin/tweets')
+  getAdminTweets({page}) {
+    const searchParams = new URLSearchParams({ page })
+    return apiHelper.get(`/admin/tweets?${searchParams.toString()}`)
   },
   getAdminUsers() {
     return apiHelper.get('/admin/users')

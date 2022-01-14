@@ -319,7 +319,7 @@ export const replies = {
 
 export const adminFeature = {
   methods: {
-    ...mapActions(['setAdminTweets', 'setAdminUsers', 'removeAdminTweet']),
+    ...mapActions(['setAdminTweets', 'setAdminPage', 'setAdminUsers', 'removeAdminTweet']),
     async fetchAdminUsers() {
       try {
         const response = await adminAPI.getAdminUsers()
@@ -332,11 +332,12 @@ export const adminFeature = {
         })
       }
     },
-    async fetchAdminTweets() {
+    async fetchAdminTweets({ queryPage }) {
       try {
-        const response = await adminAPI.getAdminTweets()
+        const response = await adminAPI.getAdminTweets({ page: queryPage })
         const { data } = response
         this.setAdminTweets(data.tweets)
+        this.setAdminPage(data)
       } catch (error) {
         console.log(error)
         errorToast.fire({
