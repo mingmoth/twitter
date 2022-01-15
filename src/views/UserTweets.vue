@@ -1,5 +1,8 @@
 <template>
   <div>
+    <div v-if="!getUserTweets" class="empty">
+      使用者尚無推文
+    </div>
     <TweetItem v-for="tweet in getUserTweets" :key="tweet.id" :tweet="tweet" />
   </div>
 </template>

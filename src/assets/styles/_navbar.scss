@@ -50,7 +50,7 @@
           background-color: var(--input-border);
           color: var(--orange);
           font-weight: 700;
-          @include breakpoint(mobile) {
+          @include breakpoint(zone-base) {
             background-color: transparent;
           }
           .icon {
@@ -88,6 +88,9 @@
       font-size: 16px;
       font-weight: 500;
       color: var(--text-content);
+      &:hover {
+      color: var(--text-content);
+    }
     }
     .img{ 
       width: 24px;

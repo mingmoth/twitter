@@ -46,8 +46,8 @@
       </button>
     </ul>
     <div class="side-logout">
-      <a class="side-logout-label">
-      <img src="../../public/images/icon_logout.png" alt="" class="img" @click="logout"> <span>登出</span></a>
+      <a class="side-logout-label" @click="logout">
+      <img src="../../public/images/icon_logout.png" alt="" class="img" > <span>登出</span></a>
     </div>
   </div>
 </template>

@@ -12,11 +12,11 @@
       <div class="card-feat">
         <div class="card-feat-comment">
           <img src="../../public/images/icon_reply.png" alt="" class="card-feat-comment-icon">
-          <span class="card-feat-comment-count">{{user.Tweets}}</span>
+          <span class="card-feat-comment-count">{{user.Tweets ? user.Tweets: 0}}</span>
         </div>
         <div class="card-feat-like">
           <img src="../../public/images/icon_like.png" alt="" class="card-feat-like-icon">
-          <span class="card-feat-like-count">{{user.Likes}}</span>
+          <span class="card-feat-like-count">{{user.Likes ? user.Likes: 0}}</span>
         </div>
       </div>
       <div class="card-follow">

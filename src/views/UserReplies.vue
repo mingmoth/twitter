@@ -1,5 +1,8 @@
 <template>
   <div>
+    <div v-if="!getUserReplies" class="empty">
+      使用者尚無推文回復
+    </div>
     <TweetReply v-for="tweet in getUserReplies" :key="tweet.id" :tweet="tweet"/>
   </div>
 </template>

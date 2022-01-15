@@ -21,12 +21,19 @@
         color: var(--text-content);
         margin-right: 5px;
         text-decoration: none;
+        &:hover {
+          color: var(--text-content);
+          text-decoration: underline;
+        }
       }
       &-account, &-time {
         font-size: 15px;
         font-weight: 500;
         color: var(--input-label);
         text-decoration: none;
+        &:hover {
+          color: var(--input-label);
+        }
       }
     }
     &-content {
@@ -35,6 +42,9 @@
       font-weight: 500;
       color: var(--text-content);
       text-decoration: none;
+      &:hover {
+        color: var(--text-content);
+      }
     }
     &-foot {
       margin-top: 10px;
