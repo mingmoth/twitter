@@ -7,6 +7,7 @@
 <script>
 import { mapGetters } from 'vuex'
 import { userFeature } from '../utils/mixins'
+import { eventBus } from "../utils/eventBus";
 
 import TweetItem from '../components/TweetItem.vue'
 
@@ -20,11 +21,21 @@ export default {
   created() {
     const { id: userId } = this.$route.params
     this.fetchUserTweets(userId)
+    this.updateUser()
   },
   beforeRouteUpdate(to, from, next) {
     const { id: userId } = to.params;
     this.fetchUserTweets(userId)
     next();
+  },
+  methods: {
+    updateUser() {
+      eventBus.$on("updateUser", () => {
+        console.log('event')
+        const { id: userId } = this.$route.params;
+        this.fetchUserTweets(userId)
+      });
+    },
   },
 }
 </script>

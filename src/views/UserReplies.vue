@@ -7,7 +7,7 @@
 <script>
 import { mapGetters } from 'vuex'
 import { userFeature } from '../utils/mixins'
-
+import { eventBus } from "../utils/eventBus";
 
 import TweetReply from '../components/TweetReply.vue'
 
@@ -18,9 +18,18 @@ export default {
   created() {
     const { id: userId } = this.$route.params
     this.fetchUserReplies(userId)
+    this.updateUser()
   },
   computed: {
     ...mapGetters(['getUserReplies'])
+  },
+  methods: {
+    updateUser() {
+      eventBus.$on("updateUser", () => {
+        const { id: userId } = this.$route.params;
+        this.fetchUserReplies(userId)
+      });
+    },
   },
 }
 </script>

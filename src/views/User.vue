@@ -4,45 +4,56 @@
       <Sidebar />
     </div>
     <div class="home">
-      <UserProfile :getUserProfile="getUserProfile"/>
+      <UserProfile :getUserProfile="getUserProfile" />
       <router-view />
-      <UserSettingModal />
+      <UserSettingModal @updateUser="updateUser" />
       <TweetModal />
-      <TweetReplyModal :tweet="getUserTweetModal"/>
+      <TweetReplyModal :tweet="getUserTweetModal" />
     </div>
     <div class="popular">
       <Popular />
-    </div>  
+    </div>
   </div>
 </template>
 
 <script>
-import { mapGetters } from 'vuex'
-import { userFeature, imageFilter } from '../utils/mixins'
+import { mapGetters } from "vuex";
+import { userFeature, imageFilter } from "../utils/mixins";
 
-import Sidebar from '../components/Sidebar.vue'
-import UserProfile from '../components/UserProfile.vue'
-import Popular from '../components/Popular.vue'
-import UserSettingModal from '../components/UserSettingModal.vue'
-import TweetModal from '../components/TweetModal.vue'
-import TweetReplyModal from '../components/TweetReplyModal.vue'
+import Sidebar from "../components/Sidebar.vue";
+import UserProfile from "../components/UserProfile.vue";
+import Popular from "../components/Popular.vue";
+import UserSettingModal from "../components/UserSettingModal.vue";
+import TweetModal from "../components/TweetModal.vue";
+import TweetReplyModal from "../components/TweetReplyModal.vue";
 export default {
-  name: 'User',
-  mixins: [ userFeature, imageFilter ],
+  name: "User",
+  mixins: [userFeature, imageFilter],
   components: {
-    Sidebar, UserProfile, Popular, UserSettingModal, TweetModal, TweetReplyModal
+    Sidebar,
+    UserProfile,
+    Popular,
+    UserSettingModal,
+    TweetModal,
+    TweetReplyModal,
   },
   computed: {
-    ...mapGetters(['getUserProfile', 'getUserTweetModal']),
+    ...mapGetters(["getUserProfile", "getUserTweetModal"]),
   },
   created() {
-    const { id: userId } = this.$route.params
-    this.fetchUser(userId)
+    const { id: userId } = this.$route.params;
+    this.fetchUser(userId);
   },
   beforeRouteUpdate(to, from, next) {
     const { id: userId } = to.params;
-    this.fetchUser(userId)
+    this.fetchUser(userId);
     next();
   },
-}
+  methods: {
+    updateUser() {
+      const { id: userId } = this.$route.params;
+      this.fetchUser(userId);
+    },
+  },
+};
 </script>

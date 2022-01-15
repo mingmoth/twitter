@@ -5,21 +5,31 @@
 </template>
 
 <script>
-import { mapGetters } from 'vuex'
-import { userFeature } from '../utils/mixins'
+import { mapGetters } from "vuex";
+import { userFeature } from "../utils/mixins";
+import { eventBus } from "../utils/eventBus";
 
-import TweetItem from '../components/TweetItem.vue'
+import TweetItem from "../components/TweetItem.vue";
 
 export default {
-  name: 'UserLikes',
-  mixins: [ userFeature ],
+  name: "UserLikes",
+  mixins: [userFeature],
   components: { TweetItem },
   created() {
-    const { id: userId } = this.$route.params
-    this.fetchUserLikes(userId)
+    const { id: userId } = this.$route.params;
+    this.fetchUserLikes(userId);
+    this.updateUser()
   },
   computed: {
-    ...mapGetters(['getUserLikes']),
+    ...mapGetters(["getUserLikes"]),
   },
-}
+  methods: {
+    updateUser() {
+      eventBus.$on("updateUser", () => {
+        const { id: userId } = this.$route.params;
+        this.fetchUserLikes(userId);
+      });
+    },
+  },
+};
 </script>

@@ -1,5 +1,6 @@
 <template>
   <div class="modal fade" id="user-setting-edit" aria-hidden="true">
+    <Spinner v-show="isProcessing"/>
     <div class="modal-dialog" role="document">
       <div class="modal-content">
         <form action="" @submit.stop.prevent="handleSubmit">
@@ -12,7 +13,7 @@
               aria-label="Close">
             
             <div class="modal-header-title">編輯個人資料</div>
-            <button class="btn-save" type="submit">儲存</button>
+            <button class="btn-save" type="submit" :disabled="isProcessing">儲存</button>
           </div>
           <div class="modal-body">
             <div class="modal-body-bg">
@@ -117,16 +118,23 @@
 <script>
 import { mapGetters } from "vuex";
 import { userFeature, imageFilter } from "../utils/mixins";
+import { eventBus } from '../utils/eventBus'
 import { errorToast } from '../utils/toast'
+
+import Spinner from '../components/Spinner.vue'
 export default {
   name: "UserSettingModal",
   mixins: [userFeature, imageFilter],
+  components: {
+    Spinner,
+  },
   data() {
     return {
       name: "",
       introduction: "",
       avatar: "",
       cover: "",
+      isProcessing: false
     };
   },
   computed: {
@@ -172,15 +180,19 @@ export default {
         }
       }
     },
-    handleSubmit(e) {
+    async handleSubmit(e) {
       if(!this.name) {
         errorToast.fire({
           title: '使用者名稱不得為空'
         })
       }
+      this.isProcessing = true
       const files = e.target
       const form = new FormData(files)
-      this.updateUser(Number(this.getCurrentUser.id), form)
+      await this.updateUser(Number(this.getCurrentUser.id), form)
+      this.isProcessing = false
+      this.$emit('updateUser')
+      eventBus.$emit('updateUser')
     }
   },
 };
