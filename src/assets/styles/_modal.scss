@@ -55,10 +55,9 @@
       border-radius: 50%;
       //z-index只能在有設定位（position）的元素上才會奏效。
       z-index: 1;
-      display: flex;
+      display: flex; 
       justify-content: center;
       align-items: center;
-      background: var(--input-label);
       &-photo {
         position: absolute;
         z-index: -1;

@@ -169,20 +169,20 @@ export default {
       if(files.length === 0) {
         switch(target) {
           case "avatar":
-            this.avatar = ''
+            this.user.avatar = ''
             break
           case "cover":
-            this.cover = ''
+            this.user.cover = ''
             break
         }
       } else {
         const imageURL = window.URL.createObjectURL(files[0])
         switch(target) {
           case "avatar":
-            this.avatar = imageURL
+            this.user.avatar = imageURL
             break
           case "cover":
-            this.cover = imageURL
+            this.user.cover = imageURL
             break
         }
       }
