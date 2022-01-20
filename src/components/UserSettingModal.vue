@@ -18,7 +18,7 @@
           <div class="modal-body">
             <div class="modal-body-bg">
               <img
-                :src="cover | emptyCover"
+                :src="user.cover | emptyCover"
                 alt=""
                 class="modal-body-bg-cover"
               />
@@ -44,7 +44,7 @@
             </div>
             <div class="modal-body-header">
               <img
-                :src="avatar | emptyAvatar"
+                :src="user.avatar | emptyAvatar"
                 alt=""
                 class="modal-body-header-photo"
               />
@@ -67,29 +67,28 @@
               <div class="form-label-group">
                 <label for="name">名稱</label>
                 <input
-                  v-model="name"
+                  v-model="user.name"
                   type="text"
                   name="name"
                   id="name"
-                  :invalid="name.length > 50"
                   required
                 />
                 <div class="modal-body-form-limit">
                   <div
-                    v-show="this.name.length > 50"
+                  v-show="user.name ? user.name.length > 50 ? true : false : false"
                     class="modal-body-form-limit-alert"
                   >
                     字數超出上限!
                   </div>
                   <div class="modal-body-form-limit-count">
-                    {{ name ? name.length : 0}}<span>/50</span>
+                    {{ user.name ? user.name.length: '' }}<span>/50</span>
                   </div>
                 </div>
               </div>
               <div class="form-label-group" id="modal-intro">
                 <label for="introduction">自我介紹</label>
                 <textarea
-                  v-model="introduction"
+                  v-model="user.introduction"
                   name="introduction"
                   id="introduction"
                   cols="30"
@@ -97,13 +96,13 @@
                 ></textarea>
                 <div class="modal-body-form-limit">
                   <div
-                    v-show="this.introduction ? ( this.introduction.length > 160 ? true: false) : false"
+                    v-show="user.inroduction ? user.inroduction.length > 50 ? true : false : false"
                     class="modal-body-form-limit-alert"
                   >
                     字數超出上限!
                   </div>
                   <div class="modal-body-form-limit-count">
-                    {{ introduction ? introduction.length : 0 }}<span>/160</span>
+                    {{ user.inroduction ? user.introduction.length: '' }}<span>/160</span>
                   </div>
                 </div>
               </div>
@@ -130,12 +129,22 @@ export default {
   },
   data() {
     return {
-      name: "",
-      introduction: "",
-      avatar: "",
-      cover: "",
+      user: {
+        name: "",
+        introduction: "",
+        avatar: "",
+        cover: "",
+      },
       isProcessing: false
     };
+  },
+  watch: {
+    getCurrentUser(newValue) {
+      this.user = {
+        ...this.getCurrentUser,
+        ...newValue
+      }
+    }
   },
   computed: {
     ...mapGetters(["getCurrentUser"]),
@@ -146,10 +155,9 @@ export default {
   },
   methods: {
     setUser() {
-      this.name = this.getCurrentUser.name;
-      this.introduction = this.getCurrentUser.introduction;
-      this.avatar = this.getCurrentUser.avatar;
-      this.cover = this.getCurrentUser.cover;
+      console.log(this.getCurrentUser)
+      const { name, avatar, cover, introduction } = this.getCurrentUser
+      this.user = { name, avatar, cover, introduction }
     },
     updateAvatar() {
       this.$refs.avatar.click();

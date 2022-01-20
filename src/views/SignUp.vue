@@ -45,7 +45,7 @@
     </form>
     <div class="register-cancel">
       <p>
-        <router-link class="register-cancel-target" to="/login"
+        <router-link class="register-cancel-target" to="/signin"
           >取消</router-link
         >
       </p>
@@ -95,7 +95,7 @@ export default {
           checkPassword: this.checkPassword,
         });
         console.log(data)
-        if (data.status !== "success") {
+        if (data.status !== "200") {
           throw new Error(data.messages);
         }
         successToast.fire({

@@ -200,9 +200,11 @@ const mutations = {
   addFollowings(state, follow) {
     console.log(follow.isFollowed)
     state.userFollowings = state.userFollowings.concat(follow)
+    state.userProfile.Followings = state.userProfile.Followings.concat(follow)
   },
   removeFollowings(state, followId) {
     state.userFollowings = state.userFollowings.filter(follow => follow.id !== followId)
+    state.userProfile.Followings = state.userProfile.Followings.filter(follow => follow.id !== followId)
   },
   toggleUserFollow(state) {
     state.userProfile = {
