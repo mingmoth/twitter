@@ -155,7 +155,6 @@ export default {
   },
   methods: {
     setUser() {
-      console.log(this.getCurrentUser)
       const { name, avatar, cover, introduction } = this.getCurrentUser
       this.user = { name, avatar, cover, introduction }
     },
@@ -189,7 +188,7 @@ export default {
       }
     },
     async handleSubmit(e) {
-      if(!this.name) {
+      if(!this.user.name) {
         errorToast.fire({
           title: '使用者名稱不得為空'
         })

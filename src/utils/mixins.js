@@ -73,7 +73,6 @@ export const userFeature = {
         if (statusText !== 'OK') {
           throw new Error(data.message)
         }
-        console.log(data)
         this.setUserLikes(data.likes)
       } catch (error) {
         console.log(error)
@@ -228,7 +227,6 @@ export const userFeature = {
         const { data } = await userAPI.updateUser(
           userId, form
         )
-        console.log(data)
         if (data.status !== 'success') {
           throw new Error(data.message)
         }
@@ -282,7 +280,6 @@ export const tweetFeature = {
         const { data } = await tweetAPI.createTweet({
           description: description
         })
-        console.log(data)
         if (data.status !== 'success') {
           throw new Error(data.message)
         }

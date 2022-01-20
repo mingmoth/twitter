@@ -32,6 +32,7 @@
         height: 200px;
         object-fit: cover;
         z-index: -1;
+        background: var(--input-label);
       }
       &-edit {
         width: 24px;
@@ -57,6 +58,7 @@
       display: flex;
       justify-content: center;
       align-items: center;
+      background: var(--input-label);
       &-photo {
         position: absolute;
         z-index: -1;
