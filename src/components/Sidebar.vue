@@ -39,7 +39,7 @@
         </router-link>
       </li>
       <li>
-        <router-link :to="{ name: 'user-tweets', params: { id: getCurrentUser.id } }" class="side-option">
+        <router-link to="/messages" class="side-option">
           <img src="../../public/images/message.png" alt="" class="icon" id="message"/>
           <img
             src="../../public/images/message_hover.png"

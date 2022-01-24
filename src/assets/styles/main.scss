@@ -13,6 +13,7 @@
 @import '_user';
 @import '_following';
 @import '_card';
+@import '_chat';
 @import '_toast';
 @import '_rwd';
 
@@ -81,7 +82,9 @@ html, body {
     }
     
   }
-  
+  .chat-container {
+    flex: 1;
+  }
 }
 
 .empty {

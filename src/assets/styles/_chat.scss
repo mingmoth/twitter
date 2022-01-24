@@ -1,0 +1,115 @@
+.chat-container {
+  display: flex;
+  border-right: 1px solid var(--input-border);
+  border-left: 1px solid var(--input-border);
+  @include breakpoint(pad-portrait) {
+    display: block;
+  }
+  .chat-head {
+    width: 40%;
+    max-height: 100vh;
+    min-width: 300px;
+    border-right: 1px solid var(--input-border);
+    @include breakpoint(pad-portrait) {
+      width: 100%;
+      height: 40vh;
+      border-right: none;
+    }
+    &-header {
+      height: 55px;
+      padding: 15px;
+      font-size: 18px;  
+      font-weight: 700;
+      color: var(--text-content);
+      border-bottom: 1px solid var(--input-border);
+    }
+    &-users {
+      max-height: calc( 100vh - 55px );
+      overflow-y: auto;
+      &::-webkit-scrollbar {
+        display: none;
+      }
+      .chat-head-user {
+        padding: 10px 15px;
+        border-bottom: 1px solid var(--input-border);
+        height: 75px;
+        &-avatar {
+          width: 50px;
+          height: 50px;
+          border-radius: 50%;
+          margin-right: 10px;
+        }
+        &-name {
+          font-size: 15px;
+          font-weight: 700;
+          color: var(--text-content);
+          text-decoration: none;
+          margin-right: 5px;
+        }
+        &-account {
+          font-size: 15px;
+          font-weight: 500;
+          color: var(--input-label);
+          text-decoration: none;
+        }
+      }
+    }
+  }
+  .chat-body {
+    flex: 1;
+    @include breakpoint(pad-portrait) {
+      height: 60vh;
+    }
+    @include breakpoint(pad-portrait) {
+      height: calc( 60vh - 57px );
+    }
+    &-header {
+      height: 55px;
+      padding: 13px 14px;
+      font-size: 19px;
+      font-weight: 700;
+      border-bottom: 1px solid var(--input-border);
+      @include breakpoint(pad-portrait) {
+        border-top: 1px solid var(--input-border);
+      }
+    }
+    &-text {
+      height: calc(100vh - 110px);
+      overflow-y: auto;
+      &::-webkit-scrollbar {
+        display: none;
+      }
+      @include breakpoint(pad-portrait) {
+        height: calc( 60vh - 110px);
+      }
+      @include breakpoint(mobile) {
+        height: calc( 60vh - 167px);
+      }
+    }
+    &-foot {
+      height: 55px;
+      padding: 11px 15px;
+      display: flex;
+      justify-content: space-between;
+      align-items: center;
+      border-top: 1px solid var(--input-border);
+      &-input {
+        width: calc(98% - 24px);
+        margin-right: 2%;
+        height: 32px;
+        border-radius: 50px;
+        border: none;
+        outline: none;
+        background: var(--input-border);
+        color: #000 40%;
+        padding: 8px 15px;
+        font-size: 15px;
+      }
+      &-image {
+        width: 24px;
+        height: 24px;
+        cursor: pointer;
+      }
+    }
+  }
+}
