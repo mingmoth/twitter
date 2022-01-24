@@ -8,7 +8,7 @@
   .chat-head {
     width: 40%;
     max-height: 100vh;
-    min-width: 300px;
+    min-width: 350px;
     border-right: 1px solid var(--input-border);
     @include breakpoint(pad-portrait) {
       width: 100%;
@@ -24,15 +24,23 @@
       border-bottom: 1px solid var(--input-border);
     }
     &-users {
-      max-height: calc( 100vh - 55px );
+      height: calc( 100vh - 55px );
       overflow-y: auto;
       &::-webkit-scrollbar {
         display: none;
+      }
+      @include breakpoint(pad-portrait) {
+        width: 100%;
+        height: calc(40vh - 55px);
+        border-right: none;
       }
       .chat-head-user {
         padding: 10px 15px;
         border-bottom: 1px solid var(--input-border);
         height: 75px;
+        display: flex;
+        align-items: center;
+        position: relative;
         &-avatar {
           width: 50px;
           height: 50px;
@@ -51,6 +59,22 @@
           font-weight: 500;
           color: var(--input-label);
           text-decoration: none;
+        }
+        &-moment {
+          font-size: 15px;
+          font-weight: 500;
+          color: var(--input-label);
+          position: absolute;
+          text-decoration: none;
+          right: 15px;
+        }
+        &-head {
+          display: block;
+        }
+        &-intro {
+          font-size: 14px;
+          font-weight: 400;
+          color: var(--input-label);
         }
       }
     }
@@ -74,16 +98,107 @@
       }
     }
     &-text {
+      padding: 15px;
       height: calc(100vh - 110px);
+      display: flex;
+      flex-direction: column;
       overflow-y: auto;
-      &::-webkit-scrollbar {
-        display: none;
+      &> :first-child {
+        margin-top: auto;
       }
+      // &::-webkit-scrollbar {
+      //   display: none;
+      // }
       @include breakpoint(pad-portrait) {
         height: calc( 60vh - 110px);
       }
       @include breakpoint(mobile) {
         height: calc( 60vh - 167px);
+      }
+      
+      &-wrapper {
+        margin-bottom: 15px;
+        &-other {
+          &-head {
+            display: flex;
+            align-items: end;
+            &-image {
+              width: 40px;
+              height: 40px;
+              border-radius: 50%;
+              margin-right: 10px;
+              @include breakpoint(mobile) {
+                width: 35px;
+                height: 35px;
+              }
+            }
+            &-text {
+              width: 60%;
+              background: var(--input-border);
+              border-radius: 25px 25px 25px 0px;
+              padding: 10px 15px;
+              font-size: 15px;
+              color: var(--text-content);
+              @include breakpoint(mobile) {
+                font-size: 13px;
+              }
+            }
+          }
+          &-body {
+            display: flex;
+            align-items: start;
+            &-name {
+              width: 40px;
+              margin-right: 10px;
+              @include breakpoint(mobile) {
+                width: 35px;
+              }
+            }
+            &-moment {
+              font-size: 15px;
+              font-weight: 400;
+              color: var(--input-label);
+              @include breakpoint(mobile) {
+                font-size: 13px;
+              }
+            }
+          }
+        }
+        &-announce {
+          display: flex;
+          &-text {
+            background: var(--chat-announce);
+            margin: 0 auto;
+            padding: 7px 14px;
+            border-radius: 50px;
+            color: var(--input-label);
+            font-size: 14px;
+          }
+        }
+        &-user {
+          display: flex;
+          flex-direction: column;
+          align-items: end;
+          &-text {
+            width: 60%;
+            background: var(--orange);
+            border-radius: 25px 25px 0px 25px;
+            padding: 10px 15px;
+            font-size: 15px;
+            color: var(--light);
+            @include breakpoint(mobile) {
+              font-size: 13px;
+            }
+          }
+          &-moment {
+            font-size: 15px;
+            font-weight: 400;
+            color: var(--input-label);
+            @include breakpoint(mobile) {
+              font-size: 13px;
+            }
+          }
+        }
       }
     }
     &-foot {
