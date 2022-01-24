@@ -41,6 +41,16 @@ const router = new VueRouter({
       component: () => import('../views/Tweet.vue')
     },
     {
+      path: '/public',
+      name: 'public-chat',
+      component: () => import('../views/PublicChat.vue')
+    },
+    {
+      path: '/messages',
+      name: 'private-chat',
+      component: () => import('../views/PrivateChat.vue')
+    },
+    {
       path: '/admin/tweets',
       name: 'admin-tweets',
       component: () => import('../views/AdminTweets.vue')
@@ -90,11 +100,6 @@ const router = new VueRouter({
         },
       ]
     },
-    // {
-    //   path: '/users/:id/followings',
-    //   name: 'user-followings',
-    //   component: () => import('../views/UserFollowings.vue')
-    // },
     {
       path: '/users/:id/settings',
       name: 'user-settings',

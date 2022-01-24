@@ -27,6 +27,30 @@
         </router-link>
       </li>
       <li>
+        <router-link to="/public" class="side-option">
+          <img src="../../public/images/message.png" alt="" class="icon" id="message"/>
+          <img
+            src="../../public/images/message_hover.png"
+            alt=""
+            class="icon-active"
+            id="message"
+          />
+          <span>公開聊天室</span>
+        </router-link>
+      </li>
+      <li>
+        <router-link :to="{ name: 'user-tweets', params: { id: getCurrentUser.id } }" class="side-option">
+          <img src="../../public/images/message.png" alt="" class="icon" id="message"/>
+          <img
+            src="../../public/images/message_hover.png"
+            alt=""
+            class="icon-active"
+            id="message"
+          />
+          <span>私人訊息</span>
+        </router-link>
+      </li>
+      <li>
         <router-link :to="{name: 'user-settings', params: { id: getCurrentUser.id }}" class="side-option">
           <img src="../../public/images/setting logo.png" alt="" class="icon" />
           <img
