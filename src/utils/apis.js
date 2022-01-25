@@ -1,7 +1,7 @@
 import axios from 'axios'
 
-const baseURL = 'https://twitter-api-guan.herokuapp.com/api'
-// const baseURL = 'http://localhost:3000/api'
+// const baseURL = 'https://twitter-api-guan.herokuapp.com/api'
+const baseURL = 'http://localhost:3000/api'
 
 export const apiHelper = axios.create({ baseURL })
 

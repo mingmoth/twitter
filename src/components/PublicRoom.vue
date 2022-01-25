@@ -44,21 +44,47 @@
     <form class="chat-body-foot">
       <input
         type="text"
+        v-model="message"
+        name="message"
+        id="message"
         class="chat-body-foot-input"
         placeholder="輸入訊息..."
+        @keydown.enter.prevent="sendMessage"
       />
-      <img
+      <img 
         src="../../public/images/icon_send.png"
         alt=""
         class="chat-body-foot-image"
-      />
+        @click.stop.prevent="sendMessage">
+      
     </form>
   </div>
 </template>
 
 <script>
+import { mapGetters } from 'vuex'
+
 export default {
   name: "PublicRoom",
+  data() {
+    return {
+      message: ''
+    }
+  },
+  computed: {
+    ...mapGetters(['getCurrentUser'])
+  },
+  methods: {
+    sendMessage() {
+      if(!this.message.trim()) return
+      this.$socket.emit("sendMessage", {
+        message: this.message,
+        roomName: 'public',
+        UserId: this.getCurrentUser.id
+      })
+      this.message = ''
+    },
+  }
 };
 </script>
 
