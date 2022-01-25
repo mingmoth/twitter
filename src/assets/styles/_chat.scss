@@ -133,7 +133,7 @@
               }
             }
             &-text {
-              width: 60%;
+              max-width: 60%;
               background: var(--input-border);
               border-radius: 25px 25px 25px 0px;
               padding: 10px 15px;
@@ -180,7 +180,7 @@
           flex-direction: column;
           align-items: end;
           &-text {
-            width: 60%;
+            max-width: 60%;
             background: var(--orange);
             border-radius: 25px 25px 0px 25px;
             padding: 10px 15px;

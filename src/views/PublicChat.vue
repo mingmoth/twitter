@@ -17,7 +17,7 @@
         </div>
       </div>
       <div class="chat-body">
-        <PublicRoom />
+        <PublicRoom :messages="publicMessage"/>
       </div>
     </div>
   </div>
@@ -36,6 +36,8 @@ export default {
   data() {
     return {
       roomName: 'public',
+      publicMessage: [],
+      onlineUser: [],
     }
   },
   sockets: {
@@ -43,13 +45,19 @@ export default {
       console.log('socket connect')
     },
     newMessage(data) {
-      console.log(data)
+      this.publicMessage.push(data)
+      console.log(this.publicMessage)
     },
+    login(data) {
+      // console.log(data)
+      const user = data.user.name
+      this.onlineUser.push(user)
+      this.publicMessage.push(data)
+      console.log(this.onlineUser)
+    }
   },
   created() {
-    this.$socket.emit('joinRoom', { roomName: this.roomName })
-    console.log(this.roomName)
-    
+    this.$socket.emit('joinRoom', { user: this.getCurrentUser, roomName: this.roomName })
   },
   mounted() {
     this.$socket.open()

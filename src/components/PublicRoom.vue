@@ -2,17 +2,35 @@
   <div>
     <div class="chat-body-header">公開聊天室</div>
     <div class="chat-body-text">
-        <div class="chat-body-text-wrapper">
-          <div class="chat-body-text-wrapper-other">
+      <div
+        class="chat-body-text-wrapper"
+        v-for="message in messages"
+        :key="message.id"
+      >
+        <div
+          class="chat-body-text-wrapper-announce"
+          v-if="message.type === 'announce'"
+        >
+          <span class="chat-body-text-wrapper-announce-text"
+            >{{message.user ? message.user.name: '無名氏'}} 上線</span
+          >
+        </div>
+        <div v-else>
+          <div class="chat-body-text-wrapper-user" v-if="message.user.id === getCurrentUser.id">
+            <div class="chat-body-text-wrapper-user-text">
+              {{message.message}}
+            </div>
+            <div class="chat-body-text-wrapper-user-moment">下午6:08</div>
+          </div>
+          <div class="chat-body-text-wrapper-other" v-else>
             <div class="chat-body-text-wrapper-other-head">
               <img
-                src="../../public/images/ac logo.png"
+                :src="message.user.avatar"
                 alt=""
                 class="chat-body-text-wrapper-other-head-image"
               />
               <div class="chat-body-text-wrapper-other-head-text">
-                Amet minim mollit non deserunt ullamco est sit aliqua dolor do
-                amet sint.
+                {{message.message}}
               </div>
             </div>
             <div class="chat-body-text-wrapper-other-body">
@@ -22,24 +40,9 @@
               </div>
             </div>
           </div>
+          
         </div>
-        <div class="chat-body-text-wrapper">
-          <div class="chat-body-text-wrapper-announce">
-            <span class="chat-body-text-wrapper-announce-text"
-              >Esther Howard 上線</span
-            >
-          </div>
-        </div>
-        <div class="chat-body-text-wrapper">
-          <div class="chat-body-text-wrapper-user">
-            <div class="chat-body-text-wrapper-user-text">
-              Nulla Lorem mollit cupidatat irure. Laborum magna nulla duis
-              ullamco cillum dolor. Voluptate exercitation incididunt aliquip
-              deserunt reprehenderit elit laborum.
-            </div>
-            <div class="chat-body-text-wrapper-user-moment">下午6:08</div>
-          </div>
-        </div>
+      </div>
     </div>
     <form class="chat-body-foot">
       <input
@@ -51,40 +54,48 @@
         placeholder="輸入訊息..."
         @keydown.enter.prevent="sendMessage"
       />
-      <img 
+      <img
         src="../../public/images/icon_send.png"
         alt=""
         class="chat-body-foot-image"
-        @click.stop.prevent="sendMessage">
-      
+        @click.stop.prevent="sendMessage"
+      />
     </form>
   </div>
 </template>
 
 <script>
-import { mapGetters } from 'vuex'
+import { mapGetters } from "vuex";
+import { imageFilter } from '../utils/mixins'
 
 export default {
   name: "PublicRoom",
+  mixins: [ imageFilter ],
+  props: {
+    messages: {
+      type: Array,
+    },
+  },
   data() {
     return {
-      message: ''
-    }
+      message: "",
+    };
   },
   computed: {
-    ...mapGetters(['getCurrentUser'])
+    ...mapGetters(["getCurrentUser"]),
   },
   methods: {
     sendMessage() {
-      if(!this.message.trim()) return
+      if (!this.message.trim()) return;
       this.$socket.emit("sendMessage", {
         message: this.message,
-        roomName: 'public',
-        UserId: this.getCurrentUser.id
-      })
-      this.message = ''
+        roomName: "public",
+        UserId: this.getCurrentUser.id,
+        user: this.getCurrentUser,
+      });
+      this.message = "";
     },
-  }
+  },
 };
 </script>
 
