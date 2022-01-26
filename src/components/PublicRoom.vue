@@ -12,20 +12,20 @@
           v-if="message.type === 'announce'"
         >
           <span class="chat-body-text-wrapper-announce-text"
-            >{{message.user ? message.user.name: '無名氏'}} 上線</span
+            >{{message.message}}</span
           >
         </div>
         <div v-else>
-          <div class="chat-body-text-wrapper-user" v-if="message.user.id === getCurrentUser.id">
+          <div class="chat-body-text-wrapper-user" v-if="message.UserId === getCurrentUser.id">
             <div class="chat-body-text-wrapper-user-text">
               {{message.message}}
             </div>
-            <div class="chat-body-text-wrapper-user-moment">下午6:08</div>
+            <div class="chat-body-text-wrapper-user-moment">{{message.createdAt | fromNow}}</div>
           </div>
           <div class="chat-body-text-wrapper-other" v-else>
             <div class="chat-body-text-wrapper-other-head">
               <img
-                :src="message.user.avatar"
+                :src="message.User? message.User.avatar: '' | emptyAvatar"
                 alt=""
                 class="chat-body-text-wrapper-other-head-image"
               />
@@ -36,7 +36,7 @@
             <div class="chat-body-text-wrapper-other-body">
               <div class="chat-body-text-wrapper-other-body-name"></div>
               <div class="chat-body-text-wrapper-other-body-moment">
-                3月19日 下午4:21
+                {{message.createdAt | fromNow}}
               </div>
             </div>
           </div>
@@ -66,11 +66,12 @@
 
 <script>
 import { mapGetters } from "vuex";
-import { imageFilter } from '../utils/mixins'
+import { imageFilter, timeFilter } from '../utils/mixins'
+import { messageFeature } from '../utils/socket'
 
 export default {
   name: "PublicRoom",
-  mixins: [ imageFilter ],
+  mixins: [ imageFilter, timeFilter, messageFeature ],
   props: {
     messages: {
       type: Array,
@@ -87,12 +88,16 @@ export default {
   methods: {
     sendMessage() {
       if (!this.message.trim()) return;
-      this.$socket.emit("sendMessage", {
+      const messages = {
         message: this.message,
         roomName: "public",
         UserId: this.getCurrentUser.id,
-        user: this.getCurrentUser,
-      });
+        User: this.getCurrentUser,
+        createdAt: new Date(),
+        type: 'message'
+      }
+      this.$socket.emit("sendMessage", messages);
+      this.postMessage(messages)
       this.message = "";
     },
   },

@@ -1,4 +1,7 @@
 import { io } from 'socket.io-client'
+import { mapActions } from 'vuex'
+import messageAPI from '../apis/message'
+import { errorToast } from './toast'
 
 export default function socketConnect(user) {
   const { id, name, account, avatar } = user
@@ -10,4 +13,38 @@ export default function socketConnect(user) {
       resolve(socket)
     })
   })
+}
+
+export const messageFeature = {
+  methods: {
+    ...mapActions(['setRoomUser', 'newMessage','setPublicMessage', 'setPrivateMessage']),
+    async postMessage(message) {
+      try {
+        const response = await messageAPI.postMessage(message)
+        console.log(response)
+      } catch (error) {
+        console.log(error)
+        errorToast.fire({
+          title: error.message
+        })
+      }
+    },
+    async fetchPublicMessage() {
+      try {
+        const { data, statusText } = await messageAPI.getPublicMessage()
+        if (statusText !== 'OK') {
+          errorToast.fire({
+            title: data.message
+          })
+          return
+        }
+        this.setPublicMessage(data.messages)
+      } catch (error) {
+        errorToast.fire({
+          title: error.message
+        })
+      }
+    },
+
+  }
 }

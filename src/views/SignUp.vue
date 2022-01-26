@@ -81,11 +81,13 @@ export default {
           errorToast.fire({
             title: "請確認所有欄位皆已填寫",
           });
+          return
         }
         if (this.password !== this.checkPassword) {
           errorToast.fire({
             title: "兩次密碼輸入不一致",
           });
+          return
         }
         const { data } = await authorizationAPI.signUp({
           name: this.name,

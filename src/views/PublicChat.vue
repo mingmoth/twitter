@@ -17,7 +17,7 @@
         </div>
       </div>
       <div class="chat-body">
-        <PublicRoom :messages="publicMessage"/>
+        <PublicRoom :messages="getPublicMessage"/>
       </div>
     </div>
   </div>
@@ -25,19 +25,21 @@
 
 <script>
 import { mapGetters } from 'vuex'
+import { messageFeature } from '../utils/socket'
 
 import Sidebar from '../components/Sidebar.vue'
 import PublicRoom from '../components/PublicRoom.vue'
 export default {
   name: 'PublicChat',
+  mixins: [ messageFeature ],
   components: {
     Sidebar, PublicRoom
   },
   data() {
     return {
       roomName: 'public',
-      publicMessage: [],
       onlineUser: [],
+      roomUser: [],
     }
   },
   sockets: {
@@ -45,29 +47,41 @@ export default {
       console.log('socket connect')
     },
     newMessage(data) {
-      this.publicMessage.push(data)
-      console.log(this.publicMessage)
+      this.getPublicMessage.push(data)
+      console.log(this.getPublicMessage)
     },
-    login(data) {
-      // console.log(data)
-      const user = data.user.name
-      this.onlineUser.push(user)
-      this.publicMessage.push(data)
-      console.log(this.onlineUser)
-    }
+    join(data) {
+      const user = data.user
+      this.roomUser.push(user)
+      this.getPublicMessage.push(data)
+      // this.postMessage({
+      //   ...data,
+      //   type: 'announce'
+      // })
+      console.log(data)
+    },
+    leave(data) {
+      const leaveUser = data.user
+      this.roomUser = this.roomUser.filter(user => user.id !== leaveUser.id),
+      this.getPublicMessage.push(data)
+      // this.postMessage({
+      //   ...data,
+      //   type: 'announce'
+      // })
+    },
   },
   created() {
+    this.fetchPublicMessage()
     this.$socket.emit('joinRoom', { user: this.getCurrentUser, roomName: this.roomName })
   },
   mounted() {
     this.$socket.open()
   },
   beforeDestroy() {
-    this.$socket.emit("leaveRoom", { roomName: this.roomName });
-    console.log("left Public");
+    this.$socket.emit("leaveRoom", { user: this.getCurrentUser, roomName: this.roomName });
   },
   computed: {
-    ...mapGetters(['getCurrentUser'])
+    ...mapGetters(['getCurrentUser', 'getPublicMessage'])
   }
 }
 </script>
