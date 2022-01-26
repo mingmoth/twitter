@@ -40,11 +40,13 @@
 <script>
 import { mapGetters } from 'vuex'
 import { userFeature, imageFilter } from '../utils/mixins'
+import { messageFeature } from '../utils/socket'
+
 export default {
   name: 'MessageModal',
-  mixins: [ userFeature, imageFilter ],
+  mixins: [ userFeature, imageFilter, messageFeature ],
   computed: {
-    ...mapGetters(['getPopular'])
+    ...mapGetters(['getPopular', "getCurrentUser"])
   },
   created() {
     this.fetchPopular()
@@ -52,6 +54,9 @@ export default {
   methods: {
     selectUser(user) {
       this.$store.dispatch('setMessagedUser', user)
+      const roomName = this.createRoomName(user.id, this.getCurrentUser.id)
+      this.fetchPrivateMessage(roomName)
+      console.log(roomName)
     }
   },
 }

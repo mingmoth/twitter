@@ -27,6 +27,7 @@ export const messageFeature = {
           })
           return
         }
+        console.log(data)
       } catch (error) {
         console.log(error)
         errorToast.fire({
@@ -50,6 +51,28 @@ export const messageFeature = {
         })
       }
     },
-
+    async fetchPrivateMessage(roomName) {
+      try {
+        const { data, statusText } = await messageAPI.getPrivateMessage(roomName)
+        if (statusText !== 'OK') {
+          errorToast.fire({
+            title: data.message
+          })
+          return
+        }
+        this.setPrivateMessage(data.messages)
+        console.log(data.messages)
+      } catch (error) {
+        console.log(error)
+        errorToast.fire({
+          title: error.message
+        })
+      }
+    },
+    createRoomName(a, b) {
+      let array = [ a, b ]
+      array.sort((a, b) => a - b)
+      return array.join('-')
+    }
   }
 }

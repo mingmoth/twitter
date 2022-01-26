@@ -7,5 +7,7 @@ export default {
   getPublicMessage() {
     return apiHelper.get('/messages/public')
   },
-  getPrivateMessage() {},
+  getPrivateMessage(roomName) {
+    return apiHelper.get(`/messages/${roomName}`)
+  },
 }

@@ -20,33 +20,30 @@
         </div>
       </div>
       <div class="chat-body-text">
-        <div class="chat-body-text-wrapper">
-          <div class="chat-body-text-wrapper-other">
+        <div class="chat-body-text-wrapper" v-for="message in getPriavateMessage" :key="message.id">
+          <div class="chat-body-text-wrapper-user" v-if="message.UserId === getCurrentUser.id">
+            <div class="chat-body-text-wrapper-user-text">
+              {{message.message}}
+            </div>
+            <div class="chat-body-text-wrapper-user-moment">{{message.createdAt | fromNow}}</div>
+          </div>
+          <div class="chat-body-text-wrapper-other" v-else>
             <div class="chat-body-text-wrapper-other-head">
               <img
-                src="../../public/images/ac logo.png"
+                :src="message.User ? message.User.avatar : '' | emptyAvatar"
                 alt=""
                 class="chat-body-text-wrapper-other-head-image"
               />
               <div class="chat-body-text-wrapper-other-head-text">
-                Amet minim mollit non deserunt ullamco est sit aliqua dolor do
-                amet sint.
+                {{message.message}}
               </div>
             </div>
             <div class="chat-body-text-wrapper-other-body">
               <div class="chat-body-text-wrapper-other-body-name"></div>
               <div class="chat-body-text-wrapper-other-body-moment">
-                3月19日 下午4:21
+                {{message.createdAt | fromNow}}
               </div>
             </div>
-          </div>
-          <div class="chat-body-text-wrapper-user">
-            <div class="chat-body-text-wrapper-user-text">
-              Nulla Lorem mollit cupidatat irure. Laborum magna nulla duis
-              ullamco cillum dolor. Voluptate exercitation incididunt aliquip
-              deserunt reprehenderit elit laborum.
-            </div>
-            <div class="chat-body-text-wrapper-user-moment">下午6:08</div>
           </div>
         </div>
       </div>
@@ -55,11 +52,14 @@
           type="text"
           class="chat-body-foot-input"
           placeholder="輸入訊息..."
+          v-model="text"
+          @keydown.enter.prevent="sendMessage(getMessagedUser.id)"
         />
         <img
           src="../../public/images/icon_send.png"
           alt=""
           class="chat-body-foot-image"
+          @click.stop.prevent="sendMessage(getMessagedUser.id)"
         />
       </form>
     </div>
@@ -68,10 +68,31 @@
 
 <script>
 import { mapGetters } from "vuex";
+import { imageFilter, timeFilter } from '../utils/mixins'
+import { messageFeature } from '../utils/socket'
 export default {
   name: "PrivateRoom",
+  mixins: [ imageFilter, timeFilter, messageFeature ],
   computed: {
-    ...mapGetters(["getMessagedUser"]),
+    ...mapGetters([ "getCurrentUser", "getMessagedUser", "getPriavateMessage"]),
+  },
+  data() {
+    return {
+      text: ''
+    }
+  },
+  methods: {
+    sendMessage(userId) {
+      if(!this.text.trim()) return
+      const roomName = this.createRoomName(userId, this.getCurrentUser.id)
+      const messages = {
+        message: this.text,
+        type: 'message',
+        roomName: roomName,
+      }
+      this.postMessage(messages)
+      this.text = ''
+    },
   },
 };
 </script>
