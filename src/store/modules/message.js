@@ -32,10 +32,10 @@ const mutations = {
     state.roomUser = user
   },
   createMessage(state, message) {
-    if(message.roomName === 'public') {
-      state.publicMessage = state.publicMessage.push(message)
+    if (message.roomName === 'public') {
+      state.publicMessage = state.publicMessage.concat(message)
     } else {
-      state.privateMessage = state.privateMessage.push(message)
+      state.privateMessage = state.privateMessage.concat(message)
     }
   },
   getPublicMessage(state, message) {

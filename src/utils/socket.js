@@ -20,8 +20,13 @@ export const messageFeature = {
     ...mapActions(['setRoomUser', 'newMessage','setPublicMessage', 'setPrivateMessage']),
     async postMessage(message) {
       try {
-        const response = await messageAPI.postMessage(message)
-        console.log(response)
+        const { data, statusText } = await messageAPI.postMessage(message)
+        if (statusText !== 'OK') {
+          errorToast.fire({
+            title: data.message
+          })
+          return
+        }
       } catch (error) {
         console.log(error)
         errorToast.fire({

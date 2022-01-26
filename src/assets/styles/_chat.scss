@@ -46,6 +46,7 @@
           height: 50px;
           border-radius: 50%;
           margin-right: 10px;
+          object-fit: cover;
         }
         &-name {
           font-size: 15px;
@@ -53,6 +54,9 @@
           color: var(--text-content);
           text-decoration: none;
           margin-right: 5px;
+          &:hover {
+            text-decoration: underline;
+          }
         }
         &-account {
           font-size: 15px;

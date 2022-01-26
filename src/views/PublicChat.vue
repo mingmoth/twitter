@@ -6,13 +6,13 @@
     <div class="chat-container">
       <div class="chat-head">
         <div class="chat-head-header">
-          <div class="chat-head-header-title">上線使用者<span>()</span></div>
+          <div class="chat-head-header-title">上線使用者<span>({{roomUser.length}})</span></div>
         </div>
         <div class="chat-head-users">
-          <div class="chat-head-user">
-            <img src="../../public/images/ac logo.png" alt="" class="chat-head-user-avatar">
-            <router-link :to="{ name: 'user-tweets', params: { id: 2 }}" class="chat-head-user-name">Apple</router-link>
-            <router-link :to="{ name: 'user-tweets', params: { id: 2 }}" class="chat-head-user-account">@apple</router-link>
+          <div class="chat-head-user" v-for="user in roomUser" :key="user.id">
+            <img :src="user.avatar | emptyAvatar" alt="" class="chat-head-user-avatar">
+            <router-link :to="{ name: 'user-tweets', params: { id: user.id }}" class="chat-head-user-name">{{user.name}}</router-link>
+            <router-link :to="{ name: 'user-tweets', params: { id: user.id }}" class="chat-head-user-account">@{{user.account}}</router-link>
           </div>
         </div>
       </div>
@@ -25,20 +25,20 @@
 
 <script>
 import { mapGetters } from 'vuex'
+import { imageFilter } from '../utils/mixins'
 import { messageFeature } from '../utils/socket'
 
 import Sidebar from '../components/Sidebar.vue'
 import PublicRoom from '../components/PublicRoom.vue'
 export default {
   name: 'PublicChat',
-  mixins: [ messageFeature ],
+  mixins: [ imageFilter, messageFeature ],
   components: {
     Sidebar, PublicRoom
   },
   data() {
     return {
       roomName: 'public',
-      onlineUser: [],
       roomUser: [],
     }
   },
@@ -51,24 +51,14 @@ export default {
       console.log(this.getPublicMessage)
     },
     join(data) {
-      const user = data.user
-      this.roomUser.push(user)
-      this.getPublicMessage.push(data)
-      // this.postMessage({
-      //   ...data,
-      //   type: 'announce'
-      // })
-      console.log(data)
+      this.$store.dispatch('newMessage', data)
     },
     leave(data) {
-      const leaveUser = data.user
-      this.roomUser = this.roomUser.filter(user => user.id !== leaveUser.id),
-      this.getPublicMessage.push(data)
-      // this.postMessage({
-      //   ...data,
-      //   type: 'announce'
-      // })
+      this.$store.dispatch('newMessage', data)
     },
+    onlineUser(data) {
+      this.roomUser = data.filter(user => user.id > 0)
+    }
   },
   created() {
     this.fetchPublicMessage()
@@ -81,7 +71,7 @@ export default {
     this.$socket.emit("leaveRoom", { user: this.getCurrentUser, roomName: this.roomName });
   },
   computed: {
-    ...mapGetters(['getCurrentUser', 'getPublicMessage'])
+    ...mapGetters(['getCurrentUser', 'getRoomUser','getPublicMessage'])
   }
 }
 </script>

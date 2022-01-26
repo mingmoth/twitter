@@ -1,7 +1,7 @@
 <template>
   <div>
     <div class="chat-body-header">公開聊天室</div>
-    <div class="chat-body-text">
+    <div class="chat-body-text" ref="messages">
       <div
         class="chat-body-text-wrapper"
         v-for="message in messages"
@@ -82,6 +82,9 @@ export default {
       message: "",
     };
   },
+  updated() {
+    this.scrollDown()
+  },
   computed: {
     ...mapGetters(["getCurrentUser"]),
   },
@@ -100,6 +103,9 @@ export default {
       this.postMessage(messages)
       this.message = "";
     },
+    scrollDown() {
+      this.$refs.messages.scrollTop = this.$refs.messages.scrollHeight
+    }
   },
 };
 </script>
