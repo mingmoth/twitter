@@ -1,8 +1,26 @@
 <template>
   <div>
-    <div class="chat-body-header">公開聊天室 <span class="chat-body-header-account">@</span></div>
-    <div class="chat-body-text">
-      <div class="chat-body-text-wrapper">
+    <div class="chat-empty" v-if="!getMessagedUser.name">
+      <div class="chat-unselect">
+        <div class="chat-unselect-title">選擇一位聊天對象吧</div>
+        <button
+          class="btn-unselect"
+          data-bs-toggle="modal"
+          data-bs-target="#new-message-select"
+        >
+          挑選
+        </button>
+      </div>
+    </div>
+    <div v-else>
+      <div class="chat-body-header">
+        <div class="chat-body-header-name">{{ getMessagedUser.name }}</div>
+        <div class="chat-body-header-account">
+          @ {{ getMessagedUser.account }}
+        </div>
+      </div>
+      <div class="chat-body-text">
+        <div class="chat-body-text-wrapper">
           <div class="chat-body-text-wrapper-other">
             <div class="chat-body-text-wrapper-other-head">
               <img
@@ -22,8 +40,6 @@
               </div>
             </div>
           </div>
-        </div>
-        <div class="chat-body-text-wrapper">
           <div class="chat-body-text-wrapper-user">
             <div class="chat-body-text-wrapper-user-text">
               Nulla Lorem mollit cupidatat irure. Laborum magna nulla duis
@@ -33,17 +49,30 @@
             <div class="chat-body-text-wrapper-user-moment">下午6:08</div>
           </div>
         </div>
+      </div>
+      <form class="chat-body-foot">
+        <input
+          type="text"
+          class="chat-body-foot-input"
+          placeholder="輸入訊息..."
+        />
+        <img
+          src="../../public/images/icon_send.png"
+          alt=""
+          class="chat-body-foot-image"
+        />
+      </form>
     </div>
-    <form class="chat-body-foot">
-      <input type="text" class="chat-body-foot-input" placeholder="輸入訊息...">
-      <img src="../../public/images/icon_send.png" alt="" class="chat-body-foot-image">
-    </form>
   </div>
 </template>
 
 <script>
+import { mapGetters } from "vuex";
 export default {
-  name: "PublicRoom",
+  name: "PrivateRoom",
+  computed: {
+    ...mapGetters(["getMessagedUser"]),
+  },
 };
 </script>
 

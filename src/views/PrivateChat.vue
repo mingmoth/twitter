@@ -7,6 +7,12 @@
       <div class="chat-head">
         <div class="chat-head-header">
           <div class="chat-head-header-title">訊息</div>
+          <img 
+            src="../../public/images/icon_newMessege.png" 
+            alt="" 
+            class="chat-head-header-message"
+            data-bs-toggle="modal"
+            data-bs-target="#new-message-select">
         </div>
         <div class="chat-head-users">
           <div class="chat-head-user">
@@ -37,17 +43,27 @@
         <PrivateRoom />
       </div>
     </div>
+    <MessageModal />
   </div>
 </template>
 
 <script>
+import { mapGetters } from 'vuex'
+
 import Sidebar from "../components/Sidebar.vue";
 import PrivateRoom from "../components/PrivateRoom.vue";
+import MessageModal from '../components/MessageModal.vue'
 export default {
   name: "PrivateChat",
   components: {
     Sidebar,
     PrivateRoom,
+    MessageModal,
   },
+  sockets: {},
+  computed: {
+    ...mapGetters(['getMessagedUser'])
+  },
+
 };
 </script>

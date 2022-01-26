@@ -1,13 +1,13 @@
 const state = {
   onlineUser: [],
-  roomUser: [],
+  messagedUser: {},
   publicMessage: [],
   privateMessage: [],
 }
 
 const getters = {
   getOnlineUser: state => state.onlineUser,
-  getRoomUser: state => state.roomUser,
+  getMessagedUser: state => state.messagedUser,
   getPublicMessage: state => state.publicMessage,
   getPriavateMessage: state => state.privateMessage
 }
@@ -18,6 +18,9 @@ const actions = {
   },
   newMessage({ commit }, message) {
     commit('createMessage', message)
+  },
+  setMessagedUser({ commit }, user) {
+    commit('getMessagedUser' , user)
   },
   setPublicMessage({ commit }, message) {
     commit('getPublicMessage', message)
@@ -37,6 +40,10 @@ const mutations = {
     } else {
       state.privateMessage = state.privateMessage.concat(message)
     }
+  },
+  getMessagedUser(state, user) {
+    console.log(user)
+    state.messagedUser = user
   },
   getPublicMessage(state, message) {
     state.publicMessage = message

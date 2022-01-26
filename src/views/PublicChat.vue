@@ -71,7 +71,7 @@ export default {
     this.$socket.emit("leaveRoom", { user: this.getCurrentUser, roomName: this.roomName });
   },
   computed: {
-    ...mapGetters(['getCurrentUser', 'getRoomUser','getPublicMessage'])
+    ...mapGetters(['getCurrentUser', 'getPublicMessage'])
   }
 }
 </script>
