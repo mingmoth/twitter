@@ -42,7 +42,6 @@ const mutations = {
     }
   },
   getMessagedUser(state, user) {
-    console.log(user)
     state.messagedUser = user
   },
   getPublicMessage(state, message) {

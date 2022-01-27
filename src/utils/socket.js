@@ -27,7 +27,6 @@ export const messageFeature = {
           })
           return
         }
-        console.log(data)
       } catch (error) {
         console.log(error)
         errorToast.fire({
@@ -61,7 +60,6 @@ export const messageFeature = {
           return
         }
         this.setPrivateMessage(data.messages)
-        console.log(data.messages)
       } catch (error) {
         console.log(error)
         errorToast.fire({

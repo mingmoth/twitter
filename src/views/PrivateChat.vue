@@ -64,6 +64,9 @@ export default {
   computed: {
     ...mapGetters(['getMessagedUser'])
   },
+  mounted() {
+    this.$socket.open()
+  },
 
 };
 </script>

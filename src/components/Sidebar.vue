@@ -40,12 +40,12 @@
       </li>
       <li>
         <router-link to="/messages" class="side-option">
-          <img src="../../public/images/message.png" alt="" class="icon" id="message"/>
+          <img src="../../public/images/icon_newMessege.png" alt="" class="icon" id="message-p"/>
           <img
-            src="../../public/images/message_hover.png"
+            src="../../public/images/icon_newMessage_active.png"
             alt=""
             class="icon-active"
-            id="message"
+            id="message-p"
           />
           <span>私人訊息</span>
         </router-link>

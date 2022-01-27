@@ -34,9 +34,7 @@
     &-users {
       height: calc( 100vh - 55px );
       overflow-y: auto;
-      &::-webkit-scrollbar {
-        display: none;
-      }
+       
       @include breakpoint(pad-portrait) {
         width: 100%;
         height: calc(40vh - 55px);
@@ -129,9 +127,9 @@
       &> :first-child {
         margin-top: auto;
       }
-      // &::-webkit-scrollbar {
-      //   display: none;
-      // }
+      &::-webkit-scrollbar {
+        display: none;
+      }
       @include breakpoint(pad-portrait) {
         height: calc( 60vh - 110px);
       }

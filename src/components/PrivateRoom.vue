@@ -19,7 +19,7 @@
           @ {{ getMessagedUser.account }}
         </div>
       </div>
-      <div class="chat-body-text">
+      <div class="chat-body-text" ref="message">
         <div class="chat-body-text-wrapper" v-for="message in getPriavateMessage" :key="message.id">
           <div class="chat-body-text-wrapper-user" v-if="message.UserId === getCurrentUser.id">
             <div class="chat-body-text-wrapper-user-text">
@@ -76,23 +76,54 @@ export default {
   computed: {
     ...mapGetters([ "getCurrentUser", "getMessagedUser", "getPriavateMessage"]),
   },
+  updated() {
+    this.scrollDown()
+  },
   data() {
     return {
       text: ''
+    }
+  },
+  sockets: {
+    join() {
+      console.log('join')
+    },
+    newMessage(data) {
+      console.log('newMessage')
+      console.log(data.roomName)
+      this.getPriavateMessage.push(data)
+      console.log(this.getPriavateMessage)
+    },
+  },
+  watch: {
+    getMessagedUser() {
+      if(this.getMessagedUser.name) {
+        const roomName = this.createRoomName(this.getMessagedUser.id, this.getCurrentUser.id)
+        this.$socket.emit('joinRoom', { user: this.getCurrentUser, roomName: roomName})
+      }
     }
   },
   methods: {
     sendMessage(userId) {
       if(!this.text.trim()) return
       const roomName = this.createRoomName(userId, this.getCurrentUser.id)
+      console.log(roomName)
       const messages = {
         message: this.text,
-        type: 'message',
         roomName: roomName,
+        User: this.getCurrentUser,
+        UserId: this.getCurrentUser.id,
+        createdAt: new Date(),
+        type: 'message',
       }
+      this.$socket.emit('sendMessage', messages)
       this.postMessage(messages)
+      this.$socket
       this.text = ''
     },
+    scrollDown() {
+      this.$refs.message.scrollTop = this.$refs.message.scrollHeight
+    }
   },
 };
 </script>
