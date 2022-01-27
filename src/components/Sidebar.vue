@@ -39,7 +39,7 @@
         </router-link>
       </li>
       <li>
-        <router-link to="/messages" class="side-option">
+        <router-link :to="{ name: 'private-chat', params: { id: getCurrentUser.id }}" class="side-option">
           <img src="../../public/images/icon_newMessege.png" alt="" class="icon" id="message-p"/>
           <img
             src="../../public/images/icon_newMessage_active.png"

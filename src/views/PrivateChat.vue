@@ -15,28 +15,7 @@
             data-bs-target="#new-message-select">
         </div>
         <div class="chat-head-users">
-          <div class="chat-head-user">
-            <img
-              src="../../public/images/ac logo.png"
-              alt=""
-              class="chat-head-user-avatar"
-            />
-            <div class="chat-head-user-head">
-              <router-link
-                :to="{ name: 'user-tweets', params: { id: 2 } }"
-                class="chat-head-user-name"
-                >Apple</router-link
-              >
-              <router-link
-                :to="{ name: 'user-tweets', params: { id: 2 } }"
-                class="chat-head-user-account"
-                >@apple</router-link
-              >
-              <a class="chat-head-user-moment">5秒</a>
-              <div class="chat-head-user-intro">Nulla Lorem mollit cupidatat irure....</div>
-            </div>
-            
-          </div>
+          <MessageUser v-for="room in getMessagedUsers" :key="room.id" :room="room"/>
         </div>
       </div>
       <div class="chat-body">
@@ -49,20 +28,27 @@
 
 <script>
 import { mapGetters } from 'vuex'
+import { messageFeature } from '../utils/socket'
 
 import Sidebar from "../components/Sidebar.vue";
+import MessageUser from '../components/MessageUser.vue'
 import PrivateRoom from "../components/PrivateRoom.vue";
 import MessageModal from '../components/MessageModal.vue'
 export default {
   name: "PrivateChat",
+  mixins: [ messageFeature ],
   components: {
     Sidebar,
+    MessageUser,
     PrivateRoom,
     MessageModal,
   },
   sockets: {},
   computed: {
-    ...mapGetters(['getMessagedUser'])
+    ...mapGetters(['getMessagedUser', 'getCurrentUser', 'getMessagedUsers'])
+  },
+  created() {
+    this.fetchMessagedUsers()
   },
   mounted() {
     this.$socket.open()

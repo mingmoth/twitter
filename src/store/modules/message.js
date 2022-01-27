@@ -1,12 +1,12 @@
 const state = {
-  onlineUser: [],
+  messagedUsers: [],
   messagedUser: {},
   publicMessage: [],
   privateMessage: [],
 }
 
 const getters = {
-  getOnlineUser: state => state.onlineUser,
+  getMessagedUsers: state => state.messagedUsers,
   getMessagedUser: state => state.messagedUser,
   getPublicMessage: state => state.publicMessage,
   getPriavateMessage: state => state.privateMessage
@@ -18,6 +18,9 @@ const actions = {
   },
   newMessage({ commit }, message) {
     commit('createMessage', message)
+  },
+  setMessagedUsers({ commit }, users) {
+    commit('getMessagedUsers' , users)
   },
   setMessagedUser({ commit }, user) {
     commit('getMessagedUser' , user)
@@ -40,6 +43,9 @@ const mutations = {
     } else {
       state.privateMessage = state.privateMessage.concat(message)
     }
+  }, 
+  getMessagedUsers(state, users) {
+    state.messagedUsers = users
   },
   getMessagedUser(state, user) {
     state.messagedUser = user

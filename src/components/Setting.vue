@@ -120,9 +120,6 @@ export default {
           title: '兩次密碼輸入不一致'
         })
       }
-      // const form = e.target;
-      // const formData = new FormData(form);
-      // console.log(formData)
       const form = {
         account: this.user.account,
         name: this.user.name,

@@ -81,7 +81,6 @@ const actions = {
     commit('removeFollowings', followId)
   },
   toggleUserProfile({ commit }) {
-    console.log('toggle')
     commit('toggleUserFollow')
   },
   likeUserTweet({ commit }, tweetId) {
@@ -198,7 +197,6 @@ const mutations = {
     })
   },
   addFollowings(state, follow) {
-    console.log(follow.isFollowed)
     state.userFollowings = state.userFollowings.concat(follow)
     state.userProfile.Followings = state.userProfile.Followings.concat(follow)
   },

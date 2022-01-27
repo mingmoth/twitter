@@ -74,7 +74,6 @@ export default {
       this.removeTweetLike(tweetId, userId)
     },
     getReplyTweet(tweetId) {
-      console.log(tweetId)
       this.setTweetModal(tweetId)
     },
   },

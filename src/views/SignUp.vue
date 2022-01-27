@@ -96,7 +96,6 @@ export default {
           password: this.password,
           checkPassword: this.checkPassword,
         });
-        console.log(data)
         if (data.status !== "200") {
           throw new Error(data.messages);
         }

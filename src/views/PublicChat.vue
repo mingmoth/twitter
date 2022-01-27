@@ -48,7 +48,6 @@ export default {
     },
     newMessage(data) {
       this.getPublicMessage.push(data)
-      console.log(this.getPublicMessage)
     },
     join(data) {
       this.$store.dispatch('newMessage', data)

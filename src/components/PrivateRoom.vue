@@ -89,10 +89,7 @@ export default {
       console.log('join')
     },
     newMessage(data) {
-      console.log('newMessage')
-      console.log(data.roomName)
       this.getPriavateMessage.push(data)
-      console.log(this.getPriavateMessage)
     },
   },
   watch: {
@@ -107,7 +104,6 @@ export default {
     sendMessage(userId) {
       if(!this.text.trim()) return
       const roomName = this.createRoomName(userId, this.getCurrentUser.id)
-      console.log(roomName)
       const messages = {
         message: this.text,
         roomName: roomName,

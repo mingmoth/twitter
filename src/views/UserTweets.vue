@@ -34,7 +34,6 @@ export default {
   methods: {
     updateUser() {
       eventBus.$on("updateUser", () => {
-        console.log('event')
         const { id: userId } = this.$route.params;
         this.fetchUserTweets(userId)
       });

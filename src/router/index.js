@@ -46,7 +46,7 @@ const router = new VueRouter({
       component: () => import('../views/PublicChat.vue')
     },
     {
-      path: '/messages',
+      path: '/messages/:id',
       name: 'private-chat',
       component: () => import('../views/PrivateChat.vue')
     },

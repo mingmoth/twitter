@@ -17,7 +17,7 @@ export default function socketConnect(user) {
 
 export const messageFeature = {
   methods: {
-    ...mapActions(['setRoomUser', 'newMessage','setPublicMessage', 'setPrivateMessage']),
+    ...mapActions(['setRoomUser', 'newMessage', 'setPublicMessage', 'setPrivateMessage', 'setMessagedUsers']),
     async postMessage(message) {
       try {
         const { data, statusText } = await messageAPI.postMessage(message)
@@ -67,10 +67,32 @@ export const messageFeature = {
         })
       }
     },
+    async fetchMessagedUsers() {
+      try {
+        const { data, statusText } = await messageAPI.getMessagedUsers()
+        if (statusText !== 'OK') {
+          errorToast.fire({
+            title: data.message
+          })
+          return
+        }
+        this.setMessagedUsers(data.messages)
+      } catch (error) {
+        console.log(error)
+        errorToast.fire({
+          title: error.message
+        })
+      }
+    },
     createRoomName(a, b) {
       let array = [ a, b ]
       array.sort((a, b) => a - b)
       return array.join('-')
+    },
+    getMessageTarget(a, b) {
+      let array = a.split('-')
+      array.splice(array.indexOf(b), 1)
+      return Number(array)
     }
   }
 }
