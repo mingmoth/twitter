@@ -78,6 +78,7 @@ export default {
   },
   updated() {
     this.scrollDown()
+    this.fetchMessagedUsers()
   },
   data() {
     return {

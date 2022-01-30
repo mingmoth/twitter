@@ -4,7 +4,7 @@
     <div class="chat-body-text" ref="messages">
       <div
         class="chat-body-text-wrapper"
-        v-for="message in messages"
+        v-for="message in getPublicMessage"
         :key="message.id"
       >
         <div
@@ -82,11 +82,14 @@ export default {
       message: "",
     };
   },
+  created() {
+    this.fetchPublicMessage()
+  },
   updated() {
     this.scrollDown()
   },
   computed: {
-    ...mapGetters(["getCurrentUser"]),
+    ...mapGetters(['getCurrentUser', 'getPublicMessage'])
   },
   methods: {
     sendMessage() {

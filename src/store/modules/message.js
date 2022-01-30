@@ -16,7 +16,7 @@ const actions = {
   setRoomUser({ commit }, user) {
     commit('getRoomUser', user)
   },
-  newMessage({ commit }, message) {
+  postMessage({ commit }, message) {
     commit('createMessage', message)
   },
   setMessagedUsers({ commit }, users) {
@@ -40,12 +40,18 @@ const mutations = {
   createMessage(state, message) {
     if (message.roomName === 'public') {
       state.publicMessage = state.publicMessage.concat(message)
-    } else {
+    } else { 
       state.privateMessage = state.privateMessage.concat(message)
     }
   }, 
-  getMessagedUsers(state, users) {
-    state.messagedUsers = users
+  getMessagedUsers(state, latestMessages) {
+    const { messages, users} = latestMessages
+    state.messagedUsers = messages.map((e, i) => {
+      return e = {
+        ...e,
+        User: users[i]
+      }
+    })
   },
   getMessagedUser(state, user) {
     state.messagedUser = user

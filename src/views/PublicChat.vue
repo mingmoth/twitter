@@ -17,7 +17,7 @@
         </div>
       </div>
       <div class="chat-body">
-        <PublicRoom :messages="getPublicMessage"/>
+        <PublicRoom />
       </div>
     </div>
   </div>
@@ -47,20 +47,19 @@ export default {
       console.log('socket connect')
     },
     newMessage(data) {
-      this.getPublicMessage.push(data)
+      this.$store.dispatch('postMessage', data)
     },
     join(data) {
-      this.$store.dispatch('newMessage', data)
+      this.$store.dispatch('postMessage', data)
     },
     leave(data) {
-      this.$store.dispatch('newMessage', data)
+      this.$store.dispatch('postMessage', data)
     },
     onlineUser(data) {
       this.roomUser = data.filter(user => user.id > 0)
     }
   },
   created() {
-    this.fetchPublicMessage()
     this.$socket.emit('joinRoom', { user: this.getCurrentUser, roomName: this.roomName })
   },
   mounted() {
@@ -70,7 +69,7 @@ export default {
     this.$socket.emit("leaveRoom", { user: this.getCurrentUser, roomName: this.roomName });
   },
   computed: {
-    ...mapGetters(['getCurrentUser', 'getPublicMessage'])
+    ...mapGetters(['getCurrentUser'])
   }
 }
 </script>

@@ -15,7 +15,7 @@
             data-bs-target="#new-message-select">
         </div>
         <div class="chat-head-users">
-          <MessageUser v-for="room in getMessagedUsers" :key="room.id" :room="room"/>
+          <MessageUser v-for="user in getMessagedUsers" :key="user.id" :user="user"/>
         </div>
       </div>
       <div class="chat-body">
@@ -53,6 +53,5 @@ export default {
   mounted() {
     this.$socket.open()
   },
-
 };
 </script>
