@@ -114,8 +114,7 @@ export default {
         type: 'message',
       }
       this.$socket.emit('sendMessage', messages)
-      this.postMessage(messages)
-      this.$socket
+      this.postMessage(messages, this.getMessagedUser)
       this.text = ''
     },
     scrollDown() {

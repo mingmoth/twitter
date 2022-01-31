@@ -22,6 +22,9 @@ const actions = {
   setMessagedUsers({ commit }, users) {
     commit('getMessagedUsers' , users)
   },
+  toggleMessagedUsers({ commit }, message) {
+    commit('updateMessagedUsers', message)
+  },
   setMessagedUser({ commit }, user) {
     commit('getMessagedUser' , user)
   },
@@ -52,6 +55,16 @@ const mutations = {
         User: users[i]
       }
     })
+    state.messagedUsers.sort((a, b) => {
+      return new Date(a.createdAt) - new Date(b.createdAt)
+    }).reverse()
+  },
+  updateMessagedUsers(state, message) {
+    state.messagedUsers.filter(user => user.UserId !== message.User.id)
+    state.messagedUsers.unshift(message)
+    state.messagedUsers.sort((a, b) => {
+      return new Date(a.createdAt) - new Date(b.createdAt)
+    }).reverse()
   },
   getMessagedUser(state, user) {
     state.messagedUser = user

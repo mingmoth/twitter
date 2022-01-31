@@ -17,8 +17,8 @@ export default function socketConnect(user) {
 
 export const messageFeature = {
   methods: {
-    ...mapActions(['setRoomUser', 'postMessage', 'setPublicMessage', 'setPrivateMessage', 'setMessagedUsers']),
-    async postMessage(message) {
+    ...mapActions(['setRoomUser', 'postMessage', 'setPublicMessage', 'setPrivateMessage', 'setMessagedUsers', 'toggleMessagedUsers']),
+    async postMessage(message, messagedUser) {
       try {
         const { data, statusText } = await messageAPI.postMessage(message)
         if (statusText !== 'OK') {
@@ -27,6 +27,12 @@ export const messageFeature = {
           })
           return
         }
+        message = {
+          ...message,
+          User: messagedUser
+        }
+        console.log(message)
+        this.toggleMessagedUsers(message)
       } catch (error) {
         console.log(error)
         errorToast.fire({
