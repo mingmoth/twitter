@@ -12,8 +12,7 @@
           class="chat-head-user-name"
           >{{ user.User? user.User.name: '' }}</router-link
         >
-        <router-link
-          :to="{ name: 'user-tweets', params: { id: user.User.id } }"
+        <router-link to=""
           class="chat-head-user-account"
           >@ {{  user.User? user.User.account: '' }}</router-link
         >

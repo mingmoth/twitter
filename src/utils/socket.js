@@ -74,11 +74,12 @@ export const messageFeature = {
         })
       }
     },
-    async fetchUnreadMessages() {
+    async fetchUnreadMessages(currentUserId) {
       try {
         const { data } = await messageAPI.getUnreadMessage()
         console.log(data)
-        this.setUnreadMessage(data.messages)
+        const messages = data.messages.filter(message => message.UserId !== currentUserId)
+        this.setUnreadMessage(messages)
       } catch (error) {
         console.log(error)
         errorToast.fire({

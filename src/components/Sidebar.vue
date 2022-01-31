@@ -84,13 +84,13 @@ export default {
   name: 'Sidebar',
   mixins: [ messageFeature ],
   created() {
-    this.fetchUnreadMessages()
+    this.fetchUnreadMessages(this.getCurrentUser.id)
   },
   computed: {
     ...mapGetters(['getCurrentUser', 'getUnreadMessage'])
   },
   socket: {
-
+    
   },
   methods: {
     logout() {
