@@ -98,6 +98,7 @@ export default {
       if(this.getMessagedUser.name) {
         const roomName = this.createRoomName(this.getMessagedUser.id, this.getCurrentUser.id)
         this.$socket.emit('joinRoom', { user: this.getCurrentUser, roomName: roomName})
+        this.toggleUnreadMessage(roomName)
       }
     }
   },

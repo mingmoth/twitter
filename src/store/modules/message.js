@@ -3,13 +3,15 @@ const state = {
   messagedUser: {},
   publicMessage: [],
   privateMessage: [],
+  unreadMessage: [],
 }
 
 const getters = {
   getMessagedUsers: state => state.messagedUsers,
   getMessagedUser: state => state.messagedUser,
   getPublicMessage: state => state.publicMessage,
-  getPriavateMessage: state => state.privateMessage
+  getPriavateMessage: state => state.privateMessage,
+  getUnreadMessage: state => state.unreadMessage
 }
 
 const actions = {
@@ -33,6 +35,12 @@ const actions = {
   },
   setPrivateMessage({ commit }, message) {
     commit('getPrivateMessage', message)
+  },
+  setUnreadMessage({ commit }, message) {
+    commit('getUnreadMessage', message)
+  },
+  toggleUnreadMessageNum({ commit }, roomId) {
+    commit('updateUnreadMessage', roomId)
   }
 }
 
@@ -75,6 +83,14 @@ const mutations = {
   getPrivateMessage(state, message) {
     state.privateMessage = message
   },
+  getUnreadMessage(state, message) {
+    state.unreadMessage = message
+  },
+  updateUnreadMessage(state, roomId) {
+    console.log(roomId)
+    state.unreadMessage = state.unreadMessage.filter(message => message.roomName !== roomId)
+    console.log(state.unreadMessage)
+  }
 }
 
 export default {

@@ -48,17 +48,6 @@ export default {
   computed: {
     ...mapGetters(["getCurrentUser"]),
   },
-  // async created() {
-  //   const userId = this.getMessageTarget(
-  //     this.room.roomName,
-  //     `${this.getCurrentUser.id}`
-  //   );
-  //   const { data } = await userAPI.getUser(userId);
-  //   this.user = data.user;
-  //   const response = await messageAPI.getPrivateMessage(this.room.roomName);
-  //   this.message =
-  //     response.data.messages[Number(response.data.messages.length - 1)];
-  // },
   methods: {
     selectUser(user) {
       this.$store.dispatch("setMessagedUser", user);

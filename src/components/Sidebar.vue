@@ -47,6 +47,7 @@
             class="icon-active"
             id="message-p"
           />
+          <div v-if="getUnreadMessage.length" class="side-unread">{{getUnreadMessage.length}}</div>
           <span>私人訊息</span>
         </router-link>
       </li>
@@ -78,16 +79,24 @@
 
 <script>
 import { mapGetters } from 'vuex'
+import { messageFeature } from '../utils/socket'
 export default {
   name: 'Sidebar',
+  mixins: [ messageFeature ],
+  created() {
+    this.fetchUnreadMessages()
+  },
   computed: {
-    ...mapGetters(['getCurrentUser'])
+    ...mapGetters(['getCurrentUser', 'getUnreadMessage'])
+  },
+  socket: {
+
   },
   methods: {
     logout() {
       this.$store.commit('revokeAuthentication')
       this.$router.push('/signin')
-    },
+    }
   },
 }
 </script>

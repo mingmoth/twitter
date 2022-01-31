@@ -7,10 +7,16 @@ export default {
   getPublicMessage() {
     return apiHelper.get('/messages/public')
   },
-  getPrivateMessage(roomName) {
-    return apiHelper.get(`/messages/${roomName}`)
+  getUnreadMessage() {
+    return apiHelper.get(`/messages/unread`)
   },
   getMessagedUsers() {
     return apiHelper.get(`/messages/message`)
-  }
+  },
+  toggleUnreadMessage(roomName) {
+    return apiHelper.put(`/messages/unread/${roomName}`, null)
+  }, 
+  getPrivateMessage(roomName) {
+    return apiHelper.get(`/messages/${roomName}`)
+  },
 }

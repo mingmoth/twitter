@@ -17,7 +17,7 @@ export default function socketConnect(user) {
 
 export const messageFeature = {
   methods: {
-    ...mapActions(['setRoomUser', 'postMessage', 'setPublicMessage', 'setPrivateMessage', 'setMessagedUsers', 'toggleMessagedUsers']),
+    ...mapActions(['setRoomUser', 'postMessage', 'setPublicMessage', 'setPrivateMessage', 'setMessagedUsers', 'toggleMessagedUsers', 'setUnreadMessage', 'toggleUnreadMessageNum']),
     async postMessage(message, messagedUser) {
       try {
         const { data, statusText } = await messageAPI.postMessage(message)
@@ -72,6 +72,27 @@ export const messageFeature = {
         errorToast.fire({
           title: error.message
         })
+      }
+    },
+    async fetchUnreadMessages() {
+      try {
+        const { data } = await messageAPI.getUnreadMessage()
+        console.log(data)
+        this.setUnreadMessage(data.messages)
+      } catch (error) {
+        console.log(error)
+        errorToast.fire({
+          title: error.message
+        })
+      }
+    },
+    async toggleUnreadMessage(roomName) {
+      try {
+        const { data } = await messageAPI.toggleUnreadMessage(roomName)
+        console.log(data)
+        this.toggleUnreadMessageNum(roomName)
+      } catch (error) {
+        console.log(error)
       }
     },
     async fetchMessagedUsers() {
