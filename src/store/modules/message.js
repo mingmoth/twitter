@@ -87,7 +87,6 @@ const mutations = {
     state.unreadMessage = message
   },
   updateUnreadMessage(state, roomId) {
-    console.log(roomId)
     state.unreadMessage = state.unreadMessage.filter(message => message.roomName !== roomId)
     console.log(state.unreadMessage)
   }

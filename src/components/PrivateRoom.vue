@@ -86,11 +86,12 @@ export default {
     }
   },
   sockets: {
-    join() {
-      console.log('join')
-    },
     newMessage(data) {
-      this.getPriavateMessage.push(data)
+      const roomName = this.createRoomName(this.getMessagedUser.id, this.getCurrentUser.id)
+      if(data.roomName === roomName) {
+        this.getPriavateMessage.push(data)
+      }
+      // this.$socket.emit('getUnreadMessage', this.getCurrentUser.id)
     },
   },
   watch: {
