@@ -84,7 +84,7 @@ export default {
   name: 'Sidebar',
   mixins: [ messageFeature ],
   created() {
-    this.getUnreadMessageinSide()
+    this.getUnreadMessages()
   },
   computed: {
     ...mapGetters(['getCurrentUser', 'getUnreadMessage'])
@@ -97,7 +97,7 @@ export default {
       this.$store.dispatch('setUnreadMessage', unreadMessage)
     },
     privateMessage() {
-      this.getUnreadMessageinSide()
+      this.getUnreadMessages()
     }
   },
   methods: {
@@ -105,7 +105,7 @@ export default {
       this.$store.commit('revokeAuthentication')
       this.$router.push('/signin')
     },
-    getUnreadMessageinSide() {
+    getUnreadMessages() {
       this.$socket.emit('getUnreadMessage', this.getCurrentUser.id)
     }
   },

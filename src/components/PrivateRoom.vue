@@ -91,7 +91,6 @@ export default {
       if(data.roomName === roomName) {
         this.getPriavateMessage.push(data)
       }
-      // this.$socket.emit('getUnreadMessage', this.getCurrentUser.id)
     },
   },
   watch: {
@@ -115,9 +114,11 @@ export default {
         createdAt: new Date(),
         type: 'message',
       }
-      this.$socket.emit('sendMessage', messages)
       this.postMessage(messages, this.getMessagedUser)
+      this.$socket.emit('sendMessage', messages)
+      this.$socket.emit('getUnreadMessage', this.userId)
       this.text = ''
+      
     },
     scrollDown() {
       this.$refs.message.scrollTop = this.$refs.message.scrollHeight

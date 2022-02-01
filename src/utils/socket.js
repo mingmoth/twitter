@@ -1,19 +1,19 @@
-import { io } from 'socket.io-client'
+// import { io } from 'socket.io-client'
 import { mapActions } from 'vuex'
 import messageAPI from '../apis/message'
 import { errorToast } from './toast'
 
-export default function socketConnect(user) {
-  const { id, name, account, avatar } = user
-  const socket = io('http://localhost:3000', {
-    query: { id, name, account, avatar }
-  })
-  return new Promise((resolve) => {
-    socket.on('connect', () => {
-      resolve(socket)
-    })
-  })
-}
+// export default function socketConnect(user) {
+//   const { id, name, account, avatar } = user
+//   const socket = io('http://localhost:3000', {
+//     query: { id, name, account, avatar }
+//   })
+//   return new Promise((resolve) => {
+//     socket.on('connect', () => {
+//       resolve(socket)
+//     })
+//   })
+// }
 
 export const messageFeature = {
   methods: {
@@ -31,7 +31,6 @@ export const messageFeature = {
           ...message,
           User: messagedUser
         }
-        console.log(message)
         this.toggleMessagedUsers(message)
       } catch (error) {
         console.log(error)
