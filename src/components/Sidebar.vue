@@ -104,6 +104,7 @@ export default {
     logout() {
       this.$store.commit('revokeAuthentication')
       this.$router.push('/signin')
+      this.$socket.emit('disconnect')
     },
     getUnreadMessages() {
       this.$socket.emit('getUnreadMessage', this.getCurrentUser.id)

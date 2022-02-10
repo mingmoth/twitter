@@ -91,20 +91,35 @@ export default {
   computed: {
     ...mapGetters(['getCurrentUser', 'getPublicMessage'])
   },
+  sockets: {
+    join(data) {
+      console.log(data)
+      this.$store.dispatch('postMessage', data)
+    },
+    leave(data) {
+      console.log(data)
+      this.$store.dispatch('postMessage', data)
+    },
+    newMessage(message) {
+      this.$store.dispatch('postMessage', message)
+    }
+  },
   methods: {
     sendMessage() {
-      if (!this.message.trim()) return;
-      const messages = {
-        message: this.message,
-        roomName: "public",
-        UserId: this.getCurrentUser.id,
-        User: this.getCurrentUser,
-        createdAt: new Date(),
-        type: 'message'
+      if (!this.message.trim()) {
+        return;
       }
-      this.$socket.emit("sendMessage", messages);
-      this.postMessage(messages)
-      this.message = "";
+      let message = {
+        User: this.getCurrentUser,
+        UserId: this.getCurrentUser.id,
+        roomName: 'public',
+        message: this.message,
+        type: 'message',
+        createdAt: new Date(),
+      }
+      this.$socket.emit('sendMessage', message)
+      this.postMessage(message)
+      this.message = ''
     },
     scrollDown() {
       this.$refs.messages.scrollTop = this.$refs.messages.scrollHeight

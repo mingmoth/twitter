@@ -53,6 +53,7 @@
           class="chat-body-foot-input"
           placeholder="輸入訊息..."
           v-model="text"
+          @click.stop.prevent="toggleUnread"
           @keydown.enter.prevent="sendMessage(getMessagedUser.id)"
         />
         <img
@@ -73,52 +74,59 @@ import { messageFeature } from '../utils/socket'
 export default {
   name: "PrivateRoom",
   mixins: [ imageFilter, timeFilter, messageFeature ],
-  computed: {
-    ...mapGetters([ "getCurrentUser", "getMessagedUser", "getPriavateMessage"]),
-  },
-  updated() {
-    this.scrollDown()
-    this.fetchMessagedUsers()
-  },
   data() {
     return {
       text: ''
     }
   },
-  sockets: {
-    newMessage(data) {
-      const roomName = this.createRoomName(this.getMessagedUser.id, this.getCurrentUser.id)
-      if(data.roomName === roomName) {
-        this.getPriavateMessage.push(data)
-      }
-    },
+  created() {
+    this.scrollDown()
   },
-  watch: {
-    getMessagedUser() {
-      if(this.getMessagedUser.name) {
-        const roomName = this.createRoomName(this.getMessagedUser.id, this.getCurrentUser.id)
-        this.$socket.emit('joinRoom', { user: this.getCurrentUser, roomName: roomName})
-        this.toggleUnreadMessage(roomName)
-      }
+  updated() {
+    this.scrollDown()
+  },
+  computed: {
+    ...mapGetters([ "getCurrentUser", "getMessagedUser", "getPriavateMessage"]),
+  },
+  sockets: {
+    join(data) {
+      console.log(data)
+    },
+    newMessage(message) {
+      console.log(message)
+      this.$store.dispatch('postMessage', message)
+    },
+    privateMessage() {
+      this.fetchMessagedUsers()
     }
   },
+  // watch: {
+  //   contents: {
+  //     handler: function () {
+  //       this.fetchMessagedUsers();
+  //     },
+  //   },
+  // },
   methods: {
     sendMessage(userId) {
-      if(!this.text.trim()) return
-      const roomName = this.createRoomName(userId, this.getCurrentUser.id)
-      const messages = {
-        message: this.text,
-        roomName: roomName,
+      if (!this.text.trim()) {
+        return;
+      }
+      let message = {
         User: this.getCurrentUser,
         UserId: this.getCurrentUser.id,
-        createdAt: new Date(),
+        roomName: this.createRoomName(userId, this.getCurrentUser.id),
+        message: this.text,
         type: 'message',
+        createdAt: new Date(),
       }
-      this.postMessage(messages, this.getMessagedUser)
-      this.$socket.emit('sendMessage', messages)
-      this.$socket.emit('getUnreadMessage', this.userId)
+      this.postMessage(message)
+      this.fetchMessagedUsers()
       this.text = ''
-      
+    },
+    toggleUnread() {
+      const roomName = this.createRoomName(this.getMessagedUser.id, this.getCurrentUser.id);
+      this.toggleUnreadMessage(roomName)
     },
     scrollDown() {
       this.$refs.message.scrollTop = this.$refs.message.scrollHeight

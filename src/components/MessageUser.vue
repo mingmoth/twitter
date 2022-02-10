@@ -47,11 +47,18 @@ export default {
   computed: {
     ...mapGetters(["getCurrentUser"]),
   },
+  sockets: {
+    privateMessage() {
+      this.fetchMessagedUsers()
+    }
+  },
   methods: {
     selectUser(user) {
       this.$store.dispatch("setMessagedUser", user);
       const roomName = this.createRoomName(user.id, this.getCurrentUser.id);
+      this.$socket.emit('join', { roomName: roomName })
       this.fetchPrivateMessage(roomName);
+      this.toggleUnreadMessage(roomName)
     },
   },
 };

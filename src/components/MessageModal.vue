@@ -56,6 +56,7 @@ export default {
       this.$store.dispatch('setMessagedUser', user)
       const roomName = this.createRoomName(user.id, this.getCurrentUser.id)
       this.fetchPrivateMessage(roomName)
+      this.toggleUnreadMessage(roomName)
     }
   },
 }

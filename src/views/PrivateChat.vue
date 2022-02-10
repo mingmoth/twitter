@@ -43,15 +43,17 @@ export default {
     PrivateRoom,
     MessageModal,
   },
-  sockets: {},
-  computed: {
-    ...mapGetters(['getMessagedUser', 'getCurrentUser', 'getMessagedUsers'])
+  sockets: {
+    
   },
   created() {
     this.fetchMessagedUsers()
   },
-  mounted() {
-    this.$socket.open()
+  computed: {
+    ...mapGetters(['getMessagedUser', 'getCurrentUser', 'getMessagedUsers'])
+  },
+  watch() {
+    
   },
 };
 </script>

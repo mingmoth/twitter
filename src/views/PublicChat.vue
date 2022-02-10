@@ -42,34 +42,30 @@ export default {
       roomUser: [],
     }
   },
-  sockets: {
-    connect: function() {
-      console.log('socket connect')
-    },
-    newMessage(data) {
-      this.$store.dispatch('postMessage', data)
-    },
-    join(data) {
-      this.$store.dispatch('postMessage', data)
-    },
-    leave(data) {
-      this.$store.dispatch('postMessage', data)
-    },
-    onlineUser(data) {
-      this.roomUser = data.filter(user => user.id > 0)
-    }
-  },
   created() {
-    this.$socket.emit('joinRoom', { user: this.getCurrentUser, roomName: this.roomName })
-  },
-  mounted() {
-    this.$socket.open()
-  },
-  beforeDestroy() {
-    this.$socket.emit("leaveRoom", { user: this.getCurrentUser, roomName: this.roomName });
+    this.joinRoom()
   },
   computed: {
     ...mapGetters(['getCurrentUser'])
-  }
+  },
+  sockets: {
+    publicUser(userList) {
+      this.roomUser = userList
+    },
+    offlineUser(message) {
+      console.log(message)
+    }
+  },
+  methods: {
+    joinRoom() {
+      this.$socket.emit('join', { roomName: 'public' })
+    },
+    leaveRoom() {
+      this.$socket.emit('leave', { roomName: 'public' })
+    },
+  },
+  beforeDestroy() {
+    this.leaveRoom()
+  },
 }
 </script>
