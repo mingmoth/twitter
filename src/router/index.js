@@ -106,6 +106,11 @@ const router = new VueRouter({
       component: () => import('../views/Settings.vue')
     },
     {
+      path: '/notice',
+      name: 'notice',
+      component: () => import('../views/Notices.vue')
+    },
+    {
       path: '*',
       name: 'not-found',
       component: NotFound

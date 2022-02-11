@@ -16,14 +16,14 @@
         </router-link>
       </li>
       <li>
-        <router-link :to="{ name: 'user-tweets', params: { id: getCurrentUser.id } }" class="side-option">
-          <img src="../../public/images/user logo.png" alt="" class="icon" />
+        <router-link :to="{ name: 'notice' }" class="side-option">
+          <img src="../../public/images/notice.png" alt="" class="icon" />
           <img
-            src="../../public/images/user logo active.png"
+            src="../../public/images/notice_active.png"
             alt=""
             class="icon-active"
           />
-          <span>個人資料</span>
+          <span>通知</span>
         </router-link>
       </li>
       <li>
@@ -49,6 +49,17 @@
           />
           <div v-if="getUnreadMessage.length" class="side-unread">{{getUnreadMessage.length}}</div>
           <span>私人訊息</span>
+        </router-link>
+      </li>
+      <li>
+        <router-link :to="{ name: 'user-tweets', params: { id: getCurrentUser.id } }" class="side-option">
+          <img src="../../public/images/user logo.png" alt="" class="icon" />
+          <img
+            src="../../public/images/user logo active.png"
+            alt=""
+            class="icon-active"
+          />
+          <span>個人資料</span>
         </router-link>
       </li>
       <li>

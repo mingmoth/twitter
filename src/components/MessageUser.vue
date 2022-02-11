@@ -17,8 +17,11 @@
           >@ {{  user.User? user.User.account: '' }}</router-link
         >
         <a class="chat-head-user-moment">{{ user.createdAt | fromNow}}</a>
-        <div class="chat-head-user-intro">
-          {{ user.message}}
+        <div v-if="!user.isRead && user.UserId !== this.getCurrentUser.id" class="chat-head-user-unread">
+          {{ user.message }}
+        </div>
+        <div v-else class="chat-head-user-intro">
+          {{ user.message }}
         </div>
       </div>
     </div>
@@ -42,6 +45,7 @@ export default {
   data() {
     return {
       message: {},
+      roomName: ''
     };
   },
   computed: {

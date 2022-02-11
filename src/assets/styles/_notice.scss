@@ -1,0 +1,23 @@
+.notice {
+  padding: 10px 15px;
+  border-bottom: 1px solid var(--input-border);
+  @include breakpoint(mobile) {
+    margin-top: 0;
+  }
+  &-head {
+    margin-bottom: 5px;
+    &-avatar {
+      height: 40px;
+      width: 40px;
+      border-radius: 50%;
+      background-color: var(--input-label);
+    }
+  }
+  &-info {
+    margin-bottom: 10px;
+  }
+  &-text {
+    font-size: 15px;
+    color: var(--input-label);
+  }
+}
