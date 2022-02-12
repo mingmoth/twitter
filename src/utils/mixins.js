@@ -283,6 +283,7 @@ export const tweetFeature = {
         if (data.status !== 'success') {
           throw new Error(data.message)
         }
+        console.log(data)
         successToast.fire({
           title: data.message
         })

@@ -6,6 +6,7 @@ import user from './modules/user'
 import tweet from './modules/tweet'
 import admin from './modules/admin'
 import message from './modules/message'
+import notice from './modules/notice'
 
 Vue.use(Vuex)
 
@@ -21,6 +22,7 @@ export default new Vuex.Store({
     user,
     tweet,
     admin,
-    message
+    message,
+    notice
   }
 })

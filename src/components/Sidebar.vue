@@ -23,6 +23,7 @@
             alt=""
             class="icon-active"
           />
+          <div v-if="getUnreadNotices.length" class="side-unread">{{getUnreadNotices.length}}</div>
           <span>通知</span>
         </router-link>
       </li>
@@ -98,7 +99,7 @@ export default {
     this.getUnreadMessages()
   },
   computed: {
-    ...mapGetters(['getCurrentUser', 'getUnreadMessage'])
+    ...mapGetters(['getCurrentUser', 'getUnreadMessage', 'getUnreadNotices'])
   },
   mounted() {
     this.$socket.open();

@@ -11,12 +11,9 @@
         <img src="../../public/images/ac logo.png" alt="" class="navTop-logo" />
       </div>
       <div class="container">
-        <Notice />
-        <Notice />
-        <Notice />
+        <Notice v-for="notice in getUnreadNotices" :key="notice.id" :notice="notice"/>
       </div>
       <TweetModal />
-      <TweetReplyModal :tweet="getTweetModal" />
     </div>
     <div class="popular">
       <Popular />
@@ -28,27 +25,25 @@
 import Sidebar from "../components/Sidebar.vue";
 import Notice from '../components/Notice.vue'
 import TweetModal from "../components/TweetModal.vue";
-import TweetReplyModal from "../components/TweetReplyModal.vue";
 import Popular from "../components/Popular.vue";
 
 import { mapGetters } from "vuex";
-import { tweetFeature } from "../utils/mixins";
+import { noticeFeature } from "../utils/notice";
 
 export default {
-  name: "Notifications",
+  name: "Notices",
   components: {
     Sidebar,
     Notice,
     TweetModal,
-    TweetReplyModal,
     Popular,
   },
-  mixins: [tweetFeature],
+  mixins: [noticeFeature],
   created() {
-    this.fetchTweets();
+    this.fetchUnreadNotices();
   },
   computed: {
-    ...mapGetters(["getTweets", "getTweetModal"]),
+    ...mapGetters(["getUnreadNotices"]),
   },
 };
 </script>
