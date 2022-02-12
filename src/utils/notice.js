@@ -14,6 +14,7 @@ export const noticeFeature = {
           })
           return
         }
+        console.log(data.notices)
         this.setUnreadNotices(data.notices)
       } catch (error) {
         errorToast.fire({

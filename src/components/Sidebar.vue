@@ -92,11 +92,14 @@
 <script>
 import { mapGetters } from 'vuex'
 import { messageFeature } from '../utils/socket'
+import { noticeFeature } from "../utils/notice";
+
 export default {
   name: 'Sidebar',
-  mixins: [ messageFeature ],
+  mixins: [ messageFeature, noticeFeature ],
   created() {
     this.getUnreadMessages()
+    this.fetchUnreadNotices();
   },
   computed: {
     ...mapGetters(['getCurrentUser', 'getUnreadMessage', 'getUnreadNotices'])
