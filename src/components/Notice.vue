@@ -2,42 +2,91 @@
   <div>
     <div class="notice" v-if="notice.TweetId">
       <div class="notice-head">
-        <router-link :to="{ name: 'user', params: {id: notice.Tweet.UserId}}">
-          <img :src=" notice.Tweet.User.avatar | emptyAvatar" alt="" class="notice-head-avatar">
+        <router-link
+          :to="{ name: 'user', params: { id: notice.Tweet.UserId } }"
+        >
+          <img
+            :src="notice.Tweet.User.avatar | emptyAvatar"
+            alt=""
+            class="notice-head-avatar"
+          />
         </router-link>
       </div>
-      <div>你錯過  <span class="notice-info">{{notice.Tweet.User.name}}</span> 的新推文了嗎</div>
-      <router-link 
-        :to="{ name: 'tweet', params: { id: notice.TweetId }}"
-        class="notice-text ">{{notice.Tweet ? notice.Tweet.description : ''}} </router-link>
+      <div class="notice-info">
+        你錯過
+        <span class="notice-user">{{ notice.Tweet.User.name }}</span>
+        的新推文了嗎
+      </div>
+      <router-link
+        :to="{ name: 'tweet', params: { id: notice.TweetId } }"
+        class="notice-text"
+        >{{ notice.Tweet ? notice.Tweet.description : "" }}
+      </router-link>
     </div>
     <div class="notice" v-else-if="notice.LikeId">
       <div class="notice-head">
-        <router-link :to="{ name: 'user', params: {id: notice.Like.UserId}}">
-          <img :src=" notice.Like.User.avatar | emptyAvatar" alt="" class="notice-head-avatar">
+        <router-link :to="{ name: 'user', params: { id: notice.Like.UserId } }">
+          <img
+            :src="notice.Like.User.avatar | emptyAvatar"
+            alt=""
+            class="notice-head-avatar"
+          />
         </router-link>
       </div>
-      <div><span class="notice-info">{{notice.Like.User.name}}</span> 已喜歡 <b>{{notice.Like.Tweet.User.name}}</b> 的一則貼文</div>
-      <router-link 
-        :to="{ name: 'tweet', params: { id: notice.Like.TweetId }}"
-        class="notice-text ">{{notice.Like ? notice.Like.Tweet.description : ''}} </router-link>
+      <div class="notice-info">
+        <span class="notice-user">{{ notice.Like.User.name }}</span> 已喜歡
+        <b class="notice-user">{{ notice.Like.Tweet.User.name }}</b> 的一則貼文
+      </div>
+      <router-link
+        :to="{ name: 'tweet', params: { id: notice.Like.TweetId } }"
+        class="notice-text"
+        >{{ notice.Like ? notice.Like.Tweet.description : "" }}
+      </router-link>
+    </div>
+    <div class="notice" v-else-if="notice.ReplyId">
+      <div class="notice-head">
+        <router-link
+          :to="{ name: 'user', params: { id: notice.Reply.UserId } }"
+        >
+          <img
+            :src="notice.Reply.User.avatar | emptyAvatar"
+            alt=""
+            class="notice-head-avatar"
+          />
+        </router-link>
+      </div>
+      <div class="notice-info">
+        <span class="notice-user">{{ notice.Reply.User.name }}</span> 回覆了
+        <b class="notice-user">{{ notice.Reply.Tweet.User.name }}</b> 的一則貼文
+      </div>
+      <router-link
+        :to="{ name: 'tweet', params: { id: notice.Reply.TweetId } }"
+        class="notice-text"
+        >{{ notice.Reply ? notice.Reply.Tweet.description : "" }}
+      </router-link>
+      <div class="notice-reply">
+        <router-link
+          :to="{ name: 'tweet', params: { id: notice.Reply.TweetId } }"
+          class="notice-text"
+          >{{ notice.Reply ? notice.Reply.comment : "" }}
+        </router-link>
+      </div>
     </div>
   </div>
 </template>
 
 <script>
-import { imageFilter, timeFilter } from '../utils/mixins'
+import { imageFilter, timeFilter } from "../utils/mixins";
 export default {
-  name: 'Notice',
-  mixins: [ imageFilter, timeFilter ],
+  name: "Notice",
+  mixins: [imageFilter, timeFilter],
   props: {
     notice: {
       type: Object,
-    }
+    },
   },
   data() {
-    return {
-    }
-  }
-}
+    return {};
+  },
+};
 </script>
