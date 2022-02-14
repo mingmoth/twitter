@@ -44,6 +44,11 @@ export default {
   computed: {
     ...mapGetters(["getTweets", 'getTweetModal']),
   },
+  sockets: {
+    getUnreadNotice() {
+      this.fetchTweets();
+    },
+  },
 };
 </script>
 

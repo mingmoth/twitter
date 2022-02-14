@@ -126,6 +126,7 @@ export const userFeature = {
         this.likeUserTweet(tweetId)
         const replyload = {tweetId: tweetId, like: data.like}
         this.likeUserReply(replyload)
+        this.$socket.emit('sendNotice')
       } catch (error) {
         console.log(error)
         errorToast.fire({
@@ -283,7 +284,6 @@ export const tweetFeature = {
         if (data.status !== 'success') {
           throw new Error(data.message)
         }
-        console.log(data)
         successToast.fire({
           title: data.message
         })
@@ -299,6 +299,7 @@ export const tweetFeature = {
         } else if(this.$route.name === 'user-tweets') {
           this.pushUserTweet(newTweet)
         }
+        this.$socket.emit('sendNotice')
       } catch (error) {
         console.log(error)
         errorToast.fire({

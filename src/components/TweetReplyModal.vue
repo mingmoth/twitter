@@ -136,6 +136,7 @@ export default {
           }
           this.pushUserReply(replyload)
         }
+        this.$socket.emit('sendNotice')
       } catch (error) {
         console.log(error)
         errorToast.fire({

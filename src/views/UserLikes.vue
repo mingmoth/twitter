@@ -1,8 +1,6 @@
 <template>
   <div>
-    <div v-if="!getUserLikes" class="empty">
-      使用者尚無喜歡的推文
-    </div>
+    <div v-if="!getUserLikes" class="empty">使用者尚無喜歡的推文</div>
     <TweetItem v-for="tweet in getUserLikes" :key="tweet.id" :tweet="tweet" />
   </div>
 </template>
@@ -21,10 +19,16 @@ export default {
   created() {
     const { id: userId } = this.$route.params;
     this.fetchUserLikes(userId);
-    this.updateUser()
+    this.updateUser();
   },
   computed: {
     ...mapGetters(["getUserLikes"]),
+  },
+  sockets: {
+    getUnreadNotice() {
+      const { id: userId } = this.$route.params;
+      this.fetchUserLikes(userId);
+    },
   },
   methods: {
     updateUser() {

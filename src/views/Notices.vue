@@ -45,6 +45,11 @@ export default {
   computed: {
     ...mapGetters(["getNotices"]),
   },
+  sockets: {
+    getUnreadNotice() {
+      this.fetchNotices();
+    }
+  },
   beforeDestroy() {
     this.toggleNotices()
   },

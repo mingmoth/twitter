@@ -14,7 +14,6 @@ export const noticeFeature = {
           })
           return
         }
-        console.log(data.notices)
         this.setNotices(data.notices)
       } catch (error) {
         errorToast.fire({

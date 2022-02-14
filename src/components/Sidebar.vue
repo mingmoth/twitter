@@ -113,6 +113,10 @@ export default {
     },
     privateMessage() {
       this.getUnreadMessages()
+    },
+    getUnreadNotice() {
+      console.log('getUnreadNotices')
+      this.fetchUnreadNotices();
     }
   },
   methods: {

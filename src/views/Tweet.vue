@@ -5,9 +5,14 @@
     </div>
     <div class="home">
       <UserTweet :tweet="getTweet" />
-      <Reply v-for="reply in getTweet.Replies" :key="reply.id" :reply="reply" :tweetOwner="getTweet.User.account"/>
+      <Reply
+        v-for="reply in getTweet.Replies"
+        :key="reply.id"
+        :reply="reply"
+        :tweetOwner="getTweet.User.account"
+      />
       <TweetModal />
-      <TweetReplyModal :tweet="getTweet"/>
+      <TweetReplyModal :tweet="getTweet" />
     </div>
     <div class="popular">
       <Popular />
@@ -17,14 +22,14 @@
 
  <script>
 import Sidebar from "../components/Sidebar.vue";
-import UserTweet from '../components/UserTweet.vue'
-import Reply from '../components/Reply.vue'
-import TweetModal from '../components/TweetModal.vue'
-import TweetReplyModal from '../components/TweetReplyModal.vue'
+import UserTweet from "../components/UserTweet.vue";
+import Reply from "../components/Reply.vue";
+import TweetModal from "../components/TweetModal.vue";
+import TweetReplyModal from "../components/TweetReplyModal.vue";
 import Popular from "../components/Popular.vue";
 
-import { tweetFeature } from '../utils/mixins'
-import { mapGetters } from 'vuex'
+import { tweetFeature } from "../utils/mixins";
+import { mapGetters } from "vuex";
 export default {
   name: "Tweet",
   mixins: [tweetFeature],
@@ -37,13 +42,19 @@ export default {
     Popular,
   },
   created() {
-    this.fetchTweets()
-    const { id: tweetId } = this.$route.params
-    this.fetchTweet(tweetId)
+    this.fetchTweets();
+    const { id: tweetId } = this.$route.params;
+    this.fetchTweet(tweetId);
   },
   computed: {
-    ...mapGetters(['getTweet']),
+    ...mapGetters(["getTweet"]),
   },
-  methods: {},
+  sockets: {
+    getUnreadNotice() {
+      this.fetchTweets();
+      const { id: tweetId } = this.$route.params;
+      this.fetchTweet(tweetId);
+    },
+  },
 };
 </script>
