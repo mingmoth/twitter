@@ -1,21 +1,29 @@
 const state = {
-  unreadNotices: {}
+  notices: {},
+  unreadNotices: 0,
 }
 
 const getters = {
+  getNotices: state => state.notices,
   getUnreadNotices: state => state.unreadNotices
 }
 
 const actions = {
-  setUnreadNotices({ commit }, notices ) {
-    commit('getUnreadNotices', notices)
-  }
+  setNotices({ commit }, notices ) {
+    commit('getNotices', notices)
+  },
+  setUnreadNotices({ commit }, unreadNotices) {
+    commit('getUnreadNotices', unreadNotices)
+  },
 }
 
 const mutations = {
-  getUnreadNotices(state, notices) {
-    state.unreadNotices = notices
-  }
+  getNotices(state, notices) {
+    state.notices = notices
+  },
+  getUnreadNotices(state, unreadNotices) {
+    state.unreadNotices = unreadNotices
+  },
 }
 
 export default {

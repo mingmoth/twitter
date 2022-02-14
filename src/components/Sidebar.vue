@@ -23,7 +23,7 @@
             alt=""
             class="icon-active"
           />
-          <div v-if="getUnreadNotices.length" class="side-unread">{{getUnreadNotices.length}}</div>
+          <div v-if="getUnreadNotices" class="side-unread">{{getUnreadNotices}}</div>
           <span>通知</span>
         </router-link>
       </li>

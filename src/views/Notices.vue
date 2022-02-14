@@ -11,7 +11,7 @@
         <img src="../../public/images/ac logo.png" alt="" class="navTop-logo" />
       </div>
       <div class="container">
-        <Notice v-for="notice in getUnreadNotices" :key="notice.id" :notice="notice"/>
+        <Notice v-for="notice in getNotices" :key="notice.id" :notice="notice"/>
       </div>
       <TweetModal />
     </div>
@@ -40,10 +40,13 @@ export default {
   },
   mixins: [noticeFeature],
   created() {
-    this.fetchUnreadNotices();
+    this.fetchNotices();
   },
   computed: {
-    ...mapGetters(["getUnreadNotices"]),
+    ...mapGetters(["getNotices"]),
+  },
+  beforeDestroy() {
+    this.toggleNotices()
   },
 };
 </script>

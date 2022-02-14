@@ -13,9 +13,9 @@
         </router-link>
       </div>
       <div class="notice-info">
-        你錯過
+        你錯過了
         <span class="notice-user">{{ notice.Tweet.User.name }}</span>
-        的新推文了嗎
+        的新推文嗎
       </div>
       <router-link
         :to="{ name: 'tweet', params: { id: notice.TweetId } }"
@@ -35,7 +35,8 @@
       </div>
       <div class="notice-info">
         <span class="notice-user">{{ notice.Like.User.name }}</span> 已喜歡
-        <b class="notice-user">{{ notice.Like.Tweet.User.name }}</b> 的一則貼文
+        <b class="notice-user" v-if="notice.Like.Tweet.UserId === getCurrentUser.id">你</b>
+        <b class="notice-user" v-else>{{ notice.Like.Tweet.User.name }}</b> 的一則貼文
       </div>
       <router-link
         :to="{ name: 'tweet', params: { id: notice.Like.TweetId } }"
@@ -57,7 +58,8 @@
       </div>
       <div class="notice-info">
         <span class="notice-user">{{ notice.Reply.User.name }}</span> 回覆了
-        <b class="notice-user">{{ notice.Reply.Tweet.User.name }}</b> 的一則貼文
+        <b class="notice-user" v-if="notice.Reply.Tweet.UserId === getCurrentUser.id">你</b>
+        <b class="notice-user" v-else>{{ notice.Reply.Tweet.User.name }}</b> 的一則貼文
       </div>
       <router-link
         :to="{ name: 'tweet', params: { id: notice.Reply.TweetId } }"
@@ -76,6 +78,7 @@
 </template>
 
 <script>
+import { mapGetters } from 'vuex'
 import { imageFilter, timeFilter } from "../utils/mixins";
 export default {
   name: "Notice",
@@ -84,6 +87,9 @@ export default {
     notice: {
       type: Object,
     },
+  },
+  computed: {
+    ...mapGetters(['getCurrentUser'])
   },
   data() {
     return {};
