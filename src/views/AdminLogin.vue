@@ -5,6 +5,7 @@
     <form action="" @submit.stop.prevent="adminLogin">
       <div class="form-label-group">
         <label for="account">帳戶</label>
+        <span class="symbol">@</span>
         <input type="text" name="account" id="account" class="form-control" v-model="account" required autofocus>
         <div class="login-error" style="visibility: none"></div>
       </div>

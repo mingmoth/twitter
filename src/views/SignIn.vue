@@ -5,8 +5,8 @@
     <form action="" @submit.stop.prevent="signin">
       <div class="form-label-group">
         <label for="account">帳戶</label>
+        <span class="symbol">@</span>
         <input type="text" name="account" id="account" class="form-control" v-model="account" required autofocus>
-        <!-- <div class="login-error" style="visibility: none">帳號與密碼不符</div> -->
       </div>
       <div class="form-label-group">
         <label for="password">密碼</label>

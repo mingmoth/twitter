@@ -5,6 +5,7 @@
     <form action="" @submit.stop.prevent="signUp">
       <div class="form-label-group">
         <label for="account">帳號</label>
+        <span class="symbol">@</span>
         <input type="text" name="account" id="account" v-model="account" required autofocus />
         <div class="register-error"></div>
       </div>
