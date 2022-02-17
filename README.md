@@ -2,9 +2,10 @@
 
 專案採前後端分離開發，本專案為[後端專案](https://github.com/mingmoth/twitter-api-2020)提供前端頁面
 
-## 專案網址:
+## 專案網址
 請點[此處](https://mingmoth.github.io/twitter/#/signin)前往
 
+![image](https://github.com/mingmoth/twitter/blob/main/public/images/twitter-demo.png)
 
 ## 測試帳號
 * 管理員帳號： root
