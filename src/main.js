@@ -9,7 +9,7 @@ const token = window.localStorage.getItem('userToken')
 
 Vue.use(new VueSocketIO({
   debug: true,
-  connection: SocketIO('http://localhost:3000', { auth: { token }, autoConnect: false }),
+  connection: SocketIO('https://twitter-api-guan.herokuapp.com', { auth: { token }, autoConnect: false }),
   vuex: {
     store,
     actionPrefix: 'SOCKET_',
