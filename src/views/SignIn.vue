@@ -11,7 +11,6 @@
       <div class="form-label-group">
         <label for="password">密碼</label>
         <input type="password" name="password" id="password" class="form-control" v-model="password" required autofocus>
-        <!-- <div class="login-error" style="visibility: none">請輸入密碼</div> -->
       </div>
       <button class="btn-login" type="submit">登入</button>
     </form>
